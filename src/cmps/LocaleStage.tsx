@@ -12,8 +12,10 @@ type Props = {
   children: ReactNode
 }
 
-const FLIP_MS = 560
-const MID_MS = 280
+// Must match the locale-dissolve keyframes: the copy swaps at the midpoint,
+// while the stage is fully transparent.
+const FLIP_MS = 620
+const MID_MS = 310
 
 export function LocaleStage({ children }: Props) {
   const { i18n } = useTranslation()

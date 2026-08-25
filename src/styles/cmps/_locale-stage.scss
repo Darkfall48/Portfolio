@@ -1,44 +1,35 @@
 @use "../setup/variables" as *;
 
-// Direction swap: the page slides out, swaps locale while hidden, slides back
-// from the other side. Kept 2D on purpose — a perspective here would turn the
-// stage into a containing block and break the fixed background and panel.
+// Locale swap: one symmetric dissolve. The curve is identical on both halves,
+// so there is no discontinuity when the copy is replaced at the midpoint.
+// Timing is coupled to FLIP_MS / MID_MS in LocaleStage.tsx.
 .locale-stage {
   min-height: 100dvh;
 }
 
 .locale-stage.is-flip-to-rtl,
 .locale-stage.is-flip-to-ltr {
-  animation: locale-swap 560ms $ease-fn both;
+  animation: locale-dissolve 620ms $ease-fn both;
+  will-change: opacity, filter, transform;
 }
 
-.locale-stage.is-flip-to-rtl {
-  --swap-sign: -1;
-}
-
-.locale-stage.is-flip-to-ltr {
-  --swap-sign: 1;
-}
-
-@keyframes locale-swap {
+@keyframes locale-dissolve {
   0% {
     opacity: 1;
-    transform: none;
+    filter: blur(0);
+    transform: scale(1);
   }
 
-  46% {
+  50% {
     opacity: 0;
-    transform: translate3d(calc(var(--swap-sign, 1) * 3.5%), 0, 0) scale(0.985);
-  }
-
-  54% {
-    opacity: 0;
-    transform: translate3d(calc(var(--swap-sign, 1) * -3.5%), 0, 0) scale(0.985);
+    filter: blur(10px);
+    transform: scale(1.018);
   }
 
   100% {
     opacity: 1;
-    transform: none;
+    filter: blur(0);
+    transform: scale(1);
   }
 }
 
