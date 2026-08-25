@@ -5,6 +5,19 @@
   inset: 0;
   z-index: 20;
   pointer-events: none;
+  --panel-accent: var(--color-accent);
+  --panel-accent-rgb: var(--color-accent-rgb);
+
+  // Work panels answer to the secondary accent, experience keeps cyan.
+  &.is-work {
+    --panel-accent: var(--color-accent-2);
+    --panel-accent-rgb: var(--color-accent-2-rgb);
+  }
+
+  &.is-experience {
+    --panel-accent: var(--color-accent);
+    --panel-accent-rgb: var(--color-accent-rgb);
+  }
 
   &.is-open {
     pointer-events: auto;
@@ -15,10 +28,10 @@
     inset: 0;
     width: 100%;
     height: 100%;
-    background: rgb(4 8 12 / 0.62);
+    background: $color-backdrop;
     opacity: 0;
-    backdrop-filter: blur(4px);
-    transition: opacity $ease;
+    backdrop-filter: blur(5px);
+    transition: opacity $ease-out;
   }
 
   &.is-open &-backdrop {
@@ -29,30 +42,72 @@
     position: absolute;
     inset-block: 0;
     inset-inline-end: 0;
-    width: min(34rem, 100%);
-    padding: $space-xl $space-lg;
+    display: flex;
+    flex-direction: column;
+    width: min(36rem, 100%);
+    padding: clamp(1.4rem, 4vh, 2.4rem) clamp(1.1rem, 2.2vw, 2rem);
     background:
-      linear-gradient(180deg, rgb(94 234 212 / 0.07), transparent 18%),
       radial-gradient(
-        420px 300px at 100% 100%,
-        rgb(167 139 250 / 0.1),
+        520px 320px at 100% 0%,
+        rgb(var(--panel-accent-rgb) / 0.12),
+        transparent 62%
+      ),
+      radial-gradient(
+        420px 300px at 0% 100%,
+        rgb(var(--panel-accent-rgb) / 0.07),
         transparent 60%
       ),
       $color-bg-mid;
-    border-inline-start: 1px solid $color-line-strong;
-    box-shadow: -24px 0 60px rgb(0 0 0 / 0.45);
+    border-inline-start: 1px solid rgb(var(--panel-accent-rgb) / 0.42);
+    box-shadow: -24px 0 60px rgb($shadow-rgb / 0.5);
     overflow: auto;
-    transform: translateX(100%);
-    transition: transform $ease;
+    transform: translateX(calc(var(--dir, 1) * 100%));
+    transition: transform $ease-out;
+
+    // Bracket on the leading corner, same HUD grammar as the bento panels.
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      inset-inline-start: 0;
+      width: 1.6rem;
+      height: 1.6rem;
+      border-color: var(--panel-accent);
+      border-style: solid;
+      border-width: 1px 0 0 1px;
+      opacity: 0.75;
+      pointer-events: none;
+    }
   }
 
   html[dir="rtl"] &-sheet {
-    transform: translateX(-100%);
-    box-shadow: 24px 0 60px rgb(0 0 0 / 0.45);
+    box-shadow: 24px 0 60px rgb($shadow-rgb / 0.5);
   }
 
   &.is-open &-sheet {
     transform: translateX(0);
+  }
+
+  &-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: $font-mono;
+    font-size: 0.66rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--panel-accent);
+
+    &::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(
+        90deg,
+        rgb(var(--panel-accent-rgb) / 0.5),
+        transparent
+      );
+    }
   }
 
   &-head {
@@ -60,50 +115,105 @@
     align-items: flex-start;
     justify-content: space-between;
     gap: $space-md;
+    margin-block-start: $space-sm;
   }
 
   &-title {
-    font-size: 1.7rem;
-    line-height: 1.15;
+    font-size: clamp(1.5rem, 3vw, 2.1rem);
+    line-height: 1.1;
   }
 
   &-close {
-    font-family: $font-mono;
-    font-size: 0.72rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: $color-accent;
+    display: grid;
+    place-items: center;
     flex-shrink: 0;
-    padding: 0.3rem 0.5rem;
+    width: 2.1rem;
+    height: 2.1rem;
+    font-size: 1rem;
+    color: var(--panel-accent);
     border: 1px solid $color-line;
+    border-radius: $radius;
     transition:
-      background $ease,
+      color $ease,
       border-color $ease,
+      background $ease,
       box-shadow $ease;
 
-    &:hover {
-      border-color: $color-line-strong;
-      background: $color-accent-dim;
-      box-shadow: 0 0 16px $color-glow;
+    &:hover,
+    &:focus-visible {
+      color: $color-text;
+      border-color: rgb(var(--panel-accent-rgb) / 0.5);
+      background: rgb(var(--panel-accent-rgb) / 0.14);
+      box-shadow: 0 0 18px rgb(var(--panel-accent-rgb) / 0.25);
     }
   }
 
-  &-kicker,
+  &-kicker {
+    margin-block-start: $space-sm;
+    font-family: $font-mono;
+    font-size: 0.76rem;
+    letter-spacing: 0.06em;
+    color: var(--panel-accent);
+  }
+
   &-summary {
     margin-block-start: $space-sm;
-    color: $color-muted;
+    max-width: 46ch;
+    font-size: 1.02rem;
+    color: $color-text;
   }
 
   &-body {
     display: grid;
-    gap: $space-sm;
-    margin-block-start: $space-lg;
-    padding-inline-start: 1.1rem;
-    list-style: disc;
+    gap: $space-md;
+    margin-block-start: clamp(1.1rem, 3vh, 1.8rem);
+    padding-block-start: clamp(1.1rem, 3vh, 1.8rem);
+    border-block-start: 1px solid $color-line;
 
-    li::marker {
-      color: $color-accent;
+    li {
+      position: relative;
+      padding-inline-start: 1.35rem;
+      color: $color-muted;
     }
+
+    // Square HUD marker instead of a bullet glyph.
+    li::before {
+      content: "";
+      position: absolute;
+      inset-inline-start: 0;
+      top: 0.55em;
+      width: 0.4rem;
+      height: 0.4rem;
+      background: var(--panel-accent);
+      opacity: 0.8;
+    }
+  }
+
+  &.is-open &-body li {
+    animation: bullet-in 460ms $ease-fn both;
+  }
+
+  @for $i from 1 through 6 {
+    &.is-open &-body li:nth-child(#{$i}) {
+      animation-delay: 120ms + $i * 60ms;
+    }
+  }
+}
+
+html[lang="he"] .detail-panel-eyebrow {
+  letter-spacing: 0.04em;
+  text-transform: none;
+}
+
+@keyframes bullet-in {
+  from {
+    opacity: 0;
+    transform: translate3d(calc(var(--dir, 1) * 10px), 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
   }
 }
 

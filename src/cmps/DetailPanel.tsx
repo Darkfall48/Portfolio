@@ -6,6 +6,9 @@ import { useTranslation } from "react-i18next"
 import { experience } from "../content"
 import type { PanelTarget } from "../content"
 
+//? Icons
+import { FiX } from "react-icons/fi"
+
 type Props = {
   target: PanelTarget | null
   onClose: () => void
@@ -43,12 +46,21 @@ export function DetailPanel({ target, onClose }: Props) {
       : experienceItem.end
     : ""
 
+  const kindClass = target ? ` is-${target.kind}` : ""
+  const eyebrow = target
+    ? t(target.kind === "experience" ? "nav.experience" : "nav.work")
+    : ""
+
   return (
-    <div className={`detail-panel${isOpen ? " is-open" : ""}`} hidden={!isOpen}>
+    <div
+      className={`detail-panel${isOpen ? " is-open" : ""}${kindClass}`}
+      hidden={!isOpen}
+    >
       <button
         type="button"
         className="detail-panel-backdrop"
         title={t("action.close")}
+        aria-label={t("action.close")}
         onClick={onClose}
       />
       <aside
@@ -60,6 +72,7 @@ export function DetailPanel({ target, onClose }: Props) {
       >
         {target ? (
           <>
+            <p className="detail-panel-eyebrow">{eyebrow}</p>
             <header className="detail-panel-head">
               <h2 id={titleId} className="detail-panel-title">
                 {target.kind === "experience"
@@ -71,16 +84,15 @@ export function DetailPanel({ target, onClose }: Props) {
                 type="button"
                 className="detail-panel-close"
                 title={t("action.close")}
+                aria-label={t("action.close")}
                 onClick={onClose}
               >
-                {t("action.close")}
+                <FiX aria-hidden="true" />
               </button>
             </header>
             {target.kind === "experience" ? (
               <p className="detail-panel-kicker">
-                {experienceItem
-                  ? `${experienceItem.start}–${experienceEnd} · `
-                  : ""}
+                {experienceItem ? `${experienceItem.start}–${experienceEnd} · ` : ""}
                 {t(`${keyPrefix}.title`)}
               </p>
             ) : null}
