@@ -25,7 +25,7 @@
       background: linear-gradient(
         180deg,
         $color-accent,
-        rgb(167 139 250 / 0.55),
+        rgb($accent-2-rgb / 0.55),
         transparent
       );
       pointer-events: none;

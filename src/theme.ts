@@ -2,12 +2,22 @@ export type Theme = 'dark' | 'light'
 
 const STORAGE_KEY = 'portfolio-theme'
 
-export function isTheme(value: string): value is Theme {
+function isTheme(value: string): value is Theme {
   return value === 'dark' || value === 'light'
 }
 
-export function applyTheme(theme: Theme) {
+function applyTheme(theme: Theme) {
   document.documentElement.dataset.theme = theme
+}
+
+function detectTheme(): Theme {
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY)
+    if (stored && isTheme(stored)) return stored
+  } catch {
+    // Private mode or blocked storage — keep the dark default.
+  }
+  return 'dark'
 }
 
 export function persistTheme(theme: Theme) {
@@ -19,14 +29,6 @@ export function persistTheme(theme: Theme) {
   applyTheme(theme)
 }
 
-export function detectTheme(): Theme {
-  try {
-    const stored = localStorage.getItem(STORAGE_KEY)
-    if (stored && isTheme(stored)) return stored
-  } catch {
-    // Private mode or blocked storage — keep the dark default.
-  }
-  return 'dark'
-}
-
+// The inline script in index.html already set the attribute to avoid a flash.
+// This keeps the module the single source of truth once the bundle runs.
 applyTheme(detectTheme())

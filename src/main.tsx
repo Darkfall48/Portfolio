@@ -8,6 +8,9 @@ import './i18n'
 //? Components
 import App from './App'
 
+//? Config
+import './theme'
+
 //? Styles
 import './styles/main.scss'
 

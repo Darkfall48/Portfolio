@@ -23,7 +23,9 @@
     "openDetails": "Ouvrir le détail",
     "language": "Langue",
     "contact": "Contact",
-    "clock": "Heure de Tel Aviv"
+    "clock": "Heure de Tel Aviv",
+    "themeLight": "Passer au thème clair",
+    "themeDark": "Passer au thème sombre"
   },
   "lang": {
     "en": "Anglais",

@@ -1,13 +1,9 @@
 @use 'variables' as *;
 
-html {
-  scrollbar-width: thin;
-  scrollbar-color: rgb(94 234 212 / 0.45) $color-bg;
-}
-
+html,
 * {
   scrollbar-width: thin;
-  scrollbar-color: rgb(94 234 212 / 0.4) rgb(7 11 16 / 0.4);
+  scrollbar-color: rgb($accent-rgb / 0.45) transparent;
 }
 
 ::-webkit-scrollbar {
@@ -16,11 +12,15 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  background: rgb(7 11 16 / 0.55);
+  background: rgb($shadow-rgb / 0.18);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, rgb(94 234 212 / 0.75), rgb(94 234 212 / 0.28));
+  background: linear-gradient(
+    180deg,
+    rgb($accent-rgb / 0.75),
+    rgb($accent-rgb / 0.28)
+  );
   border: 2px solid $color-bg;
   border-radius: 999px;
 }
@@ -30,5 +30,5 @@ html {
 }
 
 ::-webkit-scrollbar-corner {
-  background: $color-bg;
+  background: transparent;
 }

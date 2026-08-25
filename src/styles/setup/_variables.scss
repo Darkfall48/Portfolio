@@ -1,20 +1,33 @@
-$color-bg: #070b10;
-$color-bg-mid: #0c1218;
-$color-surface: rgb(14 22 30 / 0.82);
-$color-surface-hover: rgb(18 32 42 / 0.95);
-$color-line: rgb(94 234 212 / 0.16);
-$color-line-strong: rgb(94 234 212 / 0.42);
-$color-text: #e8f2f0;
-$color-muted: #7d908c;
-$color-accent: #5eead4;
-$color-accent-dim: rgb(94 234 212 / 0.12);
-$color-glow: rgb(94 234 212 / 0.22);
+// Colour tokens resolve at runtime so the light theme can swap them.
+// Values live in _theme.scss. Never hardcode a hex outside that file.
+$color-bg: var(--color-bg);
+$color-bg-mid: var(--color-bg-mid);
+$color-surface: var(--color-surface);
+$color-text: var(--color-text);
+$color-muted: var(--color-muted);
+$color-on-accent: var(--color-on-accent);
 
-// Secondary accent. Used sparingly: section markers, second light source,
-// and the full-stack chip group. Cyan stays dominant.
-$color-accent-2: #a78bfa;
-$color-accent-2-dim: rgb(167 139 250 / 0.12);
-$color-glow-2: rgb(167 139 250 / 0.2);
+$color-accent: var(--color-accent);
+$color-accent-2: var(--color-accent-2);
+$accent-rgb: var(--color-accent-rgb);
+$accent-2-rgb: var(--color-accent-2-rgb);
+
+$color-line: var(--color-line);
+$color-line-strong: var(--color-line-strong);
+$color-accent-dim: var(--color-accent-dim);
+$color-glow: var(--color-glow);
+$color-accent-2-dim: var(--color-accent-2-dim);
+$color-glow-2: var(--color-glow-2);
+
+$color-backdrop: var(--color-backdrop);
+$color-halo-2: var(--color-halo-2);
+$blend-lights: var(--color-blend);
+$shadow-rgb: var(--color-shadow-rgb);
+$shadow-alpha: var(--color-shadow-alpha);
+$grid-rgb: var(--color-grid-rgb);
+$grid-alpha: var(--color-grid-alpha);
+$scanline-rgb: var(--color-scanline-rgb);
+$scanline-alpha: var(--color-scanline-alpha);
 
 $font-sans: "IBM Plex Sans", "Assistant", "Segoe UI", sans-serif;
 $font-mono: "IBM Plex Mono", ui-monospace, monospace;
