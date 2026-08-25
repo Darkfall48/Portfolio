@@ -20,7 +20,7 @@ export function isLocale(value: string): value is Locale {
   return (SUPPORTED_LOCALES as readonly string[]).includes(value)
 }
 
-export function applyDocumentLocale(locale: Locale) {
+function applyDocumentLocale(locale: Locale) {
   document.documentElement.lang = locale
   document.documentElement.dir = localeDir(locale)
 }
@@ -38,7 +38,7 @@ function detectLocale(): Locale {
   return 'en'
 }
 
-export function persistLocale(locale: Locale) {
+function persistLocale(locale: Locale) {
   try {
     localStorage.setItem(STORAGE_KEY, locale)
   } catch {
