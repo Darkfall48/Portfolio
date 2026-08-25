@@ -1,8 +1,11 @@
 //? Libraries
-import { useTranslation } from "react-i18next"
+import { useTranslation } from 'react-i18next'
 
 //? Content / i18n
-import { profile } from "../content/profile"
+import { profile } from '../content'
+
+//? Icons
+import { FiGithub, FiLinkedin, FiMail } from 'react-icons/fi'
 
 export function ProfileCard() {
   const { t } = useTranslation()
@@ -16,37 +19,40 @@ export function ProfileCard() {
       </p>
       <h1 className="profile-card-name">{profile.name}</h1>
       <p className="profile-card-headline">{t(profile.headlineKey)}</p>
-      <p className="profile-card-lead">{t("profile.lead")}</p>
+      <p className="profile-card-lead">{t('profile.lead')}</p>
       <p className="profile-card-location">{t(profile.locationKey)}</p>
       <dl className="profile-card-meta">
         <div>
-          <dt>{t("profile.languages")}</dt>
-          <dd>{profile.languages.join(" · ")}</dd>
+          <dt>{t('profile.languages')}</dt>
+          <dd>{profile.languages.join(' · ')}</dd>
         </div>
         <div>
-          <dt>{t("profile.educationLabel")}</dt>
+          <dt>{t('profile.educationLabel')}</dt>
           <dd>{t(profile.educationKey)}</dd>
         </div>
       </dl>
-      <nav className="profile-card-links" aria-label={t("action.contact")}>
-        <a href={profile.links.email} title={t("action.email")}>
-          {t("action.email")}
+      <nav className="profile-card-links" aria-label={t('action.contact')}>
+        <a href={profile.links.email} title={t('action.email')}>
+          <FiMail aria-hidden="true" />
+          <span>{t('action.email')}</span>
         </a>
         <a
           href={profile.links.linkedin}
-          title={t("action.linkedin")}
+          title={t('action.linkedin')}
           target="_blank"
           rel="noreferrer"
         >
-          {t("action.linkedin")}
+          <FiLinkedin aria-hidden="true" />
+          <span>{t('action.linkedin')}</span>
         </a>
         <a
           href={profile.links.github}
-          title={t("action.github")}
+          title={t('action.github')}
           target="_blank"
           rel="noreferrer"
         >
-          {t("action.github")}
+          <FiGithub aria-hidden="true" />
+          <span>{t('action.github')}</span>
         </a>
       </nav>
     </article>

@@ -1,15 +1,20 @@
 //? Libraries
+import { useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 
 //? Content / i18n
-import { profile } from "../content/profile"
+import { profile } from "../content"
 import { SUPPORTED_LOCALES, type Locale } from "../i18n"
 
 //? Components
 import { useRequestLocale } from "./locale-stage-context"
 
 //? Hooks
+import { useTheme } from "../hooks/useTheme"
 import { useTlvClock } from "../hooks/useTlvClock"
+
+//? Icons
+import { FiDownload, FiLoader, FiMoon, FiSun } from "react-icons/fi"
 
 const LANG_LABELS: Record<Locale, string> = {
   en: "EN",
@@ -17,14 +22,35 @@ const LANG_LABELS: Record<Locale, string> = {
   he: "עב",
 }
 
+// A static PDF download gives no browser feedback, so the button acknowledges
+// the click for a moment. It reports nothing about real progress.
+const CV_FEEDBACK_MS = 1100
+
 export function SiteHeader() {
   const { t, i18n } = useTranslation()
   const active = i18n.language.slice(0, 2) as Locale
   const requestLocale = useRequestLocale()
+  const { theme, toggle } = useTheme()
   const time = useTlvClock()
+  const [isCvBusy, setIsCvBusy] = useState(false)
+  const cvTimer = useRef(0)
+
+  useEffect(() => () => window.clearTimeout(cvTimer.current), [])
+
   const cvHref = profile.cvPath
     ? `${import.meta.env.BASE_URL}${profile.cvPath.replace(/^\//, "")}`
     : ""
+  const themeLabel =
+    theme === "dark" ? t("action.themeLight") : t("action.themeDark")
+
+  function onCvClick() {
+    window.clearTimeout(cvTimer.current)
+    setIsCvBusy(true)
+    cvTimer.current = window.setTimeout(
+      () => setIsCvBusy(false),
+      CV_FEEDBACK_MS,
+    )
+  }
 
   return (
     <header className="site-header">
@@ -33,6 +59,19 @@ export function SiteHeader() {
         <p className="site-header-clock" title={t("action.clock")}>
           {profile.timezoneCode} {time || "--:--"}
         </p>
+        <button
+          type="button"
+          className="site-header-theme"
+          title={themeLabel}
+          aria-label={themeLabel}
+          onClick={toggle}
+        >
+          {theme === "dark" ? (
+            <FiSun aria-hidden="true" />
+          ) : (
+            <FiMoon aria-hidden="true" />
+          )}
+        </button>
         <div
           className="site-header-lang"
           role="group"
@@ -53,12 +92,20 @@ export function SiteHeader() {
         </div>
         {cvHref ? (
           <a
-            className="site-header-cv"
+            className={`site-header-cv${isCvBusy ? " is-busy" : ""}`}
             href={cvHref}
             title={t("action.cv")}
+            aria-label={t("action.cv")}
+            aria-busy={isCvBusy}
             download
+            onClick={onCvClick}
           >
-            {t("action.cv")}
+            {isCvBusy ? (
+              <FiLoader aria-hidden="true" />
+            ) : (
+              <FiDownload aria-hidden="true" />
+            )}
+            <span>{t("action.cv")}</span>
           </a>
         ) : null}
       </nav>

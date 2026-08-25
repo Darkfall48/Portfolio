@@ -6,12 +6,12 @@
   background:
     radial-gradient(
       560px 320px at 100% 0%,
-      rgb(94 234 212 / 0.12),
+      rgb($accent-rgb / 0.12),
       transparent 62%
     ),
     radial-gradient(
       420px 300px at 0% 100%,
-      rgb(167 139 250 / 0.1),
+      rgb($accent-2-rgb / 0.1),
       transparent 60%
     ),
     $color-surface;
@@ -141,6 +141,9 @@
 
     // Fill wipes in from the centre on hover, so it reads the same in RTL.
     a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
       padding: 0.34rem 0.62rem;
       font-family: $font-mono;
       font-size: 0.72rem;
@@ -161,6 +164,11 @@
         border-color $ease,
         box-shadow $ease,
         background-size $ease;
+    }
+
+    svg {
+      flex-shrink: 0;
+      font-size: 0.9rem;
     }
 
     a:hover,

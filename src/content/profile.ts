@@ -13,5 +13,5 @@ export const profile: Profile = {
     linkedin: "https://www.linkedin.com/in/sidneysebban/",
     github: "https://github.com/Darkfall48",
   },
-  cvPath: "",
+  cvPath: "cv/sidney-sebban.pdf",
 }

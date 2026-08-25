@@ -3,9 +3,10 @@
 .site-header {
   position: relative;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: $space-md;
+  gap: 0.4rem $space-md;
   padding-block: clamp(0.4rem, 1.2vh, 0.7rem) clamp(0.35rem, 1vh, 0.6rem);
   border-block-end: 1px solid $color-line;
   margin-block-end: clamp(0.45rem, 1.2vh, 0.8rem);
@@ -57,7 +58,7 @@
   &-nav {
     display: flex;
     align-items: center;
-    gap: $space-md;
+    gap: $space-sm;
   }
 
   // Equal-width buttons so the indicator can slide across thirds.
@@ -103,28 +104,111 @@
       }
 
       &.is-active {
-        color: $color-bg;
+        color: $color-on-accent;
       }
     }
   }
 
+  &-theme {
+    display: grid;
+    place-items: center;
+    width: 1.9rem;
+    height: 1.9rem;
+    font-size: 0.92rem;
+    color: $color-muted;
+    border: 1px solid $color-line;
+    border-radius: $radius;
+    transition:
+      color $ease,
+      border-color $ease,
+      background $ease,
+      box-shadow $ease;
+
+    &:hover,
+    &:focus-visible {
+      color: $color-accent;
+      border-color: $color-line-strong;
+      background: $color-accent-dim;
+      box-shadow: 0 0 16px $color-glow;
+    }
+  }
+
+  // Primary call to action in the bar: filled, not a bare text link.
   &-cv {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.36rem 0.7rem;
     font-family: $font-mono;
     font-size: 0.72rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: $color-accent;
+    color: $color-on-accent;
     text-decoration: none;
+    background: $color-accent;
+    border: 1px solid $color-accent;
+    border-radius: $radius;
+    transition:
+      box-shadow $ease,
+      transform $ease,
+      filter $ease;
 
-    &:hover {
-      text-shadow: 0 0 12px $color-glow;
+    svg {
+      flex-shrink: 0;
+      font-size: 0.9rem;
     }
+
+    &:hover,
+    &:focus-visible {
+      box-shadow: 0 0 22px $color-glow;
+      filter: brightness(1.08);
+    }
+
+    &.is-busy {
+      // Hold the pressed look while the click is acknowledged.
+      box-shadow: 0 0 22px $color-glow;
+
+      svg {
+        animation: cv-spin 700ms linear infinite;
+      }
+    }
+  }
+}
+
+@keyframes cv-spin {
+  to {
+    transform: rotate(360deg);
   }
 }
 
 html[lang="he"] .site-header-name {
   letter-spacing: 0.04em;
   text-transform: none;
+}
+
+// Icon-only CV button on small screens: the label would push the nav out of
+// the bar. The accessible name comes from aria-label on the anchor.
+@media (max-width: 560px) {
+  .site-header-nav {
+    gap: 0.4rem;
+  }
+
+  .site-header-cv {
+    padding-inline: 0.45rem;
+
+    span {
+      display: none;
+    }
+
+    svg {
+      font-size: 1rem;
+    }
+  }
+
+  .site-header-lang-btn {
+    min-width: 2.1rem;
+    padding-inline: 0.35rem;
+  }
 }
 
 @media (max-width: 460px) {
