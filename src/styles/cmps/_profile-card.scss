@@ -3,19 +3,41 @@
 
 .profile-card {
   @include panel;
-  justify-content: space-between;
   background:
     radial-gradient(
-      420px 280px at 100% 0%,
-      rgb(94 234 212 / 0.1),
+      560px 320px at 100% 0%,
+      rgb(94 234 212 / 0.12),
+      transparent 62%
+    ),
+    radial-gradient(
+      420px 300px at 0% 100%,
+      rgb(167 139 250 / 0.1),
       transparent 60%
     ),
     $color-surface;
+
+  // Accent spine: the one piece of chrome that marks this card as the anchor.
+  &-spine {
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: 0;
+    width: 2px;
+    background: linear-gradient(
+      180deg,
+      transparent,
+      $color-accent 22%,
+      $color-accent-2 78%,
+      transparent
+    );
+    opacity: 0.7;
+    pointer-events: none;
+  }
 
   &-kicker {
     display: flex;
     align-items: center;
     gap: 0.55rem;
+    font-family: $font-mono;
     font-size: 0.7rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -25,43 +47,65 @@
   &-live {
     width: 0.45rem;
     height: 0.45rem;
+    flex-shrink: 0;
     border-radius: 50%;
     background: $color-accent;
-    box-shadow: 0 0 0 0 $color-glow;
-    animation: pulse 2.2s ease-out infinite;
+    animation: pulse 2.4s ease-out infinite;
   }
 
   &-name {
-    margin-block-start: 0.85rem;
-    font-size: clamp(1.7rem, 2.8vw, 2.55rem);
-    line-height: 1.05;
+    margin-block-start: clamp(0.5rem, 1.6vh, 1rem);
+    font-size: clamp(1.75rem, 3.4vw, 3.1rem);
+    line-height: 1.02;
+    background: linear-gradient(
+      100deg,
+      $color-text 12%,
+      $color-accent 42%,
+      $color-text 68%
+    );
+    background-size: 220% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: sweep 9s ease-in-out infinite;
   }
 
   &-headline {
-    margin-block-start: $space-xs;
-    max-width: 28ch;
-    color: $color-muted;
+    margin-block-start: 0.3rem;
+    max-width: 30ch;
+    font-size: clamp(0.88rem, 1vw, 1.02rem);
+    color: $color-accent;
   }
 
   &-lead {
-    margin-block-start: $space-sm;
-    max-width: 36ch;
-    font-size: 0.92rem;
-    color: $color-text;
+    margin-block-start: clamp(0.4rem, 1.2vh, 0.8rem);
+    max-width: 38ch;
+    color: $color-muted;
   }
 
   &-location {
-    margin-block-start: $space-xs;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-block-start: clamp(0.4rem, 1vh, 0.7rem);
     font-family: $font-mono;
-    font-size: 0.78rem;
-    color: $color-muted;
+    font-size: 0.74rem;
+    letter-spacing: 0.06em;
+    color: $color-text;
+
+    &::before {
+      content: "";
+      width: 1.1rem;
+      height: 1px;
+      background: $color-accent-2;
+    }
   }
 
   &-meta {
     display: grid;
-    gap: 0.55rem;
+    gap: clamp(0.3rem, 0.9vh, 0.6rem);
     margin-block: auto 0;
-    padding-block-start: $space-md;
+    padding-block-start: clamp(0.6rem, 1.6vh, 1.1rem);
 
     dt,
     dd {
@@ -70,17 +114,21 @@
 
     dt {
       font-family: $font-mono;
-      font-size: 0.72rem;
+      font-size: 0.66rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
       color: $color-muted;
     }
 
     dd {
-      margin-block-start: 0.15rem;
+      margin-block-start: 0.1rem;
+      font-size: 0.86rem;
       color: $color-text;
     }
 
     div:first-child dd {
-      letter-spacing: 0.08em;
+      font-family: $font-mono;
+      letter-spacing: 0.1em;
       color: $color-accent;
     }
   }
@@ -89,32 +137,44 @@
     display: flex;
     flex-wrap: wrap;
     gap: 0.4rem;
-    margin-block-start: $space-md;
+    margin-block-start: clamp(0.6rem, 1.6vh, 1.1rem);
 
+    // Fill wipes in from the centre on hover, so it reads the same in RTL.
     a {
+      padding: 0.34rem 0.62rem;
       font-family: $font-mono;
       font-size: 0.72rem;
       letter-spacing: 0.06em;
       color: $color-accent;
       text-decoration: none;
-      padding: 0.3rem 0.5rem;
       border: 1px solid $color-line;
       border-radius: $radius;
+      background-image: linear-gradient(
+        $color-accent-dim,
+        $color-accent-dim
+      );
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 0% 100%;
       transition:
-        background $ease,
+        color $ease,
         border-color $ease,
-        box-shadow $ease;
+        box-shadow $ease,
+        background-size $ease;
     }
 
-    a:hover {
+    a:hover,
+    a:focus-visible {
+      color: $color-text;
       border-color: $color-line-strong;
-      background: $color-accent-dim;
-      box-shadow: 0 0 16px $color-glow;
+      box-shadow: 0 0 18px $color-glow;
+      background-size: 100% 100%;
     }
   }
 }
 
-html[lang="he"] .profile-card-kicker {
+html[lang="he"] .profile-card-kicker,
+html[lang="he"] .profile-card-meta dt {
   letter-spacing: 0.04em;
   text-transform: none;
 }
@@ -125,10 +185,30 @@ html[lang="he"] .profile-card-kicker {
   }
 
   70% {
-    box-shadow: 0 0 0 8px transparent;
+    box-shadow: 0 0 0 9px transparent;
   }
 
   100% {
     box-shadow: 0 0 0 0 transparent;
+  }
+}
+
+@keyframes sweep {
+  0%,
+  100% {
+    background-position: 100% 0;
+  }
+
+  50% {
+    background-position: 0 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .profile-card-name {
+    background: none;
+    -webkit-background-clip: border-box;
+    background-clip: border-box;
+    color: $color-text;
   }
 }

@@ -10,9 +10,15 @@ $color-accent: #5eead4;
 $color-accent-dim: rgb(94 234 212 / 0.12);
 $color-glow: rgb(94 234 212 / 0.22);
 
-$font-sans: 'IBM Plex Sans', 'Assistant', 'Segoe UI', sans-serif;
-$font-mono: 'IBM Plex Mono', ui-monospace, monospace;
-$font-he: 'Assistant', 'IBM Plex Sans', sans-serif;
+// Secondary accent. Used sparingly: section markers, second light source,
+// and the full-stack chip group. Cyan stays dominant.
+$color-accent-2: #a78bfa;
+$color-accent-2-dim: rgb(167 139 250 / 0.12);
+$color-glow-2: rgb(167 139 250 / 0.2);
+
+$font-sans: "IBM Plex Sans", "Assistant", "Segoe UI", sans-serif;
+$font-mono: "IBM Plex Mono", ui-monospace, monospace;
+$font-he: "Assistant", "IBM Plex Sans", sans-serif;
 
 $space-xs: 0.35rem;
 $space-sm: 0.65rem;
@@ -24,5 +30,9 @@ $radius: 0.2rem;
 $break-narrow: 768px;
 $break-wide: 1280px;
 
+// $ease / $ease-out bundle a duration. Use $ease-fn when the duration is set
+// separately, otherwise the bundled duration is parsed as an animation delay.
+$ease-fn: cubic-bezier(0.16, 1, 0.3, 1);
 $ease: 220ms cubic-bezier(0.22, 1, 0.36, 1);
+$ease-out: 420ms $ease-fn;
 $grid-size: 48px;

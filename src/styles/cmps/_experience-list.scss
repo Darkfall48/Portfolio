@@ -1,43 +1,77 @@
-@use '../setup/variables' as *;
-@use '../setup/mixins' as *;
+@use "../setup/variables" as *;
+@use "../setup/mixins" as *;
 
 .experience-list {
   @include panel;
 
   &-title {
     @include hud-title;
-    flex-shrink: 0;
   }
 
   &-items {
-    display: grid;
-    align-content: start;
-    gap: 0.35rem;
-    margin-block-start: $space-md;
-    overflow: auto;
-    min-height: 0;
+    @include panel-list;
+    position: relative;
+    gap: clamp(0.2rem, 0.7vh, 0.45rem);
+    margin-block-start: clamp(0.5rem, 1.4vh, 1rem);
+    padding-inline-start: 0.95rem;
+
+    // Timeline spine running behind the role markers.
+    &::before {
+      content: "";
+      position: absolute;
+      inset-block: 0.9rem 0.6rem;
+      inset-inline-start: 0.22rem;
+      width: 1px;
+      background: linear-gradient(
+        180deg,
+        $color-accent,
+        rgb(167 139 250 / 0.55),
+        transparent
+      );
+      pointer-events: none;
+    }
   }
 
   &-item {
     @include interactive-row;
 
+    &::before {
+      content: "";
+      position: absolute;
+      inset-inline-start: -0.85rem;
+      top: 0.85rem;
+      width: 0.4rem;
+      height: 0.4rem;
+      border: 1px solid $color-accent;
+      border-radius: 50%;
+      background: $color-bg;
+      transition:
+        background $ease,
+        box-shadow $ease;
+    }
+
+    &:hover::before,
+    &:focus-visible::before {
+      background: $color-accent;
+      box-shadow: 0 0 10px $color-glow;
+    }
+
     &-dates {
-      font-size: 0.72rem;
-      letter-spacing: 0.08em;
+      font-family: $font-mono;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
       color: $color-accent;
     }
 
     &-org {
+      font-size: clamp(0.95rem, 1.1vw, 1.1rem);
       font-weight: 600;
+      line-height: 1.2;
     }
 
     &-role {
+      font-size: 0.84rem;
       color: $color-muted;
     }
   }
-}
-
-.hud-index {
-  color: $color-muted;
-  letter-spacing: 0.12em;
 }

@@ -1,6 +1,11 @@
 //? Components
-import { Home } from './pages/Home'
+import { LocaleStage } from "./cmps/LocaleStage"
+import { Home } from "./pages/Home"
 
 export default function App() {
-  return <Home />
+  return (
+    <LocaleStage>
+      <Home />
+    </LocaleStage>
+  )
 }

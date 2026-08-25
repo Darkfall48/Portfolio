@@ -6,9 +6,9 @@
   align-items: center;
   justify-content: space-between;
   gap: $space-md;
-  padding-block: 0.55rem 0.5rem;
+  padding-block: clamp(0.4rem, 1.2vh, 0.7rem) clamp(0.35rem, 1vh, 0.6rem);
   border-block-end: 1px solid $color-line;
-  margin-block-end: 0.65rem;
+  margin-block-end: clamp(0.45rem, 1.2vh, 0.8rem);
 
   &::after {
     content: "";
@@ -16,17 +16,34 @@
     inset-inline: 0;
     inset-block-end: -1px;
     height: 1px;
-    background: linear-gradient(90deg, transparent, $color-accent, transparent);
-    opacity: 0.45;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      $color-accent 35%,
+      $color-accent-2 65%,
+      transparent
+    );
+    opacity: 0.5;
     pointer-events: none;
   }
 
   &-name {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     font-family: $font-mono;
     font-size: 0.78rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: $color-muted;
+
+    &::before {
+      content: "";
+      width: 0.34rem;
+      height: 0.34rem;
+      border-radius: 50%;
+      background: $color-accent;
+    }
   }
 
   &-clock {
@@ -43,20 +60,50 @@
     gap: $space-md;
   }
 
+  // Equal-width buttons so the indicator can slide across thirds.
   &-lang {
+    position: relative;
     display: flex;
     border: 1px solid $color-line;
     border-radius: $radius;
+    overflow: hidden;
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset-block: 0;
+      inset-inline-start: 0;
+      width: calc(100% / 3);
+      background: $color-accent;
+      transition: transform $ease;
+      pointer-events: none;
+    }
+
+    &:has(> :nth-child(2).is-active)::after {
+      transform: translateX(calc(var(--dir, 1) * 100%));
+    }
+
+    &:has(> :nth-child(3).is-active)::after {
+      transform: translateX(calc(var(--dir, 1) * 200%));
+    }
 
     &-btn {
-      padding: 0.28rem 0.55rem;
-      color: $color-muted;
-      letter-spacing: 0.08em;
+      position: relative;
+      z-index: 1;
+      min-width: 2.5rem;
+      padding: 0.3rem 0.5rem;
+      text-align: center;
       font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      color: $color-muted;
+      transition: color $ease;
+
+      &:hover {
+        color: $color-accent;
+      }
 
       &.is-active {
         color: $color-bg;
-        background: $color-accent;
       }
     }
   }
@@ -80,7 +127,7 @@ html[lang="he"] .site-header-name {
   text-transform: none;
 }
 
-@media (max-width: 420px) {
+@media (max-width: 460px) {
   .site-header-clock {
     display: none;
   }

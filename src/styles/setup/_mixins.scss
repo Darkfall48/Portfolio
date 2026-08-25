@@ -6,7 +6,7 @@
   flex-direction: column;
   min-height: 0;
   height: 100%;
-  padding: 1rem 1.05rem;
+  padding: clamp(0.8rem, 1.4vh, 1.15rem) clamp(0.85rem, 1vw, 1.15rem);
   overflow: hidden;
   background: $color-surface;
   border: 1px solid $color-line;
@@ -26,8 +26,11 @@
     pointer-events: none;
     border-color: $color-accent;
     border-style: solid;
-    opacity: 0.55;
-    transition: opacity $ease;
+    opacity: 0.5;
+    transition:
+      opacity $ease,
+      width $ease,
+      height $ease;
   }
 
   &::before {
@@ -51,6 +54,8 @@
 
     &::before,
     &::after {
+      width: 1.4rem;
+      height: 1.4rem;
       opacity: 1;
     }
   }
@@ -60,6 +65,7 @@
   display: flex;
   align-items: baseline;
   gap: 0.7rem;
+  flex-shrink: 0;
   font-family: $font-mono;
   font-size: 0.68rem;
   font-weight: 500;
@@ -68,30 +74,46 @@
   color: $color-accent;
 }
 
+// Rows must never shift on the inline axis: a transform here would overflow
+// the list and force a scrollbar. The spine and background carry the hover.
 @mixin interactive-row {
+  position: relative;
   display: grid;
-  gap: 0.18rem;
+  gap: 0.14rem;
   width: 100%;
-  padding: 0.55rem 0.65rem;
+  padding: clamp(0.4rem, 0.7vh, 0.6rem) 0.65rem;
   text-align: start;
   border: 1px solid transparent;
   border-radius: $radius;
   transition:
     background $ease,
     border-color $ease,
-    transform $ease,
     box-shadow $ease;
 
-  &:hover {
+  &:hover,
+  &:focus-visible {
     background: $color-accent-dim;
     border-color: $color-line;
-    transform: translateX(0.2rem);
     box-shadow: inset 2px 0 0 $color-accent;
   }
 
-  html[dir='rtl'] &:hover {
-    transform: translateX(-0.2rem);
+  html[dir='rtl'] &:hover,
+  html[dir='rtl'] &:focus-visible {
     box-shadow: inset -2px 0 0 $color-accent;
+  }
+}
+
+// Lists fill their cell. No inline scrollbar, ever: a horizontal bar steals
+// height and cascades into a vertical one.
+@mixin panel-list {
+  display: grid;
+  align-content: start;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  @media (min-width: $break-wide) {
+    overflow-y: hidden;
   }
 }
 

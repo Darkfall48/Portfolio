@@ -32,7 +32,12 @@
     width: min(34rem, 100%);
     padding: $space-xl $space-lg;
     background:
-      linear-gradient(180deg, rgb(94 234 212 / 0.06), transparent 18%),
+      linear-gradient(180deg, rgb(94 234 212 / 0.07), transparent 18%),
+      radial-gradient(
+        420px 300px at 100% 100%,
+        rgb(167 139 250 / 0.1),
+        transparent 60%
+      ),
       $color-bg-mid;
     border-inline-start: 1px solid $color-line-strong;
     box-shadow: -24px 0 60px rgb(0 0 0 / 0.45);

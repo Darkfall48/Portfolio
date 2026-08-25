@@ -1,5 +1,18 @@
 @use "../setup/variables" as *;
 
+// Registered so the drifting light can interpolate instead of jumping.
+@property --drift-x {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 84%;
+}
+
+@property --drift-y {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 86%;
+}
+
 .home {
   position: relative;
   z-index: 1;
@@ -7,7 +20,7 @@
   flex-direction: column;
   min-height: 100dvh;
   overflow: auto;
-  padding-inline: clamp(0.75rem, 1.8vw, 1.4rem);
+  padding-inline: clamp(0.75rem, 1.8vw, 1.5rem);
   padding-block-end: 0.7rem;
 
   &::before,
@@ -27,26 +40,34 @@
     mask-image: radial-gradient(ellipse at 50% 20%, black 18%, transparent 78%);
   }
 
+  // Two light sources: cyan follows the pointer, violet drifts on its own.
   &::after {
     background:
       radial-gradient(
-        420px circle at var(--spot-x) var(--spot-y),
-        rgb(94 234 212 / 0.11),
-        transparent 42%
+        460px circle at var(--spot-x) var(--spot-y),
+        rgb(94 234 212 / 0.12),
+        transparent 44%
+      ),
+      radial-gradient(
+        38vw 32vw at var(--drift-x) var(--drift-y),
+        rgb(167 139 250 / 0.14),
+        transparent 62%
       ),
       repeating-linear-gradient(
         180deg,
-        rgb(255 255 255 / 0.018) 0 1px,
+        rgb(255 255 255 / 0.016) 0 1px,
         transparent 1px 4px
       );
     mix-blend-mode: screen;
-    animation: scan 9s linear infinite;
+    animation:
+      scan 9s linear infinite,
+      drift 24s ease-in-out infinite;
   }
 
   &-main {
     display: grid;
-    gap: 0.7rem;
     flex: 1;
+    gap: clamp(0.5rem, 0.7vw, 0.8rem);
     min-height: 0;
   }
 }
@@ -55,25 +76,29 @@
 .experience-list,
 .work-list,
 .skill-groups {
-  animation: rise 0.7s $ease both;
+  animation: rise $ease-out both;
+}
+
+.profile-card {
+  animation-delay: 0.04s;
 }
 
 .experience-list {
-  animation-delay: 0.07s;
+  animation-delay: 0.12s;
 }
 
 .work-list {
-  animation-delay: 0.14s;
+  animation-delay: 0.2s;
 }
 
 .skill-groups {
-  animation-delay: 0.2s;
+  animation-delay: 0.28s;
 }
 
 @keyframes rise {
   from {
     opacity: 0;
-    transform: translateY(14px);
+    transform: translate3d(0, 18px, 0);
   }
 
   to {
@@ -86,16 +111,33 @@
   from {
     background-position:
       0 0,
+      0 0,
       0 0;
   }
 
   to {
     background-position:
       0 0,
+      0 0,
       0 120px;
   }
 }
 
+@keyframes drift {
+  0%,
+  100% {
+    --drift-x: 84%;
+    --drift-y: 86%;
+  }
+
+  50% {
+    --drift-x: 60%;
+    --drift-y: 66%;
+  }
+}
+
+// Desktop: one viewport, asymmetric grid. Profile and Focus run full height,
+// the middle column splits into a short Experience and a taller Work.
 @media (min-width: $break-wide) {
   .home {
     max-height: 100dvh;
@@ -103,11 +145,11 @@
   }
 
   .home-main {
-    grid-template-columns: 1.05fr 1.2fr 1.05fr;
-    grid-template-rows: minmax(0, 1.2fr) minmax(0, 0.8fr);
+    grid-template-columns: 1.35fr 1.1fr 0.95fr;
+    grid-template-rows: minmax(0, 0.85fr) minmax(0, 1.15fr);
     grid-template-areas:
-      "profile experience work"
-      "profile experience skills";
+      "profile experience skills"
+      "profile work skills";
   }
 
   .profile-card {
@@ -129,7 +171,7 @@
 
 @media (min-width: $break-narrow) and (max-width: $break-wide - 1px) {
   .home-main {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.15fr 0.85fr;
     grid-template-rows: auto minmax(0, 1fr) auto;
     grid-template-areas:
       "profile profile"

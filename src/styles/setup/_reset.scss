@@ -1,4 +1,4 @@
-@use 'variables' as *;
+@use "variables" as *;
 
 *,
 *::before,
@@ -15,8 +15,14 @@ body,
 html {
   --spot-x: 42%;
   --spot-y: 18%;
+  // Sign for inline-axis transforms that CSS logical properties cannot express.
+  --dir: 1;
   background: $color-bg;
   color: $color-text;
+}
+
+html[dir="rtl"] {
+  --dir: -1;
 }
 
 body {
@@ -25,12 +31,20 @@ body {
   font-size: 0.98rem;
   line-height: 1.5;
   background:
-    radial-gradient(1200px 700px at 12% -10%, rgb(94 234 212 / 0.08), transparent 55%),
-    radial-gradient(900px 500px at 100% 100%, rgb(14 80 90 / 0.25), transparent 50%),
+    radial-gradient(
+      1200px 700px at 12% -10%,
+      rgb(94 234 212 / 0.08),
+      transparent 55%
+    ),
+    radial-gradient(
+      900px 500px at 100% 100%,
+      rgb(14 80 90 / 0.25),
+      transparent 50%
+    ),
     $color-bg;
 }
 
-html[lang='he'] body {
+html[lang="he"] body {
   font-family: $font-he;
 }
 
