@@ -1,0 +1,88 @@
+{
+  "profile": {
+    "headline": "מהנדס Full-Stack — זהות, IT ותמיכה בדרגה 3",
+    "lead": "אני מוביל את עבודת הזהות ואת הפלטפורמות הפנימיות של מוצר Zero Trust.",
+    "location": "תל אביב",
+    "kicker": "ZTNA · זהות · דרגה 3",
+    "education": "הנדסת מחשבים, Polytechnique Montréal",
+    "educationLabel": "השכלה",
+    "languages": "שפות"
+  },
+  "nav": {
+    "site": "אתר",
+    "experience": "ניסיון",
+    "work": "עבודות נבחרות",
+    "skills": "מיקוד"
+  },
+  "action": {
+    "cv": "הורדת קורות חיים",
+    "close": "סגירה",
+    "email": "דוא״ל",
+    "linkedin": "LinkedIn",
+    "github": "GitHub",
+    "openDetails": "פתיחת פירוט",
+    "language": "שפה",
+    "contact": "יצירת קשר",
+    "clock": "שעון תל אביב"
+  },
+  "lang": {
+    "en": "אנגלית",
+    "fr": "צרפתית",
+    "he": "עברית"
+  },
+  "experience": {
+    "present": "היום",
+    "current-role": {
+      "org": "Cyolo",
+      "title": "Full-Stack, IT ותמיכה בדרגה 3",
+      "summary": "זהות (SAML, SCIM, SSO, LDAP) ופלטפורמות פנימיות על מוצר Zero Trust.",
+      "body": [
+        "עבודת זהות: SAML, SCIM, SSO, LDAP ו-SSL/TLS על Linux, Windows ו-macOS.",
+        "ניהול 50+ פלטפורמות SaaS (SSO/SCIM, רישיונות, עלויות) ו-Entra ID / Microsoft 365 תחת SOC 2.",
+        "בנייה ותפעול של כלי Full-Stack לניהול טננטים, רישיונות ודלפק תמיכה.",
+        "אשכולות Docker Compose ווירטואליזציה היברידית (ESXi, Proxmox, AWS).",
+        "טיפול בפניות ב-Zendesk, דיווחי Jira למוצר ולפיתוח, ותחזוקת מאגרי Confluence ו-Zendesk."
+      ]
+    },
+    "idf": {
+      "org": "חיל האוויר",
+      "title": "מהנדס תמיכה טכנית — דרגה 2",
+      "summary": "תמיכה 24/7 ברשת, בתוכנה ובחומרה בסביבה מחייבת.",
+      "body": [
+        "מוקד דרגה 2: תקלות, תיאום עם מומחים, ורציפות מערכות מקומיות.",
+        "תחזוקת כבילה לרשת, וידאו, אודיו וחשמל כשהשטח דרש זאת."
+      ]
+    }
+  },
+  "work": {
+    "ops-platform": {
+      "title": "פלטפורמת טננטים ורישיונות",
+      "summary": "אפליקציית תפעול Full-Stack ל-CS, לתמיכה ולשותפים.",
+      "body": [
+        "פלטפורמת React / Node שמרכזת לצוותי הצלחת לקוח ותמיכה טננטים, רישיונות ותעודות.",
+        "הרשאות לפי תפקיד, ייצוא מובנה, ופענוח רישיונות וחומר TLS — בלי צילומי מוצר."
+      ]
+    },
+    "helpdesk": {
+      "title": "תוסף דלפק תמיכה",
+      "summary": "מחזור חיי משתמש, כספות ו-RBAC — React, Node, Docker.",
+      "body": [
+        "תוסף React, Redux ו-Node: משתמשים, קטגוריות וכספות, עם בקרת גישה לפי תפקיד.",
+        "תיעוד, גרסאות ותמיכה שוטפת למי שמפעיל את הכלי."
+      ]
+    },
+    "identity": {
+      "title": "אינטגרציות זהות",
+      "summary": "SAML, SCIM, SSO ו-LDAP — מספק הזהות אל המוצר.",
+      "body": [
+        "חיבור ספקי זהות למוצר: SAML, SCIM, SSO, LDAP, וגם מחזור חיי תעודות.",
+        "ייחוס ציבורי: תבנית SAML SSO (React, Express, Docker) לספקי זהות בסגנון Azure AD."
+      ]
+    }
+  },
+  "skills": {
+    "identity": "זהות",
+    "fullstack": "Full-Stack",
+    "it-support": "IT ותמיכה"
+  }
+}

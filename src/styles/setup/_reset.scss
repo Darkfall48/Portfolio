@@ -1,0 +1,69 @@
+@use 'variables' as *;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+html {
+  --spot-x: 42%;
+  --spot-y: 18%;
+  background: $color-bg;
+  color: $color-text;
+}
+
+body {
+  margin: 0;
+  font-family: $font-sans;
+  font-size: 0.98rem;
+  line-height: 1.5;
+  background:
+    radial-gradient(1200px 700px at 12% -10%, rgb(94 234 212 / 0.08), transparent 55%),
+    radial-gradient(900px 500px at 100% 100%, rgb(14 80 90 / 0.25), transparent 50%),
+    $color-bg;
+}
+
+html[lang='he'] body {
+  font-family: $font-he;
+}
+
+h1,
+h2,
+h3,
+p,
+ul {
+  margin: 0;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+button,
+a {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: 0;
+}
+
+a {
+  text-underline-offset: 0.18em;
+}
+
+:focus-visible {
+  outline: 1px solid $color-accent;
+  outline-offset: 3px;
+}

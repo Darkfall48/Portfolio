@@ -1,0 +1,52 @@
+@use "../setup/variables" as *;
+@use "../setup/mixins" as *;
+
+.skill-groups {
+  @include panel;
+
+  &-title {
+    @include hud-title;
+    flex-shrink: 0;
+  }
+
+  &-list {
+    display: grid;
+    gap: 0.45rem;
+    margin-block-start: $space-md;
+    overflow: auto;
+    min-height: 0;
+  }
+
+  &-group-title {
+    font-size: 0.82rem;
+    font-weight: 600;
+    margin-block-end: $space-xs;
+    color: $color-text;
+  }
+
+  &-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+
+  &-chip {
+    padding: 0.18rem 0.5rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.04em;
+    color: $color-accent;
+    border: 1px solid $color-line;
+    border-radius: $radius;
+    background: $color-accent-dim;
+    transition:
+      border-color $ease,
+      box-shadow $ease,
+      background $ease;
+
+    &:hover {
+      border-color: $color-line-strong;
+      background: rgb(94 234 212 / 0.18);
+      box-shadow: 0 0 14px $color-glow;
+    }
+  }
+}

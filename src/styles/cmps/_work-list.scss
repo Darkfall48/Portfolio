@@ -1,0 +1,36 @@
+@use "../setup/variables" as *;
+@use "../setup/mixins" as *;
+
+.work-list {
+  @include panel;
+
+  &-title {
+    @include hud-title;
+    flex-shrink: 0;
+  }
+
+  &-items {
+    display: grid;
+    align-content: start;
+    gap: 0.35rem;
+    margin-block-start: $space-md;
+    overflow: auto;
+    min-height: 0;
+  }
+
+  &-item {
+    @include interactive-row;
+
+    &-name {
+      font-weight: 600;
+    }
+
+    &-summary {
+      display: -webkit-box;
+      overflow: hidden;
+      color: $color-muted;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+    }
+  }
+}

@@ -1,0 +1,134 @@
+@use "../setup/variables" as *;
+@use "../setup/mixins" as *;
+
+.profile-card {
+  @include panel;
+  justify-content: space-between;
+  background:
+    radial-gradient(
+      420px 280px at 100% 0%,
+      rgb(94 234 212 / 0.1),
+      transparent 60%
+    ),
+    $color-surface;
+
+  &-kicker {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: $color-accent;
+  }
+
+  &-live {
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 50%;
+    background: $color-accent;
+    box-shadow: 0 0 0 0 $color-glow;
+    animation: pulse 2.2s ease-out infinite;
+  }
+
+  &-name {
+    margin-block-start: 0.85rem;
+    font-size: clamp(1.7rem, 2.8vw, 2.55rem);
+    line-height: 1.05;
+  }
+
+  &-headline {
+    margin-block-start: $space-xs;
+    max-width: 28ch;
+    color: $color-muted;
+  }
+
+  &-lead {
+    margin-block-start: $space-sm;
+    max-width: 36ch;
+    font-size: 0.92rem;
+    color: $color-text;
+  }
+
+  &-location {
+    margin-block-start: $space-xs;
+    font-family: $font-mono;
+    font-size: 0.78rem;
+    color: $color-muted;
+  }
+
+  &-meta {
+    display: grid;
+    gap: 0.55rem;
+    margin-block: auto 0;
+    padding-block-start: $space-md;
+
+    dt,
+    dd {
+      margin: 0;
+    }
+
+    dt {
+      font-family: $font-mono;
+      font-size: 0.72rem;
+      color: $color-muted;
+    }
+
+    dd {
+      margin-block-start: 0.15rem;
+      color: $color-text;
+    }
+
+    div:first-child dd {
+      letter-spacing: 0.08em;
+      color: $color-accent;
+    }
+  }
+
+  &-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-block-start: $space-md;
+
+    a {
+      font-family: $font-mono;
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      color: $color-accent;
+      text-decoration: none;
+      padding: 0.3rem 0.5rem;
+      border: 1px solid $color-line;
+      border-radius: $radius;
+      transition:
+        background $ease,
+        border-color $ease,
+        box-shadow $ease;
+    }
+
+    a:hover {
+      border-color: $color-line-strong;
+      background: $color-accent-dim;
+      box-shadow: 0 0 16px $color-glow;
+    }
+  }
+}
+
+html[lang="he"] .profile-card-kicker {
+  letter-spacing: 0.04em;
+  text-transform: none;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 $color-glow;
+  }
+
+  70% {
+    box-shadow: 0 0 0 8px transparent;
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}

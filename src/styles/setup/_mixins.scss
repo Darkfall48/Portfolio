@@ -1,0 +1,112 @@
+@use 'variables' as *;
+
+@mixin panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  height: 100%;
+  padding: 1rem 1.05rem;
+  overflow: hidden;
+  background: $color-surface;
+  border: 1px solid $color-line;
+  border-radius: $radius;
+  box-shadow: inset 0 1px 0 rgb(94 234 212 / 0.08);
+  backdrop-filter: blur(14px);
+  transition:
+    border-color $ease,
+    box-shadow $ease;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: 0.7rem;
+    height: 0.7rem;
+    pointer-events: none;
+    border-color: $color-accent;
+    border-style: solid;
+    opacity: 0.55;
+    transition: opacity $ease;
+  }
+
+  &::before {
+    top: -1px;
+    inset-inline-start: -1px;
+    border-width: 1px 0 0 1px;
+  }
+
+  &::after {
+    bottom: -1px;
+    inset-inline-end: -1px;
+    border-width: 0 1px 1px 0;
+  }
+
+  &:hover {
+    border-color: $color-line-strong;
+    box-shadow:
+      inset 0 1px 0 rgb(94 234 212 / 0.14),
+      0 0 0 1px rgb(94 234 212 / 0.04),
+      0 18px 40px rgb(0 0 0 / 0.35);
+
+    &::before,
+    &::after {
+      opacity: 1;
+    }
+  }
+}
+
+@mixin hud-title {
+  display: flex;
+  align-items: baseline;
+  gap: 0.7rem;
+  font-family: $font-mono;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: $color-accent;
+}
+
+@mixin interactive-row {
+  display: grid;
+  gap: 0.18rem;
+  width: 100%;
+  padding: 0.55rem 0.65rem;
+  text-align: start;
+  border: 1px solid transparent;
+  border-radius: $radius;
+  transition:
+    background $ease,
+    border-color $ease,
+    transform $ease,
+    box-shadow $ease;
+
+  &:hover {
+    background: $color-accent-dim;
+    border-color: $color-line;
+    transform: translateX(0.2rem);
+    box-shadow: inset 2px 0 0 $color-accent;
+  }
+
+  html[dir='rtl'] &:hover {
+    transform: translateX(-0.2rem);
+    box-shadow: inset -2px 0 0 $color-accent;
+  }
+}
+
+html[lang='he'] {
+  .experience-list-title,
+  .work-list-title,
+  .skill-groups-title {
+    letter-spacing: 0.04em;
+    text-transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}

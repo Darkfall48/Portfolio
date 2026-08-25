@@ -1,0 +1,88 @@
+{
+  "profile": {
+    "headline": "Full-Stack Engineer — Identity, IT & Tier-3 Support",
+    "lead": "I own identity work and the internal platforms behind a Zero Trust product.",
+    "location": "Tel Aviv",
+    "kicker": "ZTNA · Identity · Tier-3",
+    "education": "Computer engineering, Polytechnique Montréal",
+    "educationLabel": "Education",
+    "languages": "Languages"
+  },
+  "nav": {
+    "site": "Site",
+    "experience": "Experience",
+    "work": "Selected work",
+    "skills": "Focus"
+  },
+  "action": {
+    "cv": "Download CV",
+    "close": "Close",
+    "email": "Email",
+    "linkedin": "LinkedIn",
+    "github": "GitHub",
+    "openDetails": "Open details",
+    "language": "Language",
+    "contact": "Contact",
+    "clock": "Tel Aviv time"
+  },
+  "lang": {
+    "en": "English",
+    "fr": "French",
+    "he": "Hebrew"
+  },
+  "experience": {
+    "present": "Present",
+    "current-role": {
+      "org": "Cyolo",
+      "title": "Full-stack, IT, and tier-3 support",
+      "summary": "Identity (SAML, SCIM, SSO, LDAP) and internal platforms on a Zero Trust product.",
+      "body": [
+        "Own identity work: SAML, SCIM, SSO, LDAP, and SSL/TLS across Linux, Windows, and macOS.",
+        "Oversee 50+ SaaS platforms (SSO/SCIM, licenses, cost) and Entra ID / Microsoft 365 under SOC 2.",
+        "Ship and operate full-stack tools for tenant, license, and helpdesk operations.",
+        "Run Docker Compose clusters and hybrid virtualization (ESXi, Proxmox, AWS).",
+        "Triage incidents in Zendesk, write Jira repros for product and R&D, and keep Confluence / Zendesk KBs current."
+      ]
+    },
+    "idf": {
+      "org": "Israeli Air Force",
+      "title": "Technical support engineer — tier 2",
+      "summary": "24/7 support across network, software, and hardware in a constrained environment.",
+      "body": [
+        "Held a tier-2 support desk: incidents, coordination with specialists, and uptime of local systems.",
+        "Maintained network, video, audio, and electrical cabling when the job required it."
+      ]
+    }
+  },
+  "work": {
+    "ops-platform": {
+      "title": "Tenant and license platform",
+      "summary": "Full-stack ops app for CS, support, and partners.",
+      "body": [
+        "Designed and built a React / Node platform so customer-success and support teams can see tenants, licenses, and certificates in one place.",
+        "Role-based access, structured exports, and decoders for licenses and TLS material — high-level, no product UI."
+      ]
+    },
+    "helpdesk": {
+      "title": "Helpdesk add-on",
+      "summary": "User lifecycle, vaults, and RBAC — React, Node, Docker.",
+      "body": [
+        "Shipped a React, Redux, and Node add-on so helpdesk admins can manage users, categories, and vaults with RBAC.",
+        "Own documentation, releases, and ongoing support for the people who run it."
+      ]
+    },
+    "identity": {
+      "title": "Identity integrations",
+      "summary": "SAML, SCIM, SSO, and LDAP — IdP to product.",
+      "body": [
+        "Specialize in connecting identity providers to the product: SAML, SCIM, SSO, LDAP, plus certificate lifecycle.",
+        "Public reference: a SAML SSO template (React, Express, Docker) for Azure AD-style IdPs."
+      ]
+    }
+  },
+  "skills": {
+    "identity": "Identity",
+    "fullstack": "Full-stack",
+    "it-support": "IT and support"
+  }
+}

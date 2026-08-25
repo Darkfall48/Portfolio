@@ -1,0 +1,88 @@
+{
+  "profile": {
+    "headline": "Ingénieur full-stack — identité, IT et support N3",
+    "lead": "Je porte l’identité et les plateformes internes d’un produit Zero Trust.",
+    "location": "Tel Aviv",
+    "kicker": "ZTNA · Identité · N3",
+    "education": "Génie informatique, Polytechnique Montréal",
+    "educationLabel": "Formation",
+    "languages": "Langues"
+  },
+  "nav": {
+    "site": "Site",
+    "experience": "Parcours",
+    "work": "Travaux choisis",
+    "skills": "Focus"
+  },
+  "action": {
+    "cv": "Télécharger le CV",
+    "close": "Fermer",
+    "email": "E-mail",
+    "linkedin": "LinkedIn",
+    "github": "GitHub",
+    "openDetails": "Ouvrir le détail",
+    "language": "Langue",
+    "contact": "Contact",
+    "clock": "Heure de Tel Aviv"
+  },
+  "lang": {
+    "en": "Anglais",
+    "fr": "Français",
+    "he": "Hébreu"
+  },
+  "experience": {
+    "present": "Aujourd’hui",
+    "current-role": {
+      "org": "Cyolo",
+      "title": "Full-stack, IT et support N3",
+      "summary": "Identité (SAML, SCIM, SSO, LDAP) et plateformes internes sur un produit Zero Trust.",
+      "body": [
+        "Identité au quotidien : SAML, SCIM, SSO, LDAP et SSL/TLS, sur Linux, Windows et macOS.",
+        "Pilotage de 50+ SaaS (SSO/SCIM, licences, coûts) et Entra ID / Microsoft 365 sous SOC 2.",
+        "Conception et exploitation d’outils full-stack pour les tenants, les licences et le helpdesk.",
+        "Clusters Docker Compose et virtualisation hybride (ESXi, Proxmox, AWS).",
+        "Triage Zendesk, tickets Jira pour le produit et la R&D, bases Confluence et Zendesk à jour."
+      ]
+    },
+    "idf": {
+      "org": "Armée de l’air israélienne",
+      "title": "Ingénieur support technique — N2",
+      "summary": "Support 24/7 réseau, logiciel et matériel, dans un cadre contraint.",
+      "body": [
+        "Permanence N2 : incidents, coordination avec les spécialistes, continuité des systèmes locaux.",
+        "Câblage réseau, vidéo, audio et électrique lorsque le terrain l’exigeait."
+      ]
+    }
+  },
+  "work": {
+    "ops-platform": {
+      "title": "Plateforme tenants et licences",
+      "summary": "App d’ops full-stack pour le CS, le support et les partenaires.",
+      "body": [
+        "Plateforme React / Node pour que le succès client et le support voient tenants, licences et certificats au même endroit.",
+        "Accès par rôles, exports structurés, décodeurs de licences et de matériel TLS — sans captures produit."
+      ]
+    },
+    "helpdesk": {
+      "title": "Add-on helpdesk",
+      "summary": "Cycle de vie, coffres et RBAC — React, Node, Docker.",
+      "body": [
+        "Add-on React, Redux et Node : utilisateurs, catégories et coffres, avec contrôle d’accès par rôles.",
+        "Documentation, versions et support de ceux qui l’utilisent au quotidien."
+      ]
+    },
+    "identity": {
+      "title": "Intégrations d’identité",
+      "summary": "SAML, SCIM, SSO et LDAP — de l’IdP au produit.",
+      "body": [
+        "Brancher les fournisseurs d’identité : SAML, SCIM, SSO, LDAP, plus le cycle de vie des certificats.",
+        "Référence publique : un modèle SAML SSO (React, Express, Docker) pour des IdP type Azure AD."
+      ]
+    }
+  },
+  "skills": {
+    "identity": "Identité",
+    "fullstack": "Full-stack",
+    "it-support": "IT et support"
+  }
+}

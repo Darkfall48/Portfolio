@@ -1,0 +1,28 @@
+$color-bg: #070b10;
+$color-bg-mid: #0c1218;
+$color-surface: rgb(14 22 30 / 0.82);
+$color-surface-hover: rgb(18 32 42 / 0.95);
+$color-line: rgb(94 234 212 / 0.16);
+$color-line-strong: rgb(94 234 212 / 0.42);
+$color-text: #e8f2f0;
+$color-muted: #7d908c;
+$color-accent: #5eead4;
+$color-accent-dim: rgb(94 234 212 / 0.12);
+$color-glow: rgb(94 234 212 / 0.22);
+
+$font-sans: 'IBM Plex Sans', 'Assistant', 'Segoe UI', sans-serif;
+$font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+$font-he: 'Assistant', 'IBM Plex Sans', sans-serif;
+
+$space-xs: 0.35rem;
+$space-sm: 0.65rem;
+$space-md: 1rem;
+$space-lg: 1.35rem;
+$space-xl: 2rem;
+
+$radius: 0.2rem;
+$break-narrow: 768px;
+$break-wide: 1280px;
+
+$ease: 220ms cubic-bezier(0.22, 1, 0.36, 1);
+$grid-size: 48px;

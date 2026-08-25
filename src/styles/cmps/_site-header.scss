@@ -1,0 +1,87 @@
+@use "../setup/variables" as *;
+
+.site-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $space-md;
+  padding-block: 0.55rem 0.5rem;
+  border-block-end: 1px solid $color-line;
+  margin-block-end: 0.65rem;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    inset-block-end: -1px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, $color-accent, transparent);
+    opacity: 0.45;
+    pointer-events: none;
+  }
+
+  &-name {
+    font-family: $font-mono;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: $color-muted;
+  }
+
+  &-clock {
+    font-family: $font-mono;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    color: $color-accent;
+    font-variant-numeric: tabular-nums;
+  }
+
+  &-nav {
+    display: flex;
+    align-items: center;
+    gap: $space-md;
+  }
+
+  &-lang {
+    display: flex;
+    border: 1px solid $color-line;
+    border-radius: $radius;
+
+    &-btn {
+      padding: 0.28rem 0.55rem;
+      color: $color-muted;
+      letter-spacing: 0.08em;
+      font-size: 0.72rem;
+
+      &.is-active {
+        color: $color-bg;
+        background: $color-accent;
+      }
+    }
+  }
+
+  &-cv {
+    font-family: $font-mono;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: $color-accent;
+    text-decoration: none;
+
+    &:hover {
+      text-shadow: 0 0 12px $color-glow;
+    }
+  }
+}
+
+html[lang="he"] .site-header-name {
+  letter-spacing: 0.04em;
+  text-transform: none;
+}
+
+@media (max-width: 420px) {
+  .site-header-clock {
+    display: none;
+  }
+}

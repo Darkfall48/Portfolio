@@ -1,0 +1,50 @@
+@use "../setup/variables" as *;
+
+.locale-stage {
+  min-height: 100dvh;
+  transform-origin: 50% 50%;
+  backface-visibility: hidden;
+}
+
+.locale-stage.is-flip-to-rtl {
+  animation: flip-to-rtl 560ms $ease both;
+}
+
+.locale-stage.is-flip-to-ltr {
+  animation: flip-to-ltr 560ms $ease both;
+}
+
+@keyframes flip-to-rtl {
+  0% {
+    transform: rotateY(0deg);
+  }
+
+  50% {
+    transform: rotateY(-90deg);
+  }
+
+  100% {
+    transform: rotateY(0deg);
+  }
+}
+
+@keyframes flip-to-ltr {
+  0% {
+    transform: rotateY(0deg);
+  }
+
+  50% {
+    transform: rotateY(90deg);
+  }
+
+  100% {
+    transform: rotateY(0deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .locale-stage.is-flip-to-rtl,
+  .locale-stage.is-flip-to-ltr {
+    animation: none;
+  }
+}

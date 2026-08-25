@@ -1,0 +1,168 @@
+@use "../setup/variables" as *;
+
+.home {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  overflow: auto;
+  padding-inline: clamp(0.75rem, 1.8vw, 1.4rem);
+  padding-block-end: 0.7rem;
+
+  &::before,
+  &::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  &::before {
+    background-image:
+      linear-gradient(rgb(94 234 212 / 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(94 234 212 / 0.04) 1px, transparent 1px);
+    background-size: $grid-size $grid-size;
+    mask-image: radial-gradient(ellipse at 50% 20%, black 18%, transparent 78%);
+  }
+
+  &::after {
+    background:
+      radial-gradient(
+        420px circle at var(--spot-x) var(--spot-y),
+        rgb(94 234 212 / 0.11),
+        transparent 42%
+      ),
+      repeating-linear-gradient(
+        180deg,
+        rgb(255 255 255 / 0.018) 0 1px,
+        transparent 1px 4px
+      );
+    mix-blend-mode: screen;
+    animation: scan 9s linear infinite;
+  }
+
+  &-main {
+    display: grid;
+    gap: 0.7rem;
+    flex: 1;
+    min-height: 0;
+  }
+}
+
+.profile-card,
+.experience-list,
+.work-list,
+.skill-groups {
+  animation: rise 0.7s $ease both;
+}
+
+.experience-list {
+  animation-delay: 0.07s;
+}
+
+.work-list {
+  animation-delay: 0.14s;
+}
+
+.skill-groups {
+  animation-delay: 0.2s;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes scan {
+  from {
+    background-position:
+      0 0,
+      0 0;
+  }
+
+  to {
+    background-position:
+      0 0,
+      0 120px;
+  }
+}
+
+@media (min-width: $break-wide) {
+  .home {
+    max-height: 100dvh;
+    overflow: hidden;
+  }
+
+  .home-main {
+    grid-template-columns: 1.05fr 1.2fr 1.05fr;
+    grid-template-rows: minmax(0, 1.2fr) minmax(0, 0.8fr);
+    grid-template-areas:
+      "profile experience work"
+      "profile experience skills";
+  }
+
+  .profile-card {
+    grid-area: profile;
+  }
+
+  .experience-list {
+    grid-area: experience;
+  }
+
+  .work-list {
+    grid-area: work;
+  }
+
+  .skill-groups {
+    grid-area: skills;
+  }
+}
+
+@media (min-width: $break-narrow) and (max-width: $break-wide - 1px) {
+  .home-main {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    grid-template-areas:
+      "profile profile"
+      "experience work"
+      "skills skills";
+  }
+
+  .profile-card {
+    grid-area: profile;
+  }
+
+  .experience-list {
+    grid-area: experience;
+  }
+
+  .work-list {
+    grid-area: work;
+  }
+
+  .skill-groups {
+    grid-area: skills;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home::after {
+    animation: none;
+  }
+
+  .profile-card,
+  .experience-list,
+  .work-list,
+  .skill-groups {
+    animation: none;
+  }
+}
