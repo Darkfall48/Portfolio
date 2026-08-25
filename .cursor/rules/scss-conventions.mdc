@@ -1,0 +1,13 @@
+---
+description: SCSS file layout and Sass conventions for the portfolio
+globs: src/**/*.scss
+alwaysApply: false
+---
+
+# SCSS
+
+- Dart Sass `@use` only (no `@import`). Register every new partial in `src/styles/main.scss`.
+- Pages → `src/styles/pages/_<page>.scss`. Components → `src/styles/cmps/_<cmp>.scss`. Tokens → `src/styles/setup/`.
+- Nest with parent `&` so class names match JSX (`site-header { &-lang {} }`).
+- Logical properties for RTL: `margin-inline`, `inset-inline-start`, `padding-inline`. Avoid physical `left` / `right` except when a design token truly is physical.
+- Mobile breakpoint: `$break-narrow` (768px). Desktop layout from 1280px.

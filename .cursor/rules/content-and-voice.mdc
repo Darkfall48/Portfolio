@@ -1,0 +1,14 @@
+---
+description: Senior voice, what the home page may show, and public contact
+alwaysApply: true
+---
+
+# Content and voice
+
+- Headline, location, roles, and featured lists are data in `src/content/` (plus locale keys). They will change; do not hardcode them in rules or TSX.
+- English is the default locale. FR/HE are careful translations, not word-for-word dumps.
+- Forbidden on the home: “passionate”, “fast learner”, “Sprint-N”, 40 tool logos, YouTube, MATLAB, PHP, bootcamp exercise names.
+- Featured work and employer copy live in `src/content/` and locale JSON only. Home cards come from those lists. School or side projects stay off the home unless the user asks (see `_parked.md`).
+- Employer or product UI: high-level copy (role, stack, environment). No screenshots unless the user says yes.
+- Public contact: email, LinkedIn, GitHub, CV PDF. No phone in the UI.
+- Senior tone: own, ship, operate, integrate. Not enthusiastic, passionate, or team-player filler.

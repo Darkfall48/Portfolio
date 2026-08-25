@@ -1,0 +1,16 @@
+---
+description: React/TypeScript layout, content, and component conventions
+globs: src/**/*.{ts,tsx}
+alwaysApply: false
+---
+
+# Frontend
+
+- Profile facts (dates, roles, project ids, skill groups) live in `src/content/` as typed lists. UI copy lives in locale JSON. Components map over that data; they do not invent copy or hardcode a card.
+- To add or remove something on the home, edit the content list (and locale keys). Do not fork a one-off component for a single item. A `featured` / `hidden` flag is enough to keep an entry off the home without deleting it.
+- Functional components, TypeScript strict. No Redux. Hash routing if GitHub Pages needs it.
+- Semantic HTML: `header`, `main`, `article`, `nav`, `h1`/`h2`. Do not wrap everything in `div`.
+- Every interactive or layout node has a kebab-case `className` that matches the SCSS nest (`site-header`, `site-header-lang`). Add `title` on controls that need a native tooltip.
+- No CSS or SCSS in TSX (`style={...}`, CSS modules in the component file, `<style>`). Styles live in `src/styles/`.
+- Import order: `//? Libraries` → Content / i18n → Components → Hooks → Config → Icons.
+- If several components look the same, propose one shared component first. Do not create or merge it until the user approves.

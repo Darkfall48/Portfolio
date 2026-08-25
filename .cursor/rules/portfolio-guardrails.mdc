@@ -1,0 +1,14 @@
+---
+description: Hard guardrails for this personal portfolio site
+alwaysApply: true
+---
+
+# Portfolio guardrails
+
+- Stay in this repo. Stack: Vite, React, TypeScript, SCSS. No Redux, no backend, no secrets in source.
+- Host on GitHub Pages (static `dist` only). Do not add a server, serverless functions, or API keys that cannot ship in a public static site.
+- Never commit `.env` with secrets, credentials, private customer data, or screenshots of an employer or partner product unless the user explicitly approves that file.
+- User-facing copy lives in i18n locale files (`en` / `fr` / `he`). Do not hardcode UI strings in TSX.
+- Profile facts, lists, and visibility flags live in `src/content/`. Adding or removing a role, project, or skill is a data change, not a new page or component.
+- Comments in English.
+- Commits: follow `commit-portfolio` (approval first: title only vs agent commit). Never commit without an explicit choice.

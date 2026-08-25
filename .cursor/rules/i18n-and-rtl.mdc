@@ -1,0 +1,14 @@
+---
+description: i18next locales, HTML lang/dir, and RTL layout
+globs: src/**/*.{ts,tsx,json}
+alwaysApply: false
+---
+
+# i18n and RTL
+
+- Locales: `en` (default), `fr`, `he`. All user-visible strings go through i18next. No raw English (or any language) in TSX.
+- Set `lang` and `dir` on `<html>`. Hebrew uses `dir="rtl"`.
+- Language switcher `EN · FR · עב` stays visible on every viewport.
+- Do not translate proper nouns or protocol names (SAML, SCIM, SSO, LDAP, Entra ID).
+- Persist the chosen locale (localStorage). First visit may follow `navigator.language`.
+- Test layout in RTL: no clipped text, no leftover `margin-left` / `text-align: left` on mirrored chrome.
