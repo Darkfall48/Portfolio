@@ -15,4 +15,5 @@ export const profile: Profile = {
   },
   cvPath: "cv/sidney-sebban.pdf",
   photoPath: "img/sidney-sebban.jpg",
+  openToWork: true,
 }

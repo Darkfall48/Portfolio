@@ -17,8 +17,13 @@ export function ProfileCard() {
     : ""
 
   return (
-    <article className="profile-card">
+    <article
+      className={`profile-card${profile.openToWork ? " is-open-to-work" : ""}`}
+    >
       <span className="profile-card-spine" aria-hidden="true" />
+      {profile.openToWork ? (
+        <p className="profile-card-open">{t("profile.openToWork")}</p>
+      ) : null}
       <div className="profile-card-identity">
         {photoSrc && !photoFailed ? (
           <img

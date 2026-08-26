@@ -7,7 +7,8 @@
     "education": "הנדסת מחשבים, Polytechnique Montréal",
     "educationLabel": "השכלה",
     "languages": "שפות",
-    "photoAlt": "תמונת פרופיל של {{name}}"
+    "photoAlt": "תמונת פרופיל של {{name}}",
+    "openToWork": "פנוי לעבודה"
   },
   "nav": {
     "site": "אתר",

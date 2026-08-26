@@ -52,6 +52,8 @@ export type Profile = {
   cvPath?: string
   /** Public portrait path under /public. Leave empty to hide the photo. */
   photoPath?: string
+  /** Shows the availability ribbon. Set to false once a role is signed. */
+  openToWork?: boolean
 }
 
 export type HomeItem = {

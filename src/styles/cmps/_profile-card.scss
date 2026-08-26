@@ -33,11 +33,45 @@
     pointer-events: none;
   }
 
+  // Availability ribbon across the top-end corner. Offsets place the band's
+  // centre 2.4rem from both edges so it sits square on the corner diagonal;
+  // the panel's overflow clip trims the ends. --dir mirrors it in RTL.
+  &-open {
+    position: absolute;
+    z-index: 2;
+    inset-block-start: 1.7rem;
+    inset-inline-end: -3.6rem;
+    width: 12rem;
+    padding-block: 0.32rem;
+    font-family: $font-mono;
+    font-size: 0.58rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-align: center;
+    color: $color-on-accent;
+    background: linear-gradient(
+      90deg,
+      $color-accent,
+      $color-accent-2,
+      $color-accent
+    );
+    background-size: 220% 100%;
+    box-shadow: 0 6px 18px rgb($shadow-rgb / 0.35);
+    transform: rotate(calc(var(--dir, 1) * 45deg));
+    animation: ribbon-sheen 7s ease-in-out infinite;
+  }
+
   // Portrait sits beside the title block, so the name keeps the top line.
   &-identity {
     display: flex;
     align-items: center;
     gap: clamp(0.7rem, 1.4vw, 1.1rem);
+  }
+
+  // Keep the name clear of the ribbon rather than trusting it to be short.
+  &.is-open-to-work &-identity {
+    padding-inline-end: 3.2rem;
   }
 
   &-titles {
@@ -212,6 +246,7 @@
 }
 
 html[lang="he"] .profile-card-kicker,
+html[lang="he"] .profile-card-open,
 html[lang="he"] .profile-card-meta dt {
   letter-spacing: 0.04em;
   text-transform: none;
@@ -228,6 +263,17 @@ html[lang="he"] .profile-card-meta dt {
 
   100% {
     box-shadow: 0 0 0 0 transparent;
+  }
+}
+
+@keyframes ribbon-sheen {
+  0%,
+  100% {
+    background-position: 0 0;
+  }
+
+  50% {
+    background-position: 100% 0;
   }
 }
 
