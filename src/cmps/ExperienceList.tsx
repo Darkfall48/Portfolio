@@ -1,4 +1,5 @@
 //? Libraries
+import { useRef } from "react"
 import { useTranslation } from "react-i18next"
 
 //? Content / i18n
@@ -13,6 +14,9 @@ import type { ContentId } from "../content"
 
 //? Components
 import { PanelExpand } from "./PanelExpand"
+
+//? Hooks
+import { useOverflows } from "../hooks/useOverflows"
 
 type Props = {
   onSelect: (id: ContentId) => void
@@ -31,6 +35,10 @@ export function ExperienceList({
   const { t } = useTranslation()
   const items = homeItems(experience, HOME_SLOTS.experience, expanded)
   const hidden = hiddenItemCount(experience, HOME_SLOTS.experience)
+  const listRef = useRef<HTMLUListElement>(null)
+  // The slot budget only counts rows it withheld. A short viewport can clip a
+  // row that was meant to show, so the control also answers to real overflow.
+  const overflows = useOverflows(listRef)
 
   return (
     <section className="experience-list" inert={collapsed}>
@@ -41,12 +49,12 @@ export function ExperienceList({
         {t("nav.experience")}
         <PanelExpand
           expanded={expanded}
-          hasMore={hidden > 0}
+          hasMore={hidden > 0 || overflows || expanded}
           hiddenRows={hidden}
           onToggle={onToggleExpand}
         />
       </h2>
-      <ul className="experience-list-items">
+      <ul className="experience-list-items" ref={listRef}>
         {items.map((item) => {
           const endLabel =
             item.end === "present" ? t("experience.present") : item.end

@@ -1,4 +1,5 @@
 @use "../setup/variables" as *;
+@use "../setup/mixins" as *;
 
 // Registered so the drifting light can interpolate instead of jumping.
 @property --drift-x {
@@ -86,7 +87,17 @@
 .experience-list,
 .work-list,
 .skill-groups {
-  animation: rise $ease-out both;
+  // A grid item keeps an auto minimum on both axes, so a track driven to 0fr
+  // still could not squeeze the panel below its padding and border: a folded
+  // panel left a sliver of itself beside the one that grew.
+  min-width: 0;
+  min-height: 0;
+  // `backwards`, not `both`: a forwards-filled animation outranks plain
+  // declarations for as long as it is applied, so the final `opacity: 1` of the
+  // entrance quietly beat the fade that folds a panel away. Filling only
+  // backwards still hides the panel through its stagger delay, then hands
+  // opacity back to the cascade.
+  animation: rise $ease-out backwards;
 }
 
 .profile-card {
@@ -158,7 +169,10 @@
     // minmax(0, …) throughout: a bare fr keeps an auto minimum, so a track
     // could never collapse below the width of its content.
     grid-template-columns: minmax(0, 1.35fr) minmax(0, 1.1fr) minmax(0, 0.95fr);
-    grid-template-rows: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    // Even split. Experience carries three dated rows against Projects' three
+    // two-line cards, so it is the taller of the two: the old 0.85/1.15 gave the
+    // shorter list the room and clipped the last role on a laptop.
+    grid-template-rows: minmax(0, 1fr) minmax(0, 1fr);
     grid-template-areas:
       "profile experience skills"
       "profile work skills";
@@ -198,13 +212,6 @@
     grid-template-rows: minmax(0, 0fr) minmax(0, 1fr);
   }
 
-  // Expanding is what buys the extra rows, so the panel that grew is the one
-  // place on a wide screen where an internal scrollbar is welcome.
-  .is-expanded-experience .experience-list-items,
-  .is-expanded-work .work-list-items {
-    overflow-y: auto;
-  }
-
   // Room for the second line the collapsed card cannot afford.
   .is-expanded-work .work-list-item-summary {
     -webkit-line-clamp: 2;
@@ -223,12 +230,7 @@
 
   .home-main.is-expanded-skills .experience-list,
   .home-main.is-expanded-skills .work-list {
-    opacity: 0;
-    transition: opacity 140ms $ease-fn 280ms;
-  }
-
-  .is-expanded-skills .skill-groups-list {
-    overflow-y: auto;
+    @include folded-away;
   }
 }
 
@@ -277,16 +279,10 @@
   }
 }
 
-// The panel clips its own content as it shrinks, so the fade is only there to
-// kill the last artefact: a zero-height box still paints its border and corner
-// brackets as a hairline. Hence the delay, which keeps the motion reading as a
-// shrink instead of a panel dissolving in place. React marks it inert, and that
-// is what actually takes it out of the tab order.
 @media (min-width: $break-narrow) {
   .home-main.is-expanded-experience .work-list,
   .home-main.is-expanded-work .experience-list {
-    opacity: 0;
-    transition: opacity 140ms $ease-fn 280ms;
+    @include folded-away;
   }
 }
 

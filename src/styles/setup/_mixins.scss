@@ -111,18 +111,33 @@
   }
 }
 
-// Lists fill their cell. No inline scrollbar, ever: a horizontal bar steals
-// height and cascades into a vertical one.
+// A panel whose grid track has been driven to zero by a sibling expanding. The
+// track does the shrinking; this removes what a zero-sized box still paints,
+// namely its border and corner brackets as a hairline. Both delays let the
+// shrink finish first, so the motion reads as a fold and not as a dissolve in
+// place. React marks the panel inert separately, and that is what takes it out
+// of the tab order.
+@mixin folded-away {
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 140ms $ease-fn 280ms,
+    visibility 0s 420ms;
+}
+
+// Lists fill their cell and scroll on the block axis at every width, desktop
+// included. Hiding the overflow on wide screens kept the page scroll-free, but
+// it swallowed rows without telling anyone: a panel one line short of its budget
+// simply lost its last entry. A styled scrollbar is the lesser evil, and the
+// expand control still offers the roomier way to read the same list. The inline
+// axis stays clipped: a horizontal bar steals height and cascades into a
+// vertical one.
 @mixin panel-list {
   display: grid;
   align-content: start;
   min-height: 0;
   overflow-x: hidden;
   overflow-y: auto;
-
-  @media (min-width: $break-wide) {
-    overflow-y: hidden;
-  }
 }
 
 html[lang="he"] {

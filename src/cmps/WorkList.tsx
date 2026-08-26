@@ -1,4 +1,5 @@
 //? Libraries
+import { useRef } from "react"
 import { useTranslation } from "react-i18next"
 
 //? Content / i18n
@@ -7,6 +8,9 @@ import type { ContentId } from "../content"
 
 //? Components
 import { PanelExpand } from "./PanelExpand"
+
+//? Hooks
+import { useOverflows } from "../hooks/useOverflows"
 
 type Props = {
   onSelect: (id: ContentId) => void
@@ -25,6 +29,9 @@ export function WorkList({
   const { t } = useTranslation()
   const items = homeItems(work, HOME_SLOTS.work, expanded)
   const hidden = hiddenItemCount(work, HOME_SLOTS.work)
+  const listRef = useRef<HTMLUListElement>(null)
+  // Same reason as Experience: the budget cannot see a clipped row.
+  const overflows = useOverflows(listRef)
 
   return (
     <section className="work-list" inert={collapsed}>
@@ -35,12 +42,12 @@ export function WorkList({
         {t("nav.work")}
         <PanelExpand
           expanded={expanded}
-          hasMore={hidden > 0}
+          hasMore={hidden > 0 || overflows || expanded}
           hiddenRows={hidden}
           onToggle={onToggleExpand}
         />
       </h2>
-      <ul className="work-list-items">
+      <ul className="work-list-items" ref={listRef}>
         {items.map((item) => (
           <li key={item.id}>
             <button
