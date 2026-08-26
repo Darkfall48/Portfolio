@@ -2,7 +2,13 @@
 import { useTranslation } from "react-i18next"
 
 //? Content / i18n
-import { HOME_SLOTS, experience, hiddenItemCount, homeItems } from "../content"
+import {
+  HOME_SLOTS,
+  experience,
+  experienceRange,
+  hiddenItemCount,
+  homeItems,
+} from "../content"
 import type { ContentId } from "../content"
 
 //? Components
@@ -53,7 +59,7 @@ export function ExperienceList({
                 onClick={() => onSelect(item.id)}
               >
                 <span className="experience-list-item-dates">
-                  {item.start}–{endLabel}
+                  {experienceRange(item.start, endLabel)}
                 </span>
                 <span className="experience-list-item-org">
                   {t(`experience.${item.id}.org`)}

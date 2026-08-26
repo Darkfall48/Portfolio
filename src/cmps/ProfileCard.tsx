@@ -54,6 +54,12 @@ export function ProfileCard() {
           <dt>{t("profile.educationLabel")}</dt>
           <dd>{t(profile.educationKey)}</dd>
         </div>
+        {profile.volunteeringKey ? (
+          <div>
+            <dt>{t("profile.volunteeringLabel")}</dt>
+            <dd>{t(profile.volunteeringKey)}</dd>
+          </div>
+        ) : null}
       </dl>
       <nav className="profile-card-links" aria-label={t("action.contact")}>
         <a href={profile.links.email} title={t("action.email")}>

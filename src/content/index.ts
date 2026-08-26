@@ -1,5 +1,5 @@
 export { profile } from './profile'
-export { experience } from './experience'
+export { experience, experienceRange } from './experience'
 export { work } from './work'
 export { skillGroups } from './skills'
 export { isOnHome } from './types'

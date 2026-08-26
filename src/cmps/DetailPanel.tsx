@@ -3,11 +3,11 @@ import { useEffect, useId, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 
 //? Content / i18n
-import { experience } from "../content"
+import { experience, experienceRange, work } from "../content"
 import type { PanelTarget } from "../content"
 
 //? Icons
-import { FiX } from "react-icons/fi"
+import { FiGithub, FiX } from "react-icons/fi"
 
 type Props = {
   target: PanelTarget | null
@@ -55,6 +55,11 @@ export function DetailPanel({ target, onClose }: Props) {
       ? t("experience.present")
       : experienceItem.end
     : ""
+  // Only the open-source rows carry one, so the link is the exception here.
+  const repoUrl =
+    shown?.kind === "work"
+      ? work.find((item) => item.id === shown.id)?.url
+      : undefined
 
   const kindClass = shown ? ` is-${shown.kind}` : ""
   const eyebrow = shown
@@ -105,7 +110,7 @@ export function DetailPanel({ target, onClose }: Props) {
             {shown.kind === "experience" ? (
               <p className="detail-panel-kicker">
                 {experienceItem
-                  ? `${experienceItem.start}–${experienceEnd} · `
+                  ? `${experienceRange(experienceItem.start, experienceEnd)} · `
                   : ""}
                 {t(`${keyPrefix}.title`)}
               </p>
@@ -116,6 +121,17 @@ export function DetailPanel({ target, onClose }: Props) {
                 <li key={line}>{line}</li>
               ))}
             </ul>
+            {repoUrl ? (
+              <a
+                className="detail-panel-link"
+                href={repoUrl}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <FiGithub aria-hidden="true" />
+                <span>{t("action.viewCode")}</span>
+              </a>
+            ) : null}
           </>
         ) : null}
       </aside>

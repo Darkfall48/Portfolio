@@ -8,3 +8,6 @@ Plain markdown — Cursor ignores this file (rules must be `.mdc`). Intentionall
 - Phone number in the site header.
 - Live GitHub contribution graph or third-party “stats” widgets on the home.
 - AI chatbot on the site.
+- Ebusiness Manager role (e-commerce, SEO, marketing): real, but off-target for identity and security.
+- Technical Trainer role (teaching Game Maker to children): too far back and off-target.
+- PAM as a claimed skill: admin rights are permanent and unbrokered, so the claim would not survive an interview. Revisit once Entra PIM is on.

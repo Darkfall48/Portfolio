@@ -1,11 +1,13 @@
 {
   "profile": {
-    "headline": "Full-Stack Engineer — Identity, IT & Tier-3 Support",
-    "lead": "I own identity work and the internal platforms behind a Zero Trust product.",
+    "headline": "Identity & Access Engineer — ZTNA, Tier-3, Full-Stack",
+    "lead": "Two roles at once at a Zero Trust vendor: Tier-3 on enterprise deployments, and sole owner of the internal estate under SOC 2 — plus the full-stack platforms both sides run on.",
     "location": "Tel Aviv",
     "kicker": "ZTNA · Identity · Tier-3",
     "education": "Computer engineering, Polytechnique Montréal",
     "educationLabel": "Education",
+    "volunteering": "Magen David Adom · Police cadet · Firefighter",
+    "volunteeringLabel": "Volunteered",
     "languages": "Languages",
     "photoAlt": "Portrait of {{name}}",
     "openToWork": "Open to work"
@@ -13,8 +15,8 @@
   "nav": {
     "site": "Site",
     "experience": "Experience",
-    "work": "Selected work",
-    "skills": "Focus"
+    "work": "Featured projects",
+    "skills": "Expertise"
   },
   "action": {
     "cv": "Download CV",
@@ -23,6 +25,7 @@
     "linkedin": "LinkedIn",
     "github": "GitHub",
     "openDetails": "Open details",
+    "viewCode": "View the code",
     "expand": "Expand panel",
     "collapse": "Collapse panel",
     "language": "Language",
@@ -40,55 +43,105 @@
     "present": "Present",
     "current-role": {
       "org": "Cyolo",
-      "title": "Full-stack, IT, and tier-3 support",
-      "summary": "Identity (SAML, SCIM, SSO, LDAP) and internal platforms on a Zero Trust product.",
+      "title": "Tier-3 support, IT infrastructure & full-stack",
+      "summary": "Two roles at a ZTNA vendor — customer escalations and the internal estate — plus the platforms behind both.",
       "body": [
-        "Own identity work: SAML, SCIM, SSO, LDAP, and SSL/TLS across Linux, Windows, and macOS.",
-        "Oversee 50+ SaaS platforms (SSO/SCIM, licenses, cost) and Entra ID / Microsoft 365 under SOC 2.",
-        "Ship and operate full-stack tools for tenant, license, and helpdesk operations.",
-        "Run Docker Compose clusters and hybrid virtualization (ESXi, Proxmox, AWS).",
-        "Triage incidents in Zendesk, write Jira repros for product and R&D, and keep Confluence / Zendesk KBs current."
+        "Tier-3 — Own escalations on enterprise ZTNA deployments across SaaS, on-prem, and DMZ, including multi-tenant networking and proxy architectures.",
+        "Tier-3 — Resolve identity and transport failures: SSO, SCIM, LDAP/S, SSL/TLS and SAN certificates, RDP, VNC, Telnet, and HTTP/HTTPS, on Linux, Windows, and macOS.",
+        "Tier-3 — Run multi-site Docker Compose clusters, and watch licenses, certificates, tenants, and sites through Grafana, Prometheus, and BetterStack.",
+        "Tier-3 — Write the Jira repros product and R&D work from, keep the Confluence and Zendesk knowledge bases current, and lead the training that keeps support answers consistent.",
+        "IT — Sole owner of the identity and endpoint estate: Entra ID, Azure AD, Microsoft 365, Exchange, and Defender XDR, under full SOC 2 compliance.",
+        "IT — Set the MFA and conditional access policy, and run passkey sign-in in production.",
+        "IT — Support around a hundred employees across EMEA, AMER, and APAC time zones, and operate 50+ SaaS platforms: SSO/SCIM integrations, licenses, cost, and lifecycle automation.",
+        "IT — Harden access with Fortinet firewalls, reverse proxies, and certificate-based access, build AD, Entra ID, XDR, Intune, and GPO test environments from scratch for R&D, QA, and sales, and lead incident response.",
+        "Full-stack — Ship and operate Back-Office for employees and Helpdesk for customers, plus the SAML/OIDC and HTTP test tools QA and R&D work with."
+      ]
+    },
+    "robotika": {
+      "org": "Robotika",
+      "title": "Software and hardware projects — freelance",
+      "summary": "Hardware and software integration on client projects: RFID, Arduino, automation.",
+      "body": [
+        "Built an RFID-to-barcode pipeline that reads tags embedded in footwear and feeds a brand-facing website.",
+        "Engineered a door intruder alarm on Arduino Portenta H7 and Nicla with a voice sensor — hardware and software integration for a security use case.",
+        "Delivered file-movement automation, Arduino-driven video playback control, and a G-code pen plotter, with 3D-printed parts for robotic assemblies."
       ]
     },
     "idf": {
       "org": "Israeli Air Force",
-      "title": "Technical support engineer — tier 2",
-      "summary": "24/7 support across network, software, and hardware in a constrained environment.",
+      "title": "Technical support engineer — tier 2, staff sergeant",
+      "summary": "24/7 support across network, software, and hardware for an operational unit.",
       "body": [
-        "Held a tier-2 support desk: incidents, coordination with specialists, and uptime of local systems.",
+        "Held a 24/7 tier-2 desk as staff sergeant: incidents, coordination with specialists, and uptime of local systems.",
+        "Certified in computer network management by the Air Force in 2020.",
         "Maintained network, video, audio, and electrical cabling when the job required it."
       ]
     }
   },
   "work": {
-    "ops-platform": {
-      "title": "Tenant and license platform",
-      "summary": "Full-stack ops app for CS, support, and partners.",
+    "idp-lab": {
+      "title": "SAML/OIDC test harness",
+      "summary": "An identity-provider testing tool built for QA and R&D.",
       "body": [
-        "Designed and built a React / Node platform so customer-success and support teams can see tenants, licenses, and certificates in one place.",
-        "Role-based access, structured exports, and decoders for licenses and TLS material — high-level, no product UI."
-      ]
-    },
-    "helpdesk": {
-      "title": "Helpdesk add-on",
-      "summary": "User lifecycle, vaults, and RBAC — React, Node, Docker.",
-      "body": [
-        "Shipped a React, Redux, and Node add-on so helpdesk admins can manage users, categories, and vaults with RBAC.",
-        "Own documentation, releases, and ongoing support for the people who run it."
+        "Built a full-stack tool that stands up SaaS identity-provider integrations, so QA and R&D can exercise SAML and OIDC flows without waiting on a customer tenant.",
+        "Containerized and deployable with Docker Compose, which is what made it usable by people other than me."
       ]
     },
     "identity": {
       "title": "Identity integrations",
       "summary": "SAML, SCIM, SSO, and LDAP — IdP to product.",
       "body": [
-        "Specialize in connecting identity providers to the product: SAML, SCIM, SSO, LDAP, plus certificate lifecycle.",
-        "Public reference: a SAML SSO template (React, Express, Docker) for Azure AD-style IdPs."
+        "Connect identity providers to a Zero Trust product: SAML, SCIM, SSO, and LDAP, plus the certificate lifecycle around them.",
+        "Troubleshoot credential vaulting and session brokering on customer deployments.",
+        "Published a SAML SSO template (React, Express, Docker) for Entra-style providers as a public reference."
+      ]
+    },
+    "ops-platform": {
+      "title": "Back-Office — tenants and licenses",
+      "summary": "Internal platform for employees and partners.",
+      "body": [
+        "Designed and delivered the frontend end to end, and contributed to the backend architecture, for the platform employees and partners use to manage customer tenants and licenses.",
+        "Added tenant insight, license and certificate management, and in-app decoders for TLS and SAN certificates and license data."
+      ]
+    },
+    "helpdesk": {
+      "title": "Helpdesk — customer add-on",
+      "summary": "User lifecycle, vaults, and RBAC — React, Redux, Node, Docker.",
+      "body": [
+        "Built from scratch an add-on to the core product, so customer helpdesk admins manage user lifecycles, categories, applications, and vaults, with full RBAC and REST APIs.",
+        "Own its documentation, releases, and ongoing support for the admins who run it."
+      ]
+    },
+    "web-forge": {
+      "title": "HTTP inspection tool",
+      "summary": "Header and body inspection and manipulation for HTTP/HTTPS apps.",
+      "body": [
+        "Built a tool that inspects and rewrites request and response headers and bodies, so support and R&D can see what a proxy or a policy is actually doing to traffic.",
+        "Containerized alongside the rest of the test stack and deployable with Docker Compose."
+      ]
+    },
+    "xdr": {
+      "title": "Defender XDR rollout",
+      "summary": "Endpoint detection taken company-wide, evaluation through production.",
+      "body": [
+        "Deployed Microsoft Defender and XDR across the estate single-handed, from evaluation through to production.",
+        "Hardened systems and access policies alongside it, improving security posture and audit readiness under SOC 2."
+      ]
+    },
+    "it-automation": {
+      "title": "IT automation",
+      "summary": "Onboarding, offboarding, and monitoring in PowerShell, Python, and Shell.",
+      "body": [
+        "Automated joiner, mover, and leaver flows across 50+ SaaS platforms, so account creation and revocation stopped depending on someone remembering.",
+        "Wrote the diagnostic and monitoring scripts support runs day to day."
       ]
     }
   },
   "skills": {
-    "identity": "Identity",
+    "identity": "Identity and access",
+    "security": "Security and network",
+    "platforms": "Platforms and cloud",
     "fullstack": "Full-stack",
-    "it-support": "IT and support"
+    "ops": "Automation and ops"
   }
 }

@@ -1,11 +1,13 @@
 {
   "profile": {
-    "headline": "Ingénieur full-stack — identité, IT et support N3",
-    "lead": "Je porte l’identité et les plateformes internes d’un produit Zero Trust.",
+    "headline": "Ingénieur identité et accès — ZTNA, N3, full-stack",
+    "lead": "Deux postes en parallèle chez un éditeur Zero Trust : le N3 sur les déploiements grands comptes, et le parc interne sous SOC 2 dont je suis seul responsable — plus les plateformes full-stack que les deux utilisent.",
     "location": "Tel Aviv",
     "kicker": "ZTNA · Identité · N3",
     "education": "Génie informatique, Polytechnique Montréal",
     "educationLabel": "Formation",
+    "volunteering": "Magen David Adom · Cadet de police · Pompier",
+    "volunteeringLabel": "Bénévolat",
     "languages": "Langues",
     "photoAlt": "Portrait de {{name}}",
     "openToWork": "Disponible"
@@ -13,8 +15,8 @@
   "nav": {
     "site": "Site",
     "experience": "Parcours",
-    "work": "Travaux choisis",
-    "skills": "Focus"
+    "work": "Projets phares",
+    "skills": "Expertise"
   },
   "action": {
     "cv": "Télécharger le CV",
@@ -23,6 +25,7 @@
     "linkedin": "LinkedIn",
     "github": "GitHub",
     "openDetails": "Ouvrir le détail",
+    "viewCode": "Voir le code",
     "expand": "Agrandir le panneau",
     "collapse": "Réduire le panneau",
     "language": "Langue",
@@ -40,55 +43,105 @@
     "present": "Aujourd’hui",
     "current-role": {
       "org": "Cyolo",
-      "title": "Full-stack, IT et support N3",
-      "summary": "Identité (SAML, SCIM, SSO, LDAP) et plateformes internes sur un produit Zero Trust.",
+      "title": "Support N3, infrastructure IT et full-stack",
+      "summary": "Deux postes chez un éditeur ZTNA — les escalades clients et le parc interne — plus les plateformes qui servent aux deux.",
       "body": [
-        "Identité au quotidien : SAML, SCIM, SSO, LDAP et SSL/TLS, sur Linux, Windows et macOS.",
-        "Pilotage de 50+ SaaS (SSO/SCIM, licences, coûts) et Entra ID / Microsoft 365 sous SOC 2.",
-        "Conception et exploitation d’outils full-stack pour les tenants, les licences et le helpdesk.",
-        "Clusters Docker Compose et virtualisation hybride (ESXi, Proxmox, AWS).",
-        "Triage Zendesk, tickets Jira pour le produit et la R&D, bases Confluence et Zendesk à jour."
+        "N3 — Je porte les escalades sur les déploiements ZTNA grands comptes, en SaaS, on-prem et DMZ, y compris les architectures multi-tenant et les chaînes de proxys.",
+        "N3 — Je résous les pannes d’identité et de transport : SSO, SCIM, LDAP/S, certificats SSL/TLS et SAN, RDP, VNC, Telnet et HTTP/HTTPS, sur Linux, Windows et macOS.",
+        "N3 — J’exploite des clusters Docker Compose multi-sites, et je surveille licences, certificats, tenants et sites via Grafana, Prometheus et BetterStack.",
+        "N3 — J’écris les reproductions Jira dont partent le produit et la R&D, je tiens à jour les bases Confluence et Zendesk, et j’anime la formation qui harmonise les réponses du support.",
+        "IT — Seul responsable du parc d’identité et de sécurité des postes : Entra ID, Azure AD, Microsoft 365, Exchange et Defender XDR, en conformité SOC 2 complète.",
+        "IT — Je définis la politique de MFA et d’accès conditionnel, et j’exploite l’authentification par passkey en production.",
+        "IT — Je couvre une centaine de salariés répartis sur les fuseaux EMEA, AMER et APAC, et j’exploite plus de 50 plateformes SaaS : intégrations SSO/SCIM, licences, coûts et automatisation du cycle de vie.",
+        "IT — Je durcis les accès avec des pare-feux Fortinet, des reverse proxies et l’accès par certificat, je monte de zéro les environnements de test AD, Entra ID, XDR, Intune et GPO pour la R&D, la QA et les ventes, et je pilote la réponse aux incidents.",
+        "Full-stack — Je livre et j’exploite Back-Office pour les salariés et Helpdesk pour les clients, ainsi que les outils de test SAML/OIDC et HTTP dont se servent la QA et la R&D."
+      ]
+    },
+    "robotika": {
+      "org": "Robotika",
+      "title": "Projets logiciels et matériels — freelance",
+      "summary": "Intégration matériel-logiciel sur des projets clients : RFID, Arduino, automatisation.",
+      "body": [
+        "J’ai construit une chaîne RFID vers code-barres qui lit les puces intégrées dans des chaussures et alimente un site vitrine de marque.",
+        "J’ai conçu une alarme d’intrusion de porte sur Arduino Portenta H7 et Nicla avec capteur vocal — de l’intégration matériel-logiciel pour un usage de sécurité.",
+        "J’ai livré l’automatisation de déplacement de fichiers, le pilotage d’un lecteur vidéo par Arduino et un traceur à plume en G-code, avec des pièces imprimées en 3D pour des ensembles robotiques."
       ]
     },
     "idf": {
       "org": "Armée de l’air israélienne",
-      "title": "Ingénieur support technique — N2",
-      "summary": "Support 24/7 réseau, logiciel et matériel, dans un cadre contraint.",
+      "title": "Ingénieur support technique — N2, sergent-chef",
+      "summary": "Support 24/7 réseau, logiciel et matériel pour une unité opérationnelle.",
       "body": [
-        "Permanence N2 : incidents, coordination avec les spécialistes, continuité des systèmes locaux.",
-        "Câblage réseau, vidéo, audio et électrique lorsque le terrain l’exigeait."
+        "J’ai tenu une permanence N2 en 24/7 au grade de sergent-chef : incidents, coordination avec les spécialistes, continuité des systèmes locaux.",
+        "Certification en gestion de réseaux informatiques délivrée par l’armée de l’air en 2020.",
+        "Entretien du câblage réseau, vidéo, audio et électrique lorsque le terrain l’exigeait."
       ]
     }
   },
   "work": {
-    "ops-platform": {
-      "title": "Plateforme tenants et licences",
-      "summary": "App d’ops full-stack pour le CS, le support et les partenaires.",
+    "idp-lab": {
+      "title": "Banc de test SAML/OIDC",
+      "summary": "Un outil de test des fournisseurs d’identité, pour la QA et la R&D.",
       "body": [
-        "Plateforme React / Node pour que le succès client et le support voient tenants, licences et certificats au même endroit.",
-        "Accès par rôles, exports structurés, décodeurs de licences et de matériel TLS — sans captures produit."
-      ]
-    },
-    "helpdesk": {
-      "title": "Add-on helpdesk",
-      "summary": "Cycle de vie, coffres et RBAC — React, Node, Docker.",
-      "body": [
-        "Add-on React, Redux et Node : utilisateurs, catégories et coffres, avec contrôle d’accès par rôles.",
-        "Documentation, versions et support de ceux qui l’utilisent au quotidien."
+        "J’ai construit un outil full-stack qui monte des intégrations de fournisseurs d’identité SaaS, pour que la QA et la R&D éprouvent les flux SAML et OIDC sans attendre un tenant client.",
+        "Conteneurisé et déployable en Docker Compose, ce qui l’a rendu utilisable par d’autres que moi."
       ]
     },
     "identity": {
       "title": "Intégrations d’identité",
       "summary": "SAML, SCIM, SSO et LDAP — de l’IdP au produit.",
       "body": [
-        "Brancher les fournisseurs d’identité : SAML, SCIM, SSO, LDAP, plus le cycle de vie des certificats.",
-        "Référence publique : un modèle SAML SSO (React, Express, Docker) pour des IdP type Azure AD."
+        "Je branche les fournisseurs d’identité sur un produit Zero Trust : SAML, SCIM, SSO et LDAP, plus le cycle de vie des certificats qui va avec.",
+        "Je dépanne les coffres d’identifiants et le courtage de session sur les déploiements clients.",
+        "J’ai publié un modèle SAML SSO (React, Express, Docker) pour les fournisseurs de type Entra, comme référence publique."
+      ]
+    },
+    "ops-platform": {
+      "title": "Back-Office — tenants et licences",
+      "summary": "Plateforme interne pour les salariés et les partenaires.",
+      "body": [
+        "J’ai conçu et livré le frontend de bout en bout, et contribué à l’architecture backend, de la plateforme dont salariés et partenaires se servent pour gérer les tenants et les licences clients.",
+        "J’y ai ajouté la vue d’ensemble des tenants, la gestion des licences et des certificats, et des décodeurs intégrés pour les certificats TLS et SAN et les données de licence."
+      ]
+    },
+    "helpdesk": {
+      "title": "Helpdesk — add-on client",
+      "summary": "Cycle de vie, coffres et RBAC — React, Redux, Node, Docker.",
+      "body": [
+        "J’ai construit de zéro un add-on au produit, pour que les administrateurs helpdesk côté client gèrent cycles de vie, catégories, applications et coffres, avec RBAC complet et API REST.",
+        "J’en porte la documentation, les versions et le support de ceux qui l’exploitent."
+      ]
+    },
+    "web-forge": {
+      "title": "Outil d’inspection HTTP",
+      "summary": "Inspection et manipulation des en-têtes et des corps HTTP/HTTPS.",
+      "body": [
+        "J’ai construit un outil qui inspecte et réécrit en-têtes et corps de requêtes et de réponses, pour que le support et la R&D voient ce qu’un proxy ou une politique fait réellement au trafic.",
+        "Conteneurisé avec le reste de la pile de test et déployable en Docker Compose."
+      ]
+    },
+    "xdr": {
+      "title": "Déploiement Defender XDR",
+      "summary": "Détection sur les postes généralisée, de l’évaluation à la production.",
+      "body": [
+        "J’ai déployé Microsoft Defender et l’XDR sur tout le parc, seul, de l’évaluation jusqu’à la production.",
+        "J’ai durci les systèmes et les politiques d’accès en parallèle, ce qui a amélioré la posture de sécurité et la préparation aux audits SOC 2."
+      ]
+    },
+    "it-automation": {
+      "title": "Automatisation IT",
+      "summary": "Arrivées, départs et supervision en PowerShell, Python et Shell.",
+      "body": [
+        "J’ai automatisé les arrivées, les mobilités et les départs sur plus de 50 plateformes SaaS, pour que la création et la révocation des comptes ne dépendent plus de la mémoire de quelqu’un.",
+        "J’ai écrit les scripts de diagnostic et de supervision que le support utilise au quotidien."
       ]
     }
   },
   "skills": {
-    "identity": "Identité",
+    "identity": "Identité et accès",
+    "security": "Sécurité et réseau",
+    "platforms": "Plateformes et cloud",
     "fullstack": "Full-stack",
-    "it-support": "IT et support"
+    "ops": "Automatisation et exploitation"
   }
 }

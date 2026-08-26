@@ -22,6 +22,8 @@ export type WorkItem = {
   id: ContentId
   featured?: boolean
   hidden?: boolean
+  /** Public repository for the project. Omit for employer-only work. */
+  url?: string
 }
 
 export type SkillChip = {
@@ -48,6 +50,8 @@ export type Profile = {
   locationKey: string
   kickerKey: string
   educationKey: string
+  /** Emergency-service volunteering. Leave empty to drop the row. */
+  volunteeringKey?: string
   timezoneCode: string
   languages: string[]
   links: ProfileLinks

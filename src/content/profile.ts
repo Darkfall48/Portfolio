@@ -6,6 +6,7 @@ export const profile: Profile = {
   locationKey: "profile.location",
   kickerKey: "profile.kicker",
   educationKey: "profile.education",
+  volunteeringKey: "profile.volunteering",
   timezoneCode: "TLV",
   languages: ["FR", "EN", "HE"],
   links: {
