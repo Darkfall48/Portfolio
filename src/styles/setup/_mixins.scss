@@ -1,4 +1,4 @@
-@use 'variables' as *;
+@use "variables" as *;
 
 @mixin panel {
   position: relative;
@@ -20,13 +20,14 @@
 
   &::before,
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     width: 0.7rem;
     height: 0.7rem;
     pointer-events: none;
     border-color: $color-accent;
     border-style: solid;
+    border-width: 0;
     opacity: 0.5;
     transition:
       opacity $ease,
@@ -34,16 +35,20 @@
       height $ease;
   }
 
+  // Logical border sides: physical ones keep pointing left while the bracket
+  // moves to the right in RTL, which reads as a stray bar inside the panel.
   &::before {
-    top: -1px;
+    inset-block-start: -1px;
     inset-inline-start: -1px;
-    border-width: 1px 0 0 1px;
+    border-block-start-width: 1px;
+    border-inline-start-width: 1px;
   }
 
   &::after {
-    bottom: -1px;
+    inset-block-end: -1px;
     inset-inline-end: -1px;
-    border-width: 0 1px 1px 0;
+    border-block-end-width: 1px;
+    border-inline-end-width: 1px;
   }
 
   &:hover {
@@ -98,8 +103,8 @@
     box-shadow: inset 2px 0 0 $color-accent;
   }
 
-  html[dir='rtl'] &:hover,
-  html[dir='rtl'] &:focus-visible {
+  html[dir="rtl"] &:hover,
+  html[dir="rtl"] &:focus-visible {
     box-shadow: inset -2px 0 0 $color-accent;
   }
 }
@@ -118,7 +123,7 @@
   }
 }
 
-html[lang='he'] {
+html[lang="he"] {
   .experience-list-title,
   .work-list-title,
   .skill-groups-title {

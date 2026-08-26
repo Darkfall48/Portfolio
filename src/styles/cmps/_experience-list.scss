@@ -56,7 +56,12 @@
       box-shadow: 0 0 10px $color-glow;
     }
 
+    // Digits are bidi-neutral, so an RTL paragraph reorders the two years and
+    // renders "2018-2021" as "2021-2018". Isolating the range as LTR keeps it
+    // in reading order; alignment is restored at the end of the file.
     &-dates {
+      direction: ltr;
+      unicode-bidi: isolate;
       font-family: $font-mono;
       font-size: 0.7rem;
       letter-spacing: 0.1em;
@@ -74,4 +79,10 @@
       color: $color-muted;
     }
   }
+}
+
+// The forced LTR direction above would otherwise pull the range to the left
+// edge, away from the org and role lines it belongs to.
+html[dir="rtl"] .experience-list-item-dates {
+  text-align: end;
 }
