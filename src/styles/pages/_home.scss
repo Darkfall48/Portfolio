@@ -64,11 +64,21 @@
       drift 24s ease-in-out infinite;
   }
 
+  // Track sizes interpolate, grid-template-areas does not. Expanding therefore
+  // re-weights the tracks and leaves every panel in its own area.
   &-main {
+    // Held in a custom property so an expanded panel can halve a gutter it is
+    // about to sit next to twice over.
+    --home-gap: clamp(0.5rem, 0.7vw, 0.8rem);
     display: grid;
     flex: 1;
-    gap: clamp(0.5rem, 0.7vw, 0.8rem);
+    gap: var(--home-gap);
     min-height: 0;
+    transition:
+      grid-template-rows $ease-out,
+      grid-template-columns $ease-out,
+      row-gap $ease-out,
+      column-gap $ease-out;
   }
 }
 
@@ -145,7 +155,9 @@
   }
 
   .home-main {
-    grid-template-columns: 1.35fr 1.1fr 0.95fr;
+    // minmax(0, …) throughout: a bare fr keeps an auto minimum, so a track
+    // could never collapse below the width of its content.
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1.1fr) minmax(0, 0.95fr);
     grid-template-rows: minmax(0, 0.85fr) minmax(0, 1.15fr);
     grid-template-areas:
       "profile experience skills"
@@ -167,16 +179,85 @@
   .skill-groups {
     grid-area: skills;
   }
+
+  // Experience and Selected work share the middle column, so the doubling
+  // happens on the block axis: one row takes everything, the other goes to 0fr.
+  // row-gap closes with it, otherwise the surviving panel stops short of the
+  // full column and leaves a dead band where the other one used to be. Panels
+  // spanning both rows are unaffected: they simply cover the gap.
+  .home-main.is-expanded-experience,
+  .home-main.is-expanded-work {
+    row-gap: 0;
+  }
+
+  .home-main.is-expanded-experience {
+    grid-template-rows: minmax(0, 1fr) minmax(0, 0fr);
+  }
+
+  .home-main.is-expanded-work {
+    grid-template-rows: minmax(0, 0fr) minmax(0, 1fr);
+  }
+
+  // Expanding is what buys the extra rows, so the panel that grew is the one
+  // place on a wide screen where an internal scrollbar is welcome.
+  .is-expanded-experience .experience-list-items,
+  .is-expanded-work .work-list-items {
+    overflow-y: auto;
+  }
+
+  // Room for the second line the collapsed card cannot afford.
+  .is-expanded-work .work-list-item-summary {
+    -webkit-line-clamp: 2;
+  }
+
+  // Focus spans both rows, so on its own it covers exactly the area of
+  // Experience and Selected work stacked. Expanding therefore swallows the
+  // middle column whole and folds both of them away.
+  .home-main.is-expanded-skills {
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 0fr) minmax(0, 2.05fr);
+    // Closing this gutter entirely would glue Focus to the profile card, since
+    // both of its neighbours here are real panels. Halving instead leaves the
+    // two collapsed gutters adding up to one normal one.
+    column-gap: calc(var(--home-gap) / 2);
+  }
+
+  .home-main.is-expanded-skills .experience-list,
+  .home-main.is-expanded-skills .work-list {
+    opacity: 0;
+    transition: opacity 140ms $ease-fn 280ms;
+  }
+
+  .is-expanded-skills .skill-groups-list {
+    overflow-y: auto;
+  }
 }
 
 @media (min-width: $break-narrow) and (max-width: $break-wide - 1px) {
   .home-main {
-    grid-template-columns: 1.15fr 0.85fr;
+    // minmax(0, …) is what lets a track reach zero: a bare fr keeps an auto
+    // minimum and would stay as wide as its content.
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
     grid-template-rows: auto minmax(0, 1fr) auto;
     grid-template-areas:
       "profile profile"
       "experience work"
       "skills skills";
+  }
+
+  // Here the two panels sit side by side, so the doubling happens on the inline
+  // axis. Grid areas follow the writing direction, so RTL mirrors this on its
+  // own and the collapsing track stays under the right panel.
+  .home-main.is-expanded-experience,
+  .home-main.is-expanded-work {
+    column-gap: 0;
+  }
+
+  .home-main.is-expanded-experience {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0fr);
+  }
+
+  .home-main.is-expanded-work {
+    grid-template-columns: minmax(0, 0fr) minmax(0, 1fr);
   }
 
   .profile-card {
@@ -193,6 +274,19 @@
 
   .skill-groups {
     grid-area: skills;
+  }
+}
+
+// The panel clips its own content as it shrinks, so the fade is only there to
+// kill the last artefact: a zero-height box still paints its border and corner
+// brackets as a hairline. Hence the delay, which keeps the motion reading as a
+// shrink instead of a panel dissolving in place. React marks it inert, and that
+// is what actually takes it out of the tab order.
+@media (min-width: $break-narrow) {
+  .home-main.is-expanded-experience .work-list,
+  .home-main.is-expanded-work .experience-list {
+    opacity: 0;
+    transition: opacity 140ms $ease-fn 280ms;
   }
 }
 

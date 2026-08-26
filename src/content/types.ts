@@ -2,6 +2,9 @@ export type ContentId = string
 
 export type PanelKind = "experience" | "work"
 
+/** Panels that can trade the collapsed view for the full list. */
+export type ExpandablePanel = "experience" | "work" | "skills"
+
 export type PanelTarget = {
   kind: PanelKind
   id: ContentId

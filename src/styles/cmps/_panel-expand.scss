@@ -1,0 +1,47 @@
+@use "../setup/variables" as *;
+
+// Shown at every width: whether a panel has more to give is a content question,
+// not a viewport one. The component renders nothing when the list fits, so the
+// control never appears where it would reveal nothing.
+.panel-expand {
+  display: inline-flex;
+  align-items: center;
+  align-self: center;
+  gap: 0.4rem;
+  // Logical margin keeps the control on the trailing edge in RTL with no
+  // transform, so there is nothing to mirror.
+  margin-inline-start: auto;
+}
+
+.panel-expand-count {
+  // Digits are bidi-neutral, so an RTL line renders "+2" as "2+". Same
+  // isolation as the experience date ranges.
+  direction: ltr;
+  unicode-bidi: isolate;
+  font-family: $font-mono;
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  color: $color-muted;
+}
+
+.panel-expand-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.2rem;
+  font-size: 0.78rem;
+  color: $color-muted;
+  border: 1px solid transparent;
+  border-radius: $radius;
+  transition:
+    color $ease,
+    background $ease,
+    border-color $ease;
+
+  &:hover,
+  &:focus-visible {
+    color: $color-accent;
+    background: $color-accent-dim;
+    border-color: $color-line;
+  }
+}

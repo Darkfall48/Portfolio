@@ -2,24 +2,43 @@
 import { useTranslation } from "react-i18next"
 
 //? Content / i18n
-import { experience, isOnHome } from "../content"
+import { HOME_SLOTS, experience, hiddenItemCount, homeItems } from "../content"
 import type { ContentId } from "../content"
+
+//? Components
+import { PanelExpand } from "./PanelExpand"
 
 type Props = {
   onSelect: (id: ContentId) => void
+  expanded: boolean
+  /** The sibling panel took the cell: this one is folded away, not just small. */
+  collapsed: boolean
+  onToggleExpand: () => void
 }
 
-export function ExperienceList({ onSelect }: Props) {
+export function ExperienceList({
+  onSelect,
+  expanded,
+  collapsed,
+  onToggleExpand,
+}: Props) {
   const { t } = useTranslation()
-  const items = experience.filter(isOnHome)
+  const items = homeItems(experience, HOME_SLOTS.experience, expanded)
+  const hidden = hiddenItemCount(experience, HOME_SLOTS.experience)
 
   return (
-    <section className="experience-list">
+    <section className="experience-list" inert={collapsed}>
       <h2 className="experience-list-title">
         <span className="hud-index" aria-hidden="true">
           01
         </span>
         {t("nav.experience")}
+        <PanelExpand
+          expanded={expanded}
+          hasMore={hidden > 0}
+          hiddenRows={hidden}
+          onToggle={onToggleExpand}
+        />
       </h2>
       <ul className="experience-list-items">
         {items.map((item) => {

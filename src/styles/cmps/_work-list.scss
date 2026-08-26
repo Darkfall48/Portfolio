@@ -13,6 +13,13 @@
     }
   }
 
+  // This panel carries the secondary accent, so its control follows.
+  .panel-expand-btn:hover,
+  .panel-expand-btn:focus-visible {
+    color: $color-accent-2;
+    background: $color-accent-2-dim;
+  }
+
   &-items {
     @include panel-list;
     gap: clamp(0.2rem, 0.7vh, 0.45rem);

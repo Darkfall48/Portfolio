@@ -1,19 +1,20 @@
 //? Libraries
-import i18n from 'i18next'
-import { initReactI18next } from 'react-i18next'
+import i18n from "i18next"
+import { initReactI18next } from "react-i18next"
 
 //? Content / i18n
-import en from './locales/en.json'
-import fr from './locales/fr.json'
-import he from './locales/he.json'
+import en from "./locales/en.json"
+import fr from "./locales/fr.json"
+import he from "./locales/he.json"
+import { FILLER_ON, fillerLocales } from "./content/_filler"
 
-export const SUPPORTED_LOCALES = ['en', 'fr', 'he'] as const
+export const SUPPORTED_LOCALES = ["en", "fr", "he"] as const
 export type Locale = (typeof SUPPORTED_LOCALES)[number]
 
-const STORAGE_KEY = 'portfolio-locale'
+const STORAGE_KEY = "portfolio-locale"
 
-export function localeDir(locale: Locale): 'ltr' | 'rtl' {
-  return locale === 'he' ? 'rtl' : 'ltr'
+export function localeDir(locale: Locale): "ltr" | "rtl" {
+  return locale === "he" ? "rtl" : "ltr"
 }
 
 export function isLocale(value: string): value is Locale {
@@ -35,7 +36,7 @@ function detectLocale(): Locale {
 
   const nav = navigator.language.slice(0, 2)
   if (isLocale(nav)) return nav
-  return 'en'
+  return "en"
 }
 
 function persistLocale(locale: Locale) {
@@ -57,11 +58,26 @@ void i18n.use(initReactI18next).init({
     he: { translation: he },
   },
   lng: initialLocale,
-  fallbackLng: 'en',
+  fallbackLng: "en",
   interpolation: { escapeValue: false },
 })
 
-i18n.on('languageChanged', (lng) => {
+// Load-test translations, skipped unless FILLER_ON is flipped in _filler.ts.
+// Deep merged so the generated keys land under experience / work without
+// replacing the real entries.
+if (FILLER_ON) {
+  for (const locale of SUPPORTED_LOCALES) {
+    i18n.addResourceBundle(
+      locale,
+      "translation",
+      fillerLocales(locale),
+      true,
+      true,
+    )
+  }
+}
+
+i18n.on("languageChanged", (lng) => {
   if (isLocale(lng)) persistLocale(lng)
 })
 
