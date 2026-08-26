@@ -1,5 +1,5 @@
 //? Libraries
-import { useEffect, useId, useRef } from "react"
+import { useEffect, useId, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 
 //? Content / i18n
@@ -19,12 +19,21 @@ export function DetailPanel({ target, onClose }: Props) {
   const titleId = useId()
   const closeRef = useRef<HTMLButtonElement>(null)
   const isOpen = target !== null
-  const keyPrefix = target ? `${target.kind}.${target.id}` : ""
+  // Held so the sheet still has copy to show while it slides back out. Without
+  // it the content unmounts on the closing click and an empty shell leaves.
+  const [shown, setShown] = useState<PanelTarget | null>(target)
+
+  // Adjusted during render rather than in an effect, so the content exists on
+  // the very commit that opens the panel and the close button can take focus.
+  if (target && target !== shown) setShown(target)
 
   useEffect(() => {
     if (!isOpen) return
 
-    closeRef.current?.focus()
+    // The button is already at the top of the sheet, so no ancestor ever needs
+    // to scroll to reveal it. Asking not to is what keeps a scroll out of the
+    // opening slide.
+    closeRef.current?.focus({ preventScroll: true })
 
     function onKey(event: KeyboardEvent) {
       if (event.key === "Escape") onClose()
@@ -34,11 +43,12 @@ export function DetailPanel({ target, onClose }: Props) {
     return () => document.removeEventListener("keydown", onKey)
   }, [isOpen, onClose])
 
-  const body = isOpen ? t(`${keyPrefix}.body`, { returnObjects: true }) : []
+  const keyPrefix = shown ? `${shown.kind}.${shown.id}` : ""
+  const body = shown ? t(`${keyPrefix}.body`, { returnObjects: true }) : []
   const bullets = Array.isArray(body) ? body.map(String) : []
   const experienceItem =
-    target?.kind === "experience"
-      ? experience.find((item) => item.id === target.id)
+    shown?.kind === "experience"
+      ? experience.find((item) => item.id === shown.id)
       : undefined
   const experienceEnd = experienceItem
     ? experienceItem.end === "present"
@@ -46,15 +56,18 @@ export function DetailPanel({ target, onClose }: Props) {
       : experienceItem.end
     : ""
 
-  const kindClass = target ? ` is-${target.kind}` : ""
-  const eyebrow = target
-    ? t(target.kind === "experience" ? "nav.experience" : "nav.work")
+  const kindClass = shown ? ` is-${shown.kind}` : ""
+  const eyebrow = shown
+    ? t(shown.kind === "experience" ? "nav.experience" : "nav.work")
     : ""
 
   return (
     <div
       className={`detail-panel${isOpen ? " is-open" : ""}${kindClass}`}
-      hidden={!isOpen}
+      // Not `hidden`: display:none gives the sheet no box to slide from, so the
+      // transition never runs. Inert takes it out of reach instead, and CSS
+      // hides it once the closing slide is over.
+      inert={!isOpen}
     >
       <button
         type="button"
@@ -68,14 +81,13 @@ export function DetailPanel({ target, onClose }: Props) {
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
-        hidden={!isOpen}
       >
-        {target ? (
+        {shown ? (
           <>
             <p className="detail-panel-eyebrow">{eyebrow}</p>
             <header className="detail-panel-head">
               <h2 id={titleId} className="detail-panel-title">
-                {target.kind === "experience"
+                {shown.kind === "experience"
                   ? t(`${keyPrefix}.org`)
                   : t(`${keyPrefix}.title`)}
               </h2>
@@ -90,9 +102,11 @@ export function DetailPanel({ target, onClose }: Props) {
                 <FiX aria-hidden="true" />
               </button>
             </header>
-            {target.kind === "experience" ? (
+            {shown.kind === "experience" ? (
               <p className="detail-panel-kicker">
-                {experienceItem ? `${experienceItem.start}–${experienceEnd} · ` : ""}
+                {experienceItem
+                  ? `${experienceItem.start}–${experienceEnd} · `
+                  : ""}
                 {t(`${keyPrefix}.title`)}
               </p>
             ) : null}

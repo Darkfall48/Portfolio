@@ -4,7 +4,17 @@
   position: fixed;
   inset: 0;
   z-index: 20;
+  // The closed sheet is parked outside the viewport, so it stays in the DOM and
+  // keeps a box to slide from. `clip` rather than `hidden`: hidden would make
+  // this a scroll container, and the parked sheet gives it a scrollable area
+  // that the browser then scrolls to reveal the focused close button, fighting
+  // the slide. `clip` trims the same overflow without anything to scroll.
+  // The delayed visibility drops the layer, and its full-screen blur, only once
+  // the closing slide has finished.
+  overflow: clip;
+  visibility: hidden;
   pointer-events: none;
+  transition: visibility 0s 420ms;
   --panel-accent: var(--color-accent);
   --panel-accent-rgb: var(--color-accent-rgb);
 
@@ -20,7 +30,9 @@
   }
 
   &.is-open {
+    visibility: visible;
     pointer-events: auto;
+    transition: visibility 0s;
   }
 
   &-backdrop {
@@ -30,6 +42,7 @@
     height: 100%;
     background: $color-backdrop;
     opacity: 0;
+    -webkit-backdrop-filter: blur(5px);
     backdrop-filter: blur(5px);
     transition: opacity $ease-out;
   }
