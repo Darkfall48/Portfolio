@@ -14,4 +14,5 @@ export const profile: Profile = {
     github: "https://github.com/Darkfall48",
   },
   cvPath: "cv/sidney-sebban.pdf",
+  photoPath: "img/sidney-sebban.jpg",
 }

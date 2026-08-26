@@ -6,7 +6,8 @@
     "kicker": "ZTNA · Identity · Tier-3",
     "education": "Computer engineering, Polytechnique Montréal",
     "educationLabel": "Education",
-    "languages": "Languages"
+    "languages": "Languages",
+    "photoAlt": "Portrait of {{name}}"
   },
   "nav": {
     "site": "Site",

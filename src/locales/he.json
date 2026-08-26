@@ -6,7 +6,8 @@
     "kicker": "ZTNA · זהות · דרגה 3",
     "education": "הנדסת מחשבים, Polytechnique Montréal",
     "educationLabel": "השכלה",
-    "languages": "שפות"
+    "languages": "שפות",
+    "photoAlt": "תמונת פרופיל של {{name}}"
   },
   "nav": {
     "site": "אתר",

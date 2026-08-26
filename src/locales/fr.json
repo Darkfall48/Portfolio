@@ -6,7 +6,8 @@
     "kicker": "ZTNA · Identité · N3",
     "education": "Génie informatique, Polytechnique Montréal",
     "educationLabel": "Formation",
-    "languages": "Langues"
+    "languages": "Langues",
+    "photoAlt": "Portrait de {{name}}"
   },
   "nav": {
     "site": "Site",

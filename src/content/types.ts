@@ -50,6 +50,8 @@ export type Profile = {
   links: ProfileLinks
   /** Public CV path under /public. Leave empty to hide the download control. */
   cvPath?: string
+  /** Public portrait path under /public. Leave empty to hide the photo. */
+  photoPath?: string
 }
 
 export type HomeItem = {

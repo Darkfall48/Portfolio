@@ -33,6 +33,39 @@
     pointer-events: none;
   }
 
+  // Portrait sits beside the title block, so the name keeps the top line.
+  &-identity {
+    display: flex;
+    align-items: center;
+    gap: clamp(0.7rem, 1.4vw, 1.1rem);
+  }
+
+  &-titles {
+    min-width: 0;
+  }
+
+  &-photo {
+    flex-shrink: 0;
+    width: clamp(3.4rem, 7vh, 5.2rem);
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: $radius;
+    border: 1px solid $color-line-strong;
+    box-shadow:
+      0 0 0 3px rgb($accent-rgb / 0.08),
+      0 10px 24px rgb($shadow-rgb / 0.3);
+    transition:
+      box-shadow $ease,
+      border-color $ease;
+  }
+
+  &:hover &-photo {
+    border-color: $color-accent;
+    box-shadow:
+      0 0 0 3px rgb($accent-rgb / 0.16),
+      0 0 22px $color-glow;
+  }
+
   &-kicker {
     display: flex;
     align-items: center;
@@ -54,7 +87,7 @@
   }
 
   &-name {
-    margin-block-start: clamp(0.5rem, 1.6vh, 1rem);
+    margin-block-start: clamp(0.25rem, 0.8vh, 0.5rem);
     font-size: clamp(1.75rem, 3.4vw, 3.1rem);
     line-height: 1.02;
     background: linear-gradient(
@@ -71,7 +104,7 @@
   }
 
   &-headline {
-    margin-block-start: 0.3rem;
+    margin-block-start: clamp(0.4rem, 1.2vh, 0.75rem);
     max-width: 30ch;
     font-size: clamp(0.88rem, 1vw, 1.02rem);
     color: $color-accent;
@@ -152,10 +185,7 @@
       text-decoration: none;
       border: 1px solid $color-line;
       border-radius: $radius;
-      background-image: linear-gradient(
-        $color-accent-dim,
-        $color-accent-dim
-      );
+      background-image: linear-gradient($color-accent-dim, $color-accent-dim);
       background-repeat: no-repeat;
       background-position: center;
       background-size: 0% 100%;
