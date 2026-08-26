@@ -1,4 +1,4 @@
-@use 'variables' as *;
+@use "variables" as *;
 
 *,
 *::before,
@@ -17,11 +17,15 @@ html {
   --spot-y: 18%;
   // Sign for inline-axis transforms that CSS logical properties cannot express.
   --dir: 1;
+  // Plex Sans Hebrew sits in the stack so Hebrew glyphs outside the Hebrew
+  // locale, such as the language switcher label, stay inside the family.
+  // Fallback is resolved per character, not per element.
+  --font-mono: "IBM Plex Mono", "IBM Plex Sans Hebrew", ui-monospace, monospace;
   background: $color-bg;
   color: $color-text;
 }
 
-html[dir='rtl'] {
+html[dir="rtl"] {
   --dir: -1;
 }
 
@@ -43,7 +47,14 @@ body {
     color 320ms ease;
 }
 
-html[lang='he'] body {
+// IBM Plex Mono carries no Hebrew glyphs, so every mono label would fall back
+// to an arbitrary system face beside the body text. Plex Sans Hebrew is the
+// family's own Hebrew companion, so the HUD stays in one typeface.
+html[lang="he"] {
+  --font-mono: #{$font-he};
+}
+
+html[lang="he"] body {
   font-family: $font-he;
 }
 

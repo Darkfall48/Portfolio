@@ -84,6 +84,7 @@ export function SiteHeader() {
             <button
               key={locale}
               type="button"
+              lang={locale}
               className={`site-header-lang-btn${active === locale ? " is-active" : ""}`}
               title={t(`lang.${locale}`)}
               aria-pressed={active === locale}

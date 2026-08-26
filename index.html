@@ -11,18 +11,18 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Hebrew:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
     <script>
       // Set the theme before first paint so a light-theme visitor never sees
       // a dark flash. Key must match STORAGE_KEY in src/theme.ts.
       try {
-        var stored = localStorage.getItem('portfolio-theme')
+        var stored = localStorage.getItem("portfolio-theme")
         document.documentElement.dataset.theme =
-          stored === 'light' ? 'light' : 'dark'
+          stored === "light" ? "light" : "dark"
       } catch (error) {
-        document.documentElement.dataset.theme = 'dark'
+        document.documentElement.dataset.theme = "dark"
       }
     </script>
   </head>

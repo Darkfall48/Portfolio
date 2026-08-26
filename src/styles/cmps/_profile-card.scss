@@ -43,7 +43,9 @@
     inset-inline-end: -3.6rem;
     width: 12rem;
     padding-block: 0.32rem;
-    font-family: $font-mono;
+    // Sans rather than the HUD mono: Plex Mono stops at the 500 weight here, and
+    // a synthesised 600 smears these spaced small caps.
+    font-family: $font-sans;
     font-size: 0.58rem;
     font-weight: 600;
     letter-spacing: 0.12em;

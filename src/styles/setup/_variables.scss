@@ -29,9 +29,10 @@ $grid-alpha: var(--color-grid-alpha);
 $scanline-rgb: var(--color-scanline-rgb);
 $scanline-alpha: var(--color-scanline-alpha);
 
-$font-sans: "IBM Plex Sans", "Assistant", "Segoe UI", sans-serif;
-$font-mono: "IBM Plex Mono", ui-monospace, monospace;
-$font-he: "Assistant", "IBM Plex Sans", sans-serif;
+$font-sans: "IBM Plex Sans", "IBM Plex Sans Hebrew", "Segoe UI", sans-serif;
+// Resolved at runtime so the Hebrew locale can retarget the whole HUD layer.
+$font-mono: var(--font-mono);
+$font-he: "IBM Plex Sans Hebrew", sans-serif;
 
 $space-sm: 0.65rem;
 $space-md: 1rem;
