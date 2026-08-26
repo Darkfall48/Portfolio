@@ -69,25 +69,29 @@
     gap: clamp(0.7rem, 1.4vw, 1.1rem);
   }
 
-  // Keep the name clear of the ribbon rather than trusting it to be short.
+  // The ribbon is thickest at the very corner and retreats diagonally, so it
+  // only bites into the kicker line. Reserving more would starve the name.
   &.is-open-to-work &-identity {
-    padding-inline-end: 3.2rem;
+    padding-inline-end: 1.75rem;
   }
 
   &-titles {
     min-width: 0;
   }
 
+  // Scales on the inline axis, since the column width is what constrains the
+  // portrait. A vh basis collapsed it on wide, short windows.
   &-photo {
     flex-shrink: 0;
-    width: clamp(3.4rem, 7vh, 5.2rem);
+    width: clamp(6rem, 10vw, 11.5rem);
     aspect-ratio: 1;
     object-fit: cover;
     border-radius: $radius;
     border: 1px solid $color-line-strong;
     box-shadow:
-      0 0 0 3px rgb($accent-rgb / 0.08),
-      0 10px 24px rgb($shadow-rgb / 0.3);
+      0 0 0 1px rgb($accent-2-rgb / 0.22),
+      0 0 0 4px rgb($accent-rgb / 0.08),
+      0 14px 30px rgb($shadow-rgb / 0.32);
     transition:
       box-shadow $ease,
       border-color $ease;
@@ -96,8 +100,9 @@
   &:hover &-photo {
     border-color: $color-accent;
     box-shadow:
-      0 0 0 3px rgb($accent-rgb / 0.16),
-      0 0 22px $color-glow;
+      0 0 0 1px rgb($accent-2-rgb / 0.4),
+      0 0 0 4px rgb($accent-rgb / 0.16),
+      0 0 26px $color-glow;
   }
 
   &-kicker {
@@ -122,7 +127,9 @@
 
   &-name {
     margin-block-start: clamp(0.25rem, 0.8vh, 0.5rem);
-    font-size: clamp(1.75rem, 3.4vw, 3.1rem);
+    // Trimmed from 3.4vw so the name still fits on one line beside the
+    // portrait at the narrowest desktop width.
+    font-size: clamp(1.6rem, 3vw, 2.85rem);
     line-height: 1.02;
     background: linear-gradient(
       100deg,
@@ -138,7 +145,7 @@
   }
 
   &-headline {
-    margin-block-start: clamp(0.4rem, 1.2vh, 0.75rem);
+    margin-block-start: clamp(0.3rem, 0.9vh, 0.55rem);
     max-width: 30ch;
     font-size: clamp(0.88rem, 1vw, 1.02rem);
     color: $color-accent;

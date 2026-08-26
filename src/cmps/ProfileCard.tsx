@@ -40,9 +40,9 @@ export function ProfileCard() {
             {t(profile.kickerKey)}
           </p>
           <h1 className="profile-card-name">{profile.name}</h1>
+          <p className="profile-card-headline">{t(profile.headlineKey)}</p>
         </div>
       </div>
-      <p className="profile-card-headline">{t(profile.headlineKey)}</p>
       <p className="profile-card-lead">{t("profile.lead")}</p>
       <p className="profile-card-location">{t(profile.locationKey)}</p>
       <dl className="profile-card-meta">
