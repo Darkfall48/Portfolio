@@ -1,19 +1,22 @@
 @use "../setup/variables" as *;
 
-// Locale swap: one symmetric dissolve. The curve is identical on both halves,
-// so there is no discontinuity when the copy is replaced at the midpoint.
+// Locale swap: a symmetric defocus. The blur carries the transition; opacity
+// only dips, just enough that the copy swap at the midpoint is not a visible
+// cut. The curve is identical on both halves, so there is no discontinuity.
 // Timing is coupled to FLIP_MS / MID_MS in LocaleStage.tsx.
+// The stage recedes rather than grows: scaling past 1 pushes this full-width
+// element outside the viewport and raises scrollbars on the document.
 .locale-stage {
   min-height: 100dvh;
 }
 
 .locale-stage.is-flip-to-rtl,
 .locale-stage.is-flip-to-ltr {
-  animation: locale-dissolve 620ms $ease-fn both;
+  animation: locale-defocus 620ms $ease-fn both;
   will-change: opacity, filter, transform;
 }
 
-@keyframes locale-dissolve {
+@keyframes locale-defocus {
   0% {
     opacity: 1;
     filter: blur(0);
@@ -21,9 +24,9 @@
   }
 
   50% {
-    opacity: 0;
-    filter: blur(10px);
-    transform: scale(1.018);
+    opacity: 0.32;
+    filter: blur(16px);
+    transform: scale(0.99);
   }
 
   100% {

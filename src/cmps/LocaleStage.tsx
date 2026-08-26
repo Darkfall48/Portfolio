@@ -12,8 +12,8 @@ type Props = {
   children: ReactNode
 }
 
-// Must match the locale-dissolve keyframes: the copy swaps at the midpoint,
-// while the stage is fully transparent.
+// Must match the locale-defocus keyframes: the copy swaps at the midpoint,
+// where the blur peaks and hides the substitution.
 const FLIP_MS = 620
 const MID_MS = 310
 
