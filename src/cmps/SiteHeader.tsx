@@ -54,7 +54,10 @@ export function SiteHeader() {
 
   return (
     <header className="site-header">
-      <p className="site-header-name">{profile.name}</p>
+      <p className="site-header-name">
+        {profile.name}
+        <span className="site-header-year">{new Date().getFullYear()}</span>
+      </p>
       <nav className="site-header-nav" aria-label={t("nav.site")}>
         <p className="site-header-clock" title={t("action.clock")}>
           {profile.timezoneCode} {time || "--:--"}

@@ -47,6 +47,19 @@
     }
   }
 
+  &-year {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: $color-accent;
+    font-variant-numeric: tabular-nums;
+
+    &::before {
+      content: "·";
+      color: $color-muted;
+    }
+  }
+
   &-clock {
     font-family: $font-mono;
     font-size: 0.7rem;
