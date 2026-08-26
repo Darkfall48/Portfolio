@@ -28,6 +28,13 @@
     pointer-events: none;
   }
 
+  // Passive information on one side of the bar, controls on the other.
+  &-identity {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
   &-name {
     display: flex;
     align-items: center;
@@ -47,10 +54,36 @@
     }
   }
 
-  &-year {
-    display: inline-flex;
+  &-meta {
+    display: flex;
     align-items: center;
     gap: 0.5rem;
+
+    // Separates the block from the name, and is dropped once the block moves
+    // to a line of its own.
+    &::before {
+      content: "·";
+      font-family: $font-mono;
+      font-size: 0.78rem;
+      color: $color-muted;
+    }
+  }
+
+  &-year {
+    font-family: $font-mono;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    color: $color-accent;
+    font-variant-numeric: tabular-nums;
+  }
+
+  &-clock {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: $font-mono;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
     color: $color-accent;
     font-variant-numeric: tabular-nums;
 
@@ -58,14 +91,6 @@
       content: "·";
       color: $color-muted;
     }
-  }
-
-  &-clock {
-    font-family: $font-mono;
-    font-size: 0.7rem;
-    letter-spacing: 0.12em;
-    color: $color-accent;
-    font-variant-numeric: tabular-nums;
   }
 
   &-nav {
@@ -199,13 +224,11 @@ html[lang="he"] .site-header-name {
   text-transform: none;
 }
 
-// Icon-only CV button on small screens: the label would push the nav out of
-// the bar. The accessible name comes from aria-label on the anchor.
-@media (max-width: 560px) {
-  .site-header-nav {
-    gap: 0.4rem;
-  }
-
+// Icon-only CV button once the label stops fitting. The threshold is content
+// driven, not a layout breakpoint: "Télécharger le CV" is half again as wide as
+// "Download CV", so it is set from the longest locale. The accessible name
+// stays on the anchor's aria-label.
+@media (max-width: 760px) {
   .site-header-cv {
     padding-inline: 0.45rem;
 
@@ -217,15 +240,36 @@ html[lang="he"] .site-header-name {
       font-size: 1rem;
     }
   }
+}
+
+// Below this the bar cannot hold a single row in any locale, so the two-row
+// layout is declared instead of left to flex-wrap. Deciding it here is what
+// keeps the row count stable: the count used to flip back to one row at 460px,
+// where the clock hides and frees just enough space.
+@media (max-width: 560px) {
+  // Controls keep the top-right corner while the identity block grows downward,
+  // so the bar gains a line without either side drifting to the centre.
+  .site-header {
+    align-items: flex-start;
+  }
+
+  .site-header-identity {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.2rem;
+  }
+
+  .site-header-meta {
+    // Indented past the status dot so it lines up with the name above it.
+    padding-inline-start: 0.84rem;
+
+    &::before {
+      content: none;
+    }
+  }
 
   .site-header-lang-btn {
     min-width: 2.1rem;
     padding-inline: 0.35rem;
-  }
-}
-
-@media (max-width: 460px) {
-  .site-header-clock {
-    display: none;
   }
 }
