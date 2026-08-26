@@ -254,6 +254,60 @@
   }
 }
 
+// Tablet: the card spans both grid columns, so its cell is wide and short.
+// Stacked, its blocks ran down one edge and left most of that width bare, so
+// they split in two here: who I am on one side, the details on the other. Grid
+// columns follow the writing direction, so RTL mirrors this on its own.
+@media (min-width: $break-narrow) and (max-width: $break-wide - 1px) {
+  .profile-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+    grid-template-areas:
+      "identity meta"
+      "lead     meta"
+      "location links";
+    column-gap: clamp(1rem, 3vw, 2.4rem);
+    align-content: start;
+  }
+
+  .profile-card-identity {
+    grid-area: identity;
+  }
+
+  .profile-card-lead {
+    grid-area: lead;
+    // Wider than the desktop measure: here the column is the constraint, and
+    // 38ch left the paragraph looking like a ribbon inside it.
+    max-width: 44ch;
+  }
+
+  .profile-card-location {
+    grid-area: location;
+  }
+
+  .profile-card-meta {
+    grid-area: meta;
+    // Its area spans two rows, and this list is a grid of its own: left to
+    // stretch, it would pull its two rows apart to fill the height.
+    align-self: start;
+    // The auto margin that pins this to the foot of the desktop card would push
+    // it down its own area here, away from the identity block it sits beside.
+    margin-block-start: 0;
+  }
+
+  // Bottom row, so the links line up with the location across the card.
+  .profile-card-links {
+    grid-area: links;
+    align-self: end;
+  }
+
+  // The details now hold the corner the ribbon crosses, so they reserve the
+  // room the identity block reserves on desktop.
+  .profile-card.is-open-to-work .profile-card-meta {
+    padding-inline-end: 1.75rem;
+  }
+}
+
 html[lang="he"] .profile-card-kicker,
 html[lang="he"] .profile-card-open,
 html[lang="he"] .profile-card-meta dt {
