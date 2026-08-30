@@ -34,6 +34,8 @@ export type SkillChip = {
   cvLabel?: string
   /** A common noun rather than a product name, so the CV translates it. */
   translated?: boolean
+  /** Other ways a job offer writes this, matched on top of the labels. */
+  aliases?: string[]
 }
 
 /** An arrangement of the inventory, not an owner: groups hold chip ids. */

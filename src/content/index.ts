@@ -4,8 +4,10 @@ export {
   cvKey,
   cvPresets,
   cvPresetSelection,
+  cvOrderedKeys,
   cvSections,
   cvSkillChips,
+  cvSyncRoleHeaders,
   isSameSelection,
 } from "./cv"
 export { experience, experienceRange } from "./experience"

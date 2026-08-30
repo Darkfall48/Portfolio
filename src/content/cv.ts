@@ -9,6 +9,15 @@ export type CvItem = {
   id: ContentId
   /** Kept out of the builder entirely, without deleting the locale copy. */
   hidden?: boolean
+  /**
+   * Inventory ids this line is evidence for. A tag is a claim the line can
+   * back in an interview, not a keyword sprinkled on it, and it is what a job
+   * offer is scored against. Tags may name a tool the skills section never
+   * prints, since demonstrating something and listing it are not the same.
+   */
+  skills?: ContentId[]
+  /** Ships whatever the angle is. Tailoring seeds the page with these. */
+  required?: boolean
 }
 
 export type CvRole = CvItem & {
@@ -39,36 +48,72 @@ export type CvSections = {
 
 export const cvSections: CvSections = {
   summary: [
-    { id: "profile" },
-    { id: "track-record" },
-    { id: "automation" },
+    // The opening line is who he is, not an angle; no offer buys it out.
+    { id: "profile", skills: ["ztna"], required: true },
+    { id: "track-record", skills: ["saas-platforms"] },
+    {
+      id: "automation",
+      skills: [
+        "powershell",
+        "python",
+        "bash",
+        "shell",
+        "windows",
+        "macos",
+        "linux",
+      ],
+    },
+    // Nothing to tag: no offer screens for this on a tool name.
     { id: "communication" },
   ],
   roles: [
     {
       id: "cyolo",
       bullets: [
-        { id: "support" },
-        { id: "escalations" },
-        { id: "docker" },
-        { id: "jira" },
-        { id: "knowledge-base" },
-        { id: "zendesk" },
-        { id: "automation" },
-        { id: "cloud" },
-        { id: "saas" },
-        { id: "infrastructure" },
-        { id: "back-office" },
-        { id: "helpdesk" },
+        { id: "support", skills: ["saas-platforms"] },
+        {
+          id: "escalations",
+          skills: [
+            "sso",
+            "scim",
+            "ldap",
+            "tls",
+            "san",
+            "rdp",
+            "vnc",
+            "telnet",
+            "linux",
+            "windows",
+            "macos",
+          ],
+        },
+        { id: "docker", skills: ["docker", "compose"] },
+        { id: "jira", skills: ["jira"] },
+        { id: "knowledge-base", skills: ["confluence", "zendesk"] },
+        { id: "zendesk", skills: ["zendesk"] },
+        { id: "automation", skills: ["powershell", "python", "shell"] },
+        { id: "cloud", skills: ["esxi", "proxmox", "aws"] },
+        { id: "saas", skills: ["saas-platforms", "sso", "scim"] },
+        { id: "infrastructure", skills: ["azuread", "entra", "soc2"] },
+        // The wording names no stack, but this is what building it took.
+        { id: "back-office", skills: ["react", "node", "mongodb", "rest"] },
+        { id: "helpdesk", skills: ["react", "node", "rest", "scim"] },
       ],
     },
     {
       id: "idf",
-      bullets: [{ id: "support" }, { id: "video" }, { id: "cabling" }],
+      bullets: [
+        { id: "support" },
+        { id: "video", skills: ["adobe"] },
+        { id: "cabling" },
+      ],
     },
   ],
   education: [
-    { id: "coding-academy" },
+    {
+      id: "coding-academy",
+      skills: ["javascript", "react", "node", "mongodb"],
+    },
     { id: "polytechnique" },
     { id: "network-cert" },
   ],
@@ -195,6 +240,43 @@ export function cvSkillChips(line: CvSkillLine): ContentId[] {
 }
 
 /**
+ * A role header says nothing without a bullet under it, and the generator
+ * drops such a role anyway. So the header follows its bullets instead of
+ * living its own life. Every selection passes through here, which is what lets
+ * the panel and the offer matcher agree without either knowing about the other.
+ */
+export function cvSyncRoleHeaders(keys: Set<string>): Set<string> {
+  for (const role of cvSections.roles) {
+    const hasBullet = role.bullets.some((bullet) =>
+      keys.has(cvKey("bullet", role.id, bullet.id)),
+    )
+    if (hasBullet) keys.add(cvKey("role", role.id))
+    else keys.delete(cvKey("role", role.id))
+  }
+  return keys
+}
+
+/** Every selectable key, in the order the document prints them. */
+export function cvOrderedKeys(): string[] {
+  const keys: string[] = []
+  for (const item of cvSections.summary.filter(visible)) {
+    keys.push(cvKey("summary", item.id))
+  }
+  for (const role of cvSections.roles.filter(visible)) {
+    for (const bullet of role.bullets.filter(visible)) {
+      keys.push(cvKey("bullet", role.id, bullet.id))
+    }
+  }
+  for (const item of cvSections.education.filter(visible)) {
+    keys.push(cvKey("education", item.id))
+  }
+  for (const line of cvSections.skills.filter(visible)) {
+    for (const id of cvSkillChips(line)) keys.push(cvKey("skill", id))
+  }
+  return keys
+}
+
+/**
  * A targeted angle, expressed as the lines the full document drops. The page is
  * already full at 99%, so an angle earns room by leaving things out rather than
  * by adding anything. Tune these lists per application: it is a data change.
@@ -206,6 +288,12 @@ export type CvPreset = {
   drop: string[]
   /** Tools the angle leaves out, by inventory id. */
   dropSkills?: ContentId[]
+  /**
+   * How an ad names this job. Every language at once, because the ad's
+   * language has nothing to do with the one the site is being read in. Only
+   * multi-word titles: a bare "support" is in every ad ever written.
+   */
+  roleTerms: string[]
 }
 
 export const cvPresets: CvPreset[] = [
@@ -213,6 +301,24 @@ export const cvPresets: CvPreset[] = [
     // Escalations, reproduction, and the knowledge base carry this one; the
     // internal estate work is background noise for a support panel.
     id: "support",
+    roleTerms: [
+      "support engineer",
+      "technical support",
+      "customer support",
+      "customer success engineer",
+      "service desk",
+      "help desk",
+      "helpdesk",
+      "escalation engineer",
+      "solutions engineer",
+      "ingénieur support",
+      "support technique",
+      "technicien support",
+      "chargé de support",
+      "מהנדס תמיכה",
+      "תמיכה טכנית",
+      "איש תמיכה",
+    ],
     drop: [
       cvKey("bullet", "cyolo", "saas"),
       cvKey("bullet", "cyolo", "back-office"),
@@ -250,6 +356,29 @@ export const cvPresets: CvPreset[] = [
   {
     // Identity, estate, and compliance lead; the ticket-desk routine does not.
     id: "it",
+    roleTerms: [
+      "system administrator",
+      "systems administrator",
+      "sysadmin",
+      "IT administrator",
+      "IT operations",
+      "IT engineer",
+      "IT specialist",
+      "IT manager",
+      "infrastructure engineer",
+      "infrastructure administrator",
+      "network administrator",
+      "administrateur système",
+      "administrateur systèmes",
+      "ingénieur système",
+      "ingénieur systèmes",
+      "administrateur réseau",
+      "administrateur réseaux",
+      "responsable informatique",
+      "מנהל מערכות",
+      "מנהל רשת",
+      "איש מערכות מידע",
+    ],
     drop: [
       cvKey("bullet", "cyolo", "jira"),
       cvKey("bullet", "cyolo", "zendesk"),
@@ -291,6 +420,24 @@ export const cvPresets: CvPreset[] = [
     // What was shipped and operated, not what was answered. The military
     // media and cabling lines say nothing to an engineering panel.
     id: "fullstack",
+    roleTerms: [
+      "full-stack",
+      "fullstack",
+      "software engineer",
+      "software developer",
+      "web developer",
+      "back-end developer",
+      "front-end developer",
+      "backend engineer",
+      "frontend engineer",
+      "développeur",
+      "développeuse",
+      "ingénieur logiciel",
+      "ingénieur développement",
+      "מפתח",
+      "מפתחת",
+      "מהנדס תוכנה",
+    ],
     drop: [
       cvKey("bullet", "cyolo", "knowledge-base"),
       cvKey("bullet", "cyolo", "zendesk"),

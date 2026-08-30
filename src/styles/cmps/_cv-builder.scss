@@ -120,7 +120,8 @@
     gap: 0.35rem;
     align-content: start;
 
-    input {
+    input,
+    textarea {
       min-inline-size: 0;
       padding: 0.5rem 0.7rem;
       font-family: $font-mono;
@@ -136,6 +137,11 @@
       }
     }
 
+    textarea {
+      resize: vertical;
+      line-height: 1.5;
+    }
+
     small {
       font-size: 0.72rem;
       color: $color-muted;
@@ -148,6 +154,110 @@
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: $color-accent-2;
+  }
+
+  &-offer {
+    display: grid;
+    gap: $space-sm;
+  }
+
+  &-offer-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  &-offer-tools {
+    display: flex;
+    gap: 0.4rem;
+
+    button {
+      padding: 0.1rem 0.5rem;
+      font-family: $font-mono;
+      font-size: 0.7rem;
+      color: $color-muted;
+      border: 1px solid $color-line;
+      border-radius: $radius;
+      transition:
+        color $ease,
+        border-color $ease;
+
+      &:hover:not(:disabled),
+      &:focus-visible:not(:disabled) {
+        color: $color-text;
+        border-color: rgb($accent-2-rgb / 0.5);
+      }
+
+      &:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  &-offer-read {
+    display: grid;
+    gap: 0.4rem;
+    justify-items: start;
+  }
+
+  // The recognised terms are listed on purpose: a short name like React turns
+  // up in prose that has nothing to do with the tool, and only the eye can
+  // tell. The gauge is a hint, not a verdict.
+  &-offer-terms {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.3rem;
+  }
+
+  &-offer-legend {
+    font-family: $font-mono;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: $color-muted;
+  }
+
+  &-offer-term {
+    padding: 0.1rem 0.42rem;
+    font-size: 0.72rem;
+    color: $color-text;
+    border: 1px solid rgb($accent-2-rgb / 0.45);
+    border-radius: $radius;
+  }
+
+  &-offer-terms.is-gap &-offer-term {
+    color: $color-muted;
+    border-color: $color-line;
+    border-style: dashed;
+  }
+
+  &-offer-apply {
+    padding: 0.35rem 0.8rem;
+    font-family: $font-mono;
+    font-size: 0.74rem;
+    letter-spacing: 0.06em;
+    color: $color-accent-2;
+    border: 1px solid rgb($accent-2-rgb / 0.45);
+    border-radius: $radius;
+    transition:
+      color $ease,
+      border-color $ease,
+      background $ease;
+
+    &:hover:not(:disabled),
+    &:focus-visible:not(:disabled) {
+      color: $color-text;
+      background: rgb($accent-2-rgb / 0.14);
+    }
+
+    &:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
   }
 
   // Shared by the document language row and the angle row.
@@ -245,6 +355,8 @@
     font-size: 0.84rem;
     line-height: 1.45;
     color: $color-muted;
+    // Carried by every row so flagging a match costs no reflow.
+    border-inline-start: 2px solid transparent;
     border-radius: $radius;
     cursor: pointer;
     transition:
@@ -269,6 +381,10 @@
 
     &:has(input:checked) {
       color: $color-text;
+    }
+
+    &.is-matched {
+      border-inline-start-color: $color-accent;
     }
   }
 
@@ -338,6 +454,11 @@
         color: $color-text;
         border-color: rgb($accent-2-rgb / 0.55);
         background: rgb($accent-2-rgb / 0.12);
+        opacity: 1;
+      }
+
+      &.is-matched {
+        border-color: rgb($accent-rgb / 0.7);
         opacity: 1;
       }
     }

@@ -9,7 +9,9 @@ import {
   cvPresets,
   cvPresetSelection,
   cvSections,
+  cvSyncRoleHeaders,
   isSameSelection,
+  skillChip,
 } from "../content"
 import { SUPPORTED_LOCALES, isLocale, localeDir } from "../i18n"
 import type { Locale } from "../i18n"
@@ -24,6 +26,7 @@ import {
 } from "../services/cvDocument"
 import type { CvDoc } from "../services/cvDocument"
 import { downloadBlob, renderCvDocx } from "../services/cvDocx"
+import { matchOffer, tailorSelection } from "../services/jobMatch"
 
 //? Icons
 import { FiDownload, FiLoader, FiX } from "react-icons/fi"
@@ -37,23 +40,6 @@ function readStoredPhone(): string {
     // Private mode or blocked storage — the field just starts empty.
     return ""
   }
-}
-
-/**
- * A role header says nothing without a bullet under it, and the document drops
- * such a role anyway. So the header follows its bullets instead of living its
- * own life: unticking the last bullet unticks the role, and ticking one back
- * brings it along.
- */
-function syncRoleHeaders(keys: Set<string>): Set<string> {
-  for (const role of cvSections.roles) {
-    const hasBullet = role.bullets.some((bullet) =>
-      keys.has(cvKey("bullet", role.id, bullet.id)),
-    )
-    if (hasBullet) keys.add(cvKey("role", role.id))
-    else keys.delete(cvKey("role", role.id))
-  }
-  return keys
 }
 
 type Props = {
@@ -75,8 +61,13 @@ export function CvBuilder({ isOpen, onClose }: Props) {
   const closeRef = useRef<HTMLButtonElement>(null)
   const [selection, setSelection] = useState(cvFullSelection)
   const [phone, setPhone] = useState(readStoredPhone)
+  const [offer, setOffer] = useState("")
+  const [pasteFailed, setPasteFailed] = useState(false)
+  const offerRef = useRef<HTMLTextAreaElement>(null)
   const [isBusy, setIsBusy] = useState(false)
   const [error, setError] = useState("")
+
+  const match = useMemo(() => matchOffer(offer), [offer])
 
   // Reading in one language while applying in another is normal, so the
   // document keeps its own language and only starts from the site's.
@@ -126,7 +117,7 @@ export function CvBuilder({ isOpen, onClose }: Props) {
     setSelection((current) => {
       const next = new Set(current)
       mutate(next)
-      return syncRoleHeaders(next)
+      return cvSyncRoleHeaders(next)
     })
   }
 
@@ -156,11 +147,33 @@ export function CvBuilder({ isOpen, onClose }: Props) {
     }
   }
 
+  /**
+   * Firefox refuses a clipboard read outside a paste gesture, and a denied
+   * permission lands in the same place. Neither is worth an error banner: the
+   * textarea is right there, so the fallback is to focus it and say so.
+   */
+  async function onPasteOffer() {
+    try {
+      const text = await navigator.clipboard.readText()
+      setOffer(text)
+      setPasteFailed(false)
+    } catch {
+      setPasteFailed(true)
+      offerRef.current?.focus()
+    }
+  }
+
   /** Angles carry their own file name, so picking one renames the download. */
   function applyPreset(keys: Set<string>, key: string) {
-    setSelection(syncRoleHeaders(keys))
+    setSelection(cvSyncRoleHeaders(keys))
     setTitleKey(key)
     setCustomName(null)
+  }
+
+  /** Tailoring lands on an angle, so it renames the download like a click. */
+  function onTailor() {
+    const { keys, angle } = tailorSelection(match, doc, lang, phone)
+    applyPreset(keys, angle)
   }
 
   async function onDownload() {
@@ -193,7 +206,13 @@ export function CvBuilder({ isOpen, onClose }: Props) {
     return (
       <label
         key={key}
-        className={`cv-builder-line${options.nested ? " is-nested" : ""}`}
+        className={[
+          "cv-builder-line",
+          options.nested ? "is-nested" : "",
+          match.scores.has(key) ? "is-matched" : "",
+        ]
+          .filter(Boolean)
+          .join(" ")}
       >
         <input
           type="checkbox"
@@ -295,12 +314,95 @@ export function CvBuilder({ isOpen, onClose }: Props) {
           </label>
         </div>
 
+        {/* The automatic version of picking an angle by hand, so it sits with
+            the angles rather than off in a corner of its own. */}
+        <div className="cv-builder-offer">
+          <div className="cv-builder-field">
+            <div className="cv-builder-offer-head">
+              <label className="cv-builder-field-label" htmlFor="cv-offer">
+                {t("cv.builder.offer")}
+              </label>
+              <span className="cv-builder-offer-tools">
+                <button type="button" onClick={onPasteOffer}>
+                  {t("cv.builder.offerPaste")}
+                </button>
+                <button
+                  type="button"
+                  disabled={offer === ""}
+                  onClick={() => {
+                    setOffer("")
+                    setPasteFailed(false)
+                  }}
+                >
+                  {t("cv.builder.offerClear")}
+                </button>
+              </span>
+            </div>
+            <textarea
+              id="cv-offer"
+              ref={offerRef}
+              rows={3}
+              value={offer}
+              placeholder={t("cv.builder.offerPlaceholder")}
+              onChange={(event) => setOffer(event.target.value)}
+            />
+            <small>
+              {pasteFailed
+                ? t("cv.builder.offerPasteFailed")
+                : t("cv.builder.offerHint")}
+            </small>
+          </div>
+
+          {offer.trim() ? (
+            <div className="cv-builder-offer-read">
+              {match.found.length > 0 ? (
+                <p className="cv-builder-offer-terms">
+                  <span className="cv-builder-offer-legend">
+                    {t("cv.builder.offerFound")}
+                  </span>
+                  {match.found.map((id) => (
+                    <span key={id} className="cv-builder-offer-term">
+                      {skillChip(id)?.label}
+                    </span>
+                  ))}
+                </p>
+              ) : (
+                <p className="cv-builder-offer-legend">
+                  {t("cv.builder.offerNone")}
+                </p>
+              )}
+
+              {match.gaps.length > 0 ? (
+                <p className="cv-builder-offer-terms is-gap">
+                  <span className="cv-builder-offer-legend">
+                    {t("cv.builder.offerGaps")}
+                  </span>
+                  {match.gaps.map((term) => (
+                    <span key={term} className="cv-builder-offer-term">
+                      {term}
+                    </span>
+                  ))}
+                </p>
+              ) : null}
+
+              <button
+                type="button"
+                className="cv-builder-offer-apply"
+                disabled={match.found.length === 0}
+                onClick={onTailor}
+              >
+                {t("cv.builder.tailor")}
+              </button>
+            </div>
+          ) : null}
+        </div>
+
         <div className="cv-builder-chips" role="group">
           <p className="cv-builder-chips-label">{t("cv.builder.angle")}</p>
           {cvPresets
             .filter((preset) => preset.hidden !== true)
             .map((preset) => {
-              const keys = syncRoleHeaders(cvPresetSelection(preset))
+              const keys = cvSyncRoleHeaders(cvPresetSelection(preset))
               const isActive = isSameSelection(keys, selection)
               return (
                 <button
@@ -423,11 +525,17 @@ export function CvBuilder({ isOpen, onClose }: Props) {
                       {run.map((id) => {
                         const key = cvKey("skill", id)
                         const isOn = selection.has(key)
+                        const classes = [
+                          isOn ? "is-active" : "",
+                          match.scores.has(key) ? "is-matched" : "",
+                        ]
+                          .filter(Boolean)
+                          .join(" ")
                         return (
                           <button
                             key={id}
                             type="button"
-                            className={isOn ? "is-active" : undefined}
+                            className={classes || undefined}
                             aria-pressed={isOn}
                             onClick={() => toggle(key)}
                           >

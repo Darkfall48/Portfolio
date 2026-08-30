@@ -43,6 +43,7 @@ The header opens a builder that ticks the CV apart line by line and downloads a 
 npm run cv:template                   # rebuild both templates from CVs/2026/...docx
 npm run cv:extract                    # print the reference wording as JSON, to seed cv.doc
 npm run cv:sample -- he 054-0000000   # render every line to .tmp/cv-sample-he.docx, through the app's own generator
+npm run cv:sample -- en "" ad.txt     # render what the builder would tailor for that job ad
 npm run cv:pdf -- <in.docx> [out.pdf] # convert with Word, refuse anything over one page
 ```
 
@@ -65,6 +66,23 @@ Every tool is named once, in `skillChips` (`src/content/skills.ts`). The home an
 The CV arrangement is `cvSections.skills` (`src/content/cv.ts`): each paragraph holds groups, and each group holds the runs the document separates with a semicolon. `cv.doc.skillLabels.<id>` carries the bold lead-in with its own colon and spacing, and `cv.doc.skillJoin` the run separator, which French writes with a non-breaking space. The paragraph is generated from whatever survived the selection, so a group whose tools are all deselected takes its lead-in with it.
 
 Because the inventory is exhaustive for an applicant tracking system and the home is deliberately curated, adding an ATS keyword to `skillChips` never puts it on the home: it appears only where an arrangement lists it.
+
+### Matching a job offer
+
+Paste an ad into the builder and it scores the CV against it, in the browser, with no model and no network. The wiring is two lists over the same inventory:
+
+- Lines carry `skills` in `src/content/cv.ts`: the inventory ids that line is evidence for. A tag is a claim the line can back in an interview, not a keyword sprinkled on it. It may name a tool the skills section never prints, because demonstrating something and listing it are not the same thing.
+- Chips carry `aliases` in `src/content/skills.ts`, for the other ways an ad writes the same tool (`Azure AD` for `Entra ID`, `M365` for Microsoft 365). Terms are matched whole and tolerant of a plural, of a hyphen, and of wherever the ad wrapped its lines — an ad that breaks `Docker Compose` across two lines still means Compose. Word boundaries would not do, since half the vocabulary ends in punctuation.
+- `ambiguousTerms` lists the vocabulary that is also an ordinary word, matched case-sensitively so that `React` counts and `react quickly` does not. The same rule separates `Node` from a cluster node, `Teams` from cross-functional teams, `Vue` from `en vue de`, and `Chef` from `chef de projet`. Case cannot save a word that also opens a sentence, so `Go` is only recognised as `Golang`, and `Swift` is left out: `Swift resolution` is ad boilerplate and neither language is near the roles this CV targets.
+- Presets carry `roleTerms` in `src/content/cv.ts`: how an ad names that job, in all three languages at once, since the ad's language has nothing to do with the one the site is being read in. Only multi-word titles — a bare "support" appears in every ad ever written.
+
+Matching only against your own inventory can never report what you lack, so `unclaimedSkills` lists neighbouring technology the CV does not claim — Kubernetes, Terraform, a SIEM. An ad naming those gets a plain answer instead of silence. Move an entry into `skillChips` the day it becomes defensible.
+
+Tailoring then picks an angle rather than packing the page: the full document already fits, so filling to the budget would hand back the full document whatever the ad said. What an angle really does is leave out what dilutes it, and that judgement is already in `cvPresets`. The offer picks an angle, overrules it wherever it asked for something the angle had dropped, and the page is trimmed from the least relevant end if that pushes it over. Landing on an angle also renames the download, exactly as clicking it would.
+
+The job title picks the angle, and the tools only break a tie. Measured over a corpus of twelve ads, all three angles routinely covered the same 84% of an ad's tools, because the tools are largely shared; the choice then fell to whichever preset happened to be leanest, which means nothing. An ad states the role it is hiring for in its first line, and that is what a recruiter screens on. The tie-break is coverage times density — coverage alone rewards the roomiest angle for having room, density alone rewards the smallest.
+
+Recognised terms are listed in the panel on purpose. Case-sensitivity handles the ordinary words, but nothing catches a false positive that opens a sentence, and only the eye can tell.
 
 ### CV languages
 
