@@ -272,6 +272,77 @@
     }
   }
 
+  // One row per line so the list can be scanned: the lead is readable, the
+  // rest runs off the edge, and the title attribute holds the full wording.
+  &-line-copy {
+    min-inline-size: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  &-line-rest {
+    opacity: 0.62;
+  }
+
+  // One tool per toggle. The caption is a switch for its whole run, because
+  // dropping a family of tools is the common move, not dropping one of them.
+  &-matrix {
+    display: grid;
+    gap: 0.3rem;
+    padding-block: 0.25rem 0.5rem;
+  }
+
+  &-matrix-label {
+    justify-self: start;
+    font-size: 0.78rem;
+    color: $color-muted;
+    transition: color $ease;
+
+    &:hover,
+    &:focus-visible {
+      color: $color-text;
+    }
+
+    &[aria-pressed="true"] {
+      color: $color-accent-2;
+    }
+  }
+
+  &-matrix-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.28rem;
+
+    button {
+      padding: 0.14rem 0.48rem;
+      font-size: 0.73rem;
+      color: $color-muted;
+      border: 1px solid $color-line;
+      border-radius: $radius;
+      opacity: 0.55;
+      transition:
+        color $ease,
+        border-color $ease,
+        background $ease,
+        opacity $ease;
+
+      &:hover,
+      &:focus-visible {
+        color: $color-text;
+        border-color: rgb($accent-2-rgb / 0.5);
+        opacity: 1;
+      }
+
+      &.is-active {
+        color: $color-text;
+        border-color: rgb($accent-2-rgb / 0.55);
+        background: rgb($accent-2-rgb / 0.12);
+        opacity: 1;
+      }
+    }
+  }
+
   &-foot {
     position: sticky;
     inset-block-end: 0;

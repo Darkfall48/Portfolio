@@ -299,54 +299,30 @@
           "suffix": ", חיל האוויר, צה״ל"
         }
       },
-      "skills": {
-        "engineering": {
-          "parts": [
-            {
-              "label": "פיתוח: ",
-              "text": "JavaScript, Python, C#, PHP, MATLAB, Bash, PowerShell, Shell; React, Vue.js, Angular, HTML, CSS/SCSS/SASS, Responsive Design, Redux; Node.js, Express, REST APIs; MongoDB, MySQL, SQL Server; "
-            },
-            {
-              "label": "כלי בסיסי נתונים: ",
-              "text": "phpMyAdmin, Studio 3T; "
-            },
-            { "label": "כלי פיתוח: ", "text": "Visual Studio Code, Postman;" },
-            { "label": " ווב: ", "text": "פלטפורמות SaaS, אפליקציות PWA; " },
-            {
-              "label": "עקרונות: ",
-              "text": "תכנות מונחה עצמים ותכנות ריאקטיבי."
-            }
-          ]
-        },
-        "platforms": {
-          "parts": [
-            {
-              "label": "פלטפורמות ותשתיות: ",
-              "text": "Docker, Docker Compose, Git, GitHub; Linux (Ubuntu), Windows, Windows Server, macOS; AWS EC2/S3; "
-            },
-            {
-              "label": "ענן ווירטואליזציה:",
-              "text": " VMware ESXi, Proxmox; מכונות וירטואליות במערכות הפעלה מרובות."
-            }
-          ]
-        },
-        "security": {
-          "parts": [
-            {
-              "label": "אבטחה, IAM ורשתות: ",
-              "text": "AzureAD, Entra ID, Okta, Active Directory, GPO, LDAP, SSO, SCIM, SAML, OIDC, RBAC, Microsoft XDR; ICAP, רשומות DNS, חומות אש, פרוקסי, Fortinet; תעודות SSL/TLS ו-SAN, JWT."
-            }
-          ]
-        },
-        "ops": {
-          "parts": [
-            {
-              "label": "תפעול, ניטור ושיתוף פעולה: ",
-              "text": "Grafana, Prometheus, BetterStack; Zendesk, Jira, Confluence; SSH, SCP, RDP, VNC, Telnet, PuTTY, AnyDesk; Microsoft Intune; Microsoft 365 Word, Excel, PowerPoint, Outlook, OneDrive, SharePoint, Visio; TimeClock365, Gong, Salesforce, SalesLoft, TravelPerk, HiBob; Figma, Adobe Suite, Avocode, Lunacy; Zoom, Slack, Microsoft Teams."
-            }
-          ]
-        }
-      }
+      "skillLabels": {
+        "engineering": "פיתוח: ",
+        "database-tools": "כלי בסיסי נתונים: ",
+        "dev-tools": "כלי פיתוח: ",
+        "web": "ווב: ",
+        "principles": "עקרונות: ",
+        "platforms": "פלטפורמות ותשתיות: ",
+        "cloud": "ענן ווירטואליזציה: ",
+        "security": "אבטחה, IAM ורשתות: ",
+        "ops": "תפעול, ניטור ושיתוף פעולה: "
+      },
+      "skillTerms": {
+        "responsive-design": "Responsive Design",
+        "rest": "REST APIs",
+        "saas-platforms": "פלטפורמות SaaS",
+        "pwa": "אפליקציות PWA",
+        "oop-reactive": "תכנות מונחה עצמים ותכנות ריאקטיבי",
+        "multi-os-vms": "מכונות וירטואליות במערכות הפעלה מרובות",
+        "dns-records": "רשומות DNS",
+        "firewalls": "חומות אש",
+        "proxies": "פרוקסי",
+        "ssl-san-certs": "תעודות SSL/TLS ו-SAN"
+      },
+      "skillJoin": "; "
     }
   }
 }

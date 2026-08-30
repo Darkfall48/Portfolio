@@ -3,7 +3,7 @@ import { useRef } from "react"
 import { useTranslation } from "react-i18next"
 
 //? Content / i18n
-import { isOnHome, skillGroups } from "../content"
+import { isOnHome, skillChip, skillGroups } from "../content"
 
 //? Components
 import { PanelExpand } from "./PanelExpand"
@@ -45,15 +45,15 @@ export function SkillGroups({ expanded, onToggleExpand }: Props) {
               {t(`skills.${group.id}`)}
             </h3>
             <ul className="skill-groups-chips">
-              {group.chips.map((chip) => (
-                <li
-                  key={chip.id}
-                  className="skill-groups-chip"
-                  title={chip.label}
-                >
-                  {chip.label}
-                </li>
-              ))}
+              {group.chips.map((id) => {
+                const chip = skillChip(id)
+                if (!chip) return null
+                return (
+                  <li key={id} className="skill-groups-chip" title={chip.label}>
+                    {chip.label}
+                  </li>
+                )
+              })}
             </ul>
           </li>
         ))}

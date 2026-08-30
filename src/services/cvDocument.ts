@@ -1,6 +1,8 @@
 //? Content / i18n
 import { cvKey, cvSections } from "../content/cv"
 import { profile } from "../content/profile"
+import { skillChip } from "../content/skills"
+import type { ContentId } from "../content/types"
 import type { Locale } from "../i18n"
 
 /** Shape of the `cv.doc` branch of the locale files. */
@@ -29,7 +31,12 @@ export type CvDoc = {
   summary: Record<string, CvEmphasis>
   roles: Record<string, CvRoleEntry>
   education: Record<string, CvEducationEntry>
-  skills: Record<string, { parts: CvSkillPart[] }>
+  /** Bold lead-in of each skills group, colon and spacing included. */
+  skillLabels: Record<string, string>
+  /** Chips the document states as a common noun rather than a product name. */
+  skillTerms: Record<string, string>
+  /** Between two runs of tools. French wants its space before the semicolon. */
+  skillJoin: string
 }
 
 /** Exactly the placeholders the .docx template exposes. */
@@ -55,6 +62,47 @@ export type CvTemplateData = {
 
 const visible = <T extends { hidden?: boolean }>(item: T) =>
   item.hidden !== true
+
+/** How one tool is written in the document, which is not always its name. */
+export function cvSkillLabel(id: ContentId, doc: CvDoc): string {
+  const chip = skillChip(id)
+  if (!chip) return ""
+  if (chip.translated) return doc.skillTerms[id] ?? chip.label
+  return chip.cvLabel ?? chip.label
+}
+
+/**
+ * A skills paragraph, rebuilt from whatever tools survived the selection. Each
+ * group becomes one part so the lead-in keeps its own bold run, and a group
+ * whose tools are all gone takes its lead-in with it.
+ */
+function composeSkillLine(
+  line: (typeof cvSections.skills)[number],
+  selection: ReadonlySet<string>,
+  doc: CvDoc,
+): { parts: CvSkillPart[] } | null {
+  const groups = line.groups
+    .map((group) => ({
+      id: group.id,
+      runs: group.runs
+        .map((run) => run.filter((id) => selection.has(cvKey("skill", id))))
+        .filter((run) => run.length > 0),
+    }))
+    .filter((group) => group.runs.length > 0)
+
+  if (groups.length === 0) return null
+
+  const parts = groups.map((group, index) => ({
+    label: doc.skillLabels[group.id] ?? "",
+    text:
+      group.runs
+        .map((run) => run.map((id) => cvSkillLabel(id, doc)).join(", "))
+        .join(doc.skillJoin) +
+      (index === groups.length - 1 ? "." : doc.skillJoin),
+  }))
+
+  return { parts }
+}
 
 export function buildCvData(
   doc: CvDoc,
@@ -90,9 +138,7 @@ export function buildCvData(
 
   const skills = cvSections.skills
     .filter(visible)
-    .filter((item) => selection.has(cvKey("skills", item.id)))
-    .map((item) => doc.skills[item.id])
-    .filter(Boolean)
+    .flatMap((line) => composeSkillLine(line, selection, doc) ?? [])
 
   return {
     name: profile.name,

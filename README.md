@@ -18,13 +18,14 @@ Push to `main` also deploys via `.github/workflows/deploy.yml`. In the GitHub re
 
 Facts live in `src/content/`. UI copy lives in `src/locales/en.json`, `fr.json`, and `he.json`. Do not hardcode cards in components.
 
-| What                 | Files                                                                  |
-| -------------------- | ---------------------------------------------------------------------- |
-| Name, links, CV path | `src/content/profile.ts`                                               |
-| Roles                | `src/content/experience.ts` + `experience.<id>.*` in all three locales |
-| Work                 | `src/content/work.ts` + `work.<id>.*` in all three locales             |
-| Skill groups         | `src/content/skills.ts` + `skills.<id>` in all three locales           |
-| Generated CV lines   | `src/content/cv.ts` + `cv.doc.*` in all three locales                  |
+| What                 | Files                                                                         |
+| -------------------- | ----------------------------------------------------------------------------- |
+| Name, links, CV path | `src/content/profile.ts`                                                      |
+| Roles                | `src/content/experience.ts` + `experience.<id>.*` in all three locales        |
+| Work                 | `src/content/work.ts` + `work.<id>.*` in all three locales                    |
+| Skill inventory      | `skillChips` in `src/content/skills.ts`                                       |
+| Home skill groups    | `skillGroups` in `src/content/skills.ts` + `skills.<id>` in all three locales |
+| Generated CV lines   | `src/content/cv.ts` + `cv.doc.*` in all three locales                         |
 
 Home only shows items with `featured: true` and without `hidden: true`. Set `hidden: true` to keep an entry off the home without deleting it.
 
@@ -41,19 +42,29 @@ The header opens a builder that ticks the CV apart line by line and downloads a 
 ```bash
 npm run cv:template                   # rebuild both templates from CVs/2026/...docx
 npm run cv:extract                    # print the reference wording as JSON, to seed cv.doc
-npm run cv:sample -- he 054-0000000   # render every line to .tmp/cv-sample-he.docx
+npm run cv:sample -- he 054-0000000   # render every line to .tmp/cv-sample-he.docx, through the app's own generator
 npm run cv:pdf -- <in.docx> [out.pdf] # convert with Word, refuse anything over one page
 ```
 
 `cv:pdf` drives Word through COM, so it needs Windows with Word installed. It is a local step and never runs in the build or the deploy.
 
-Presets tailor the document to a targeted role. Each one is declared in `cvPresets` (`src/content/cv.ts`) as the lines the full document drops, with its label under `cv.builder.presets.<id>` in all three locales. Retargeting a CV is a data change there, not a code change.
+Presets tailor the document to a targeted role. Each one is declared in `cvPresets` (`src/content/cv.ts`) as the lines the full document drops in `drop` and the tools it drops in `dropSkills`, with its label under `cv.builder.presets.<id>` in all three locales. Retargeting a CV is a data change there, not a code change. An id in `dropSkills` that is misspelled or never printed drops nothing and says nothing, so check an angle against the page fill after editing it.
+
+A role header follows its bullets rather than carrying its own state: unticking the last bullet unticks the role, ticking one back brings it along, and the header shows a mixed state while only part of the role is kept. The document already drops a role with no bullet under it, so the panel now says out loud what the generator was doing quietly.
 
 Picking a preset also renames the download, following the reference naming (`Sidney Sebban 2026 - IT Specialist`). The role wording lives under `cv.doc.fileTitles.<id>`, plus a `full` entry for the complete document. The field stays editable, and characters Windows rejects are stripped before the file is written.
 
 The phone number is never in the repository. It is typed into the builder, kept in `localStorage`, and injected at generation time; the template ships a `{phone}` placeholder instead. The reference documents under `CVs/` stay ignored by git.
 
 The reference CV takes 823.8 pt of the 830 pt a page offers, so there is no room to add a line without removing one. The builder's fill gauge estimates this; `npm run cv:pdf` is what actually enforces it, since only Word knows where the page breaks.
+
+### Skills
+
+Every tool is named once, in `skillChips` (`src/content/skills.ts`). The home and the CV are two arrangements over those ids, so a name cannot drift between them and a keyword only has to be recognised in one place. A chip carries `cvLabel` when the document spells it out for a machine reader (`Linux` on the home, `Linux (Ubuntu)` in the CV) and `translated` when it is a common noun the CV states in its own language, taken from `cv.doc.skillTerms.<id>`. Everything else is a product name and stays as written in all three locales.
+
+The CV arrangement is `cvSections.skills` (`src/content/cv.ts`): each paragraph holds groups, and each group holds the runs the document separates with a semicolon. `cv.doc.skillLabels.<id>` carries the bold lead-in with its own colon and spacing, and `cv.doc.skillJoin` the run separator, which French writes with a non-breaking space. The paragraph is generated from whatever survived the selection, so a group whose tools are all deselected takes its lead-in with it.
+
+Because the inventory is exhaustive for an applicant tracking system and the home is deliberately curated, adding an ATS keyword to `skillChips` never puts it on the home: it appears only where an arrangement lists it.
 
 ### CV languages
 

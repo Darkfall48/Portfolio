@@ -28,12 +28,18 @@ export type WorkItem = {
 
 export type SkillChip = {
   id: ContentId
+  /** Canonical name, and what the home panel shows. */
   label: string
+  /** Spelled out for the CV, which an applicant tracking system reads. */
+  cvLabel?: string
+  /** A common noun rather than a product name, so the CV translates it. */
+  translated?: boolean
 }
 
+/** An arrangement of the inventory, not an owner: groups hold chip ids. */
 export type SkillGroup = {
   id: ContentId
-  chips: SkillChip[]
+  chips: ContentId[]
   featured?: boolean
   hidden?: boolean
 }

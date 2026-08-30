@@ -6,7 +6,7 @@
 // function, so the call sites collapse to a static empty spread and the bundler
 // drops this module from the build.
 
-import type { ExperienceItem, SkillChip, WorkItem } from "./types"
+import type { ContentId, ExperienceItem, SkillChip, WorkItem } from "./types"
 import type { Locale } from "../i18n"
 
 export const FILLER_ON = false
@@ -34,12 +34,21 @@ export function fillerWork(): WorkItem[] {
   return ids().map((id) => ({ id, featured: true }))
 }
 
+const CHIP_GROUPS = ["identity", "security", "platforms", "fullstack", "ops"]
+
 /** Seven per group, to push the Focus panel past its natural height. */
-export function fillerChips(group: string): SkillChip[] {
-  return Array.from({ length: 7 }, (_, index) => ({
-    id: `zz-${group}-${index + 1}`,
-    label: `Filler ${index + 1}`,
-  }))
+export function fillerChipIds(group: string): ContentId[] {
+  return Array.from({ length: 7 }, (_, index) => `zz-${group}-${index + 1}`)
+}
+
+/** The same chips as inventory entries, so the groups can resolve their ids. */
+export function fillerChips(): SkillChip[] {
+  return CHIP_GROUPS.flatMap((group) =>
+    fillerChipIds(group).map((id, index) => ({
+      id,
+      label: `Filler ${index + 1}`,
+    })),
+  )
 }
 
 const copy = {

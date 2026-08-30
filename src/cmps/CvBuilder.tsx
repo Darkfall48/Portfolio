@@ -18,6 +18,7 @@ import type { Locale } from "../i18n"
 import {
   buildCvData,
   cvFileName,
+  cvSkillLabel,
   estimateCvFill,
   sanitizeFileName,
 } from "../services/cvDocument"
@@ -38,9 +39,34 @@ function readStoredPhone(): string {
   }
 }
 
+/**
+ * A role header says nothing without a bullet under it, and the document drops
+ * such a role anyway. So the header follows its bullets instead of living its
+ * own life: unticking the last bullet unticks the role, and ticking one back
+ * brings it along.
+ */
+function syncRoleHeaders(keys: Set<string>): Set<string> {
+  for (const role of cvSections.roles) {
+    const hasBullet = role.bullets.some((bullet) =>
+      keys.has(cvKey("bullet", role.id, bullet.id)),
+    )
+    if (hasBullet) keys.add(cvKey("role", role.id))
+    else keys.delete(cvKey("role", role.id))
+  }
+  return keys
+}
+
 type Props = {
   isOpen: boolean
   onClose: () => void
+}
+
+/** A row can be driven by its own key, or by whatever sits under it. */
+type LineOptions = {
+  nested?: boolean
+  checked?: boolean
+  partial?: boolean
+  onToggle?: () => void
 }
 
 export function CvBuilder({ isOpen, onClose }: Props) {
@@ -95,12 +121,29 @@ export function CvBuilder({ isOpen, onClose }: Props) {
     return () => document.removeEventListener("keydown", onKey)
   }, [isOpen, onClose])
 
-  function toggle(key: string) {
+  /** Every change repairs the header invariant, presets included. */
+  function update(mutate: (keys: Set<string>) => void) {
     setSelection((current) => {
       const next = new Set(current)
-      if (next.has(key)) next.delete(key)
-      else next.add(key)
-      return next
+      mutate(next)
+      return syncRoleHeaders(next)
+    })
+  }
+
+  function toggle(key: string) {
+    update((keys) => {
+      if (keys.has(key)) keys.delete(key)
+      else keys.add(key)
+    })
+  }
+
+  /** A caption doubles as a switch for everything under it. */
+  function setKeys(keys: string[], on: boolean) {
+    update((current) => {
+      for (const key of keys) {
+        if (on) current.add(key)
+        else current.delete(key)
+      }
     })
   }
 
@@ -115,7 +158,7 @@ export function CvBuilder({ isOpen, onClose }: Props) {
 
   /** Angles carry their own file name, so picking one renames the download. */
   function applyPreset(keys: Set<string>, key: string) {
-    setSelection(keys)
+    setSelection(syncRoleHeaders(keys))
     setTitleKey(key)
     setCustomName(null)
   }
@@ -134,21 +177,44 @@ export function CvBuilder({ isOpen, onClose }: Props) {
     }
   }
 
-  function line(key: string, label: string, isNested = false) {
+  /**
+   * A line's lead already summarises it, so it carries the row and the rest
+   * trails off dimmed. Lines written without a lead fall back to their own
+   * text, and the full wording stays one hover away.
+   */
+  function line(
+    key: string,
+    lead: string,
+    text: string,
+    options: LineOptions = {},
+  ) {
+    const full = `${lead}${text}`.trim()
+    const hasLead = lead.trim().length > 0
     return (
       <label
         key={key}
-        className={`cv-builder-line${isNested ? " is-nested" : ""}`}
+        className={`cv-builder-line${options.nested ? " is-nested" : ""}`}
       >
         <input
           type="checkbox"
-          checked={selection.has(key)}
-          onChange={() => toggle(key)}
+          ref={(input) => {
+            if (input) input.indeterminate = options.partial === true
+          }}
+          checked={options.checked ?? selection.has(key)}
+          onChange={options.onToggle ?? (() => toggle(key))}
         />
         {/* These are lines of the document, not UI copy, so they carry the
             document's own language and direction rather than the panel's. */}
-        <span lang={lang} dir={localeDir(lang)}>
-          {label}
+        <span
+          className="cv-builder-line-copy"
+          title={full}
+          lang={lang}
+          dir={localeDir(lang)}
+        >
+          <span>{hasLead ? lead : full}</span>
+          {hasLead ? (
+            <span className="cv-builder-line-rest">{text}</span>
+          ) : null}
         </span>
       </label>
     )
@@ -234,7 +300,7 @@ export function CvBuilder({ isOpen, onClose }: Props) {
           {cvPresets
             .filter((preset) => preset.hidden !== true)
             .map((preset) => {
-              const keys = cvPresetSelection(preset)
+              const keys = syncRoleHeaders(cvPresetSelection(preset))
               const isActive = isSameSelection(keys, selection)
               return (
                 <button
@@ -269,10 +335,7 @@ export function CvBuilder({ isOpen, onClose }: Props) {
             // i18next falls back a whole branch, not a single leaf, so a
             // half-translated locale would otherwise crash the panel.
             if (!entry) return null
-            return line(
-              cvKey("summary", item.id),
-              `${entry.lead}${entry.text}`.trim(),
-            )
+            return line(cvKey("summary", item.id), entry.lead, entry.text)
           })}
         </section>
 
@@ -281,19 +344,32 @@ export function CvBuilder({ isOpen, onClose }: Props) {
           {cvSections.roles.map((role) => {
             const entry = doc.roles[role.id]
             if (!entry) return null
+            const bulletKeys = role.bullets.map((bullet) =>
+              cvKey("bullet", role.id, bullet.id),
+            )
+            const someOn = bulletKeys.some((key) => selection.has(key))
+            const allOn = bulletKeys.every((key) => selection.has(key))
             return (
               <div key={role.id} className="cv-builder-role">
+                {/* Two rows anchor the whole section, so they stay whole. */}
                 {line(
                   cvKey("role", role.id),
                   `${entry.lead}${entry.period}${entry.title}${entry.suffix}`.trim(),
+                  "",
+                  {
+                    checked: someOn,
+                    partial: someOn && !allOn,
+                    onToggle: () => setKeys(bulletKeys, !someOn),
+                  },
                 )}
                 {role.bullets.map((bullet) => {
                   const text = entry.bullets[bullet.id]
                   if (!text) return null
                   return line(
                     cvKey("bullet", role.id, bullet.id),
-                    `${text.lead}${text.text}`.trim(),
-                    true,
+                    text.lead,
+                    text.text,
+                    { nested: true },
                   )
                 })}
               </div>
@@ -308,21 +384,63 @@ export function CvBuilder({ isOpen, onClose }: Props) {
             if (!entry) return null
             return line(
               cvKey("education", item.id),
-              `${entry.period}${entry.title}${entry.suffix}`.trim(),
+              `${entry.period}${entry.title}`.trim(),
+              entry.suffix,
             )
           })}
         </section>
 
         <section className="cv-builder-section">
           <h3>{t("cv.builder.skills")}</h3>
-          {cvSections.skills.map((item) => {
-            const entry = doc.skills[item.id]
-            if (!entry) return null
-            return line(
-              cvKey("skills", item.id),
-              entry.parts.map((part) => part.label + part.text).join(""),
-            )
-          })}
+          {/* Tools are picked one at a time: a paragraph of a hundred of them
+              is only tailorable if the smallest unit is the tool itself. */}
+          {cvSections.skills.map((skillLine) =>
+            skillLine.groups.map((group) => {
+              const keys = group.runs.flat().map((id) => cvKey("skill", id))
+              const allOn = keys.every((key) => selection.has(key))
+              const caption = (doc.skillLabels?.[group.id] ?? group.id)
+                .replace(/[\s\u00a0]*:[\s\u00a0]*$/, "")
+                .trim()
+              return (
+                <div
+                  key={`${skillLine.id}:${group.id}`}
+                  className="cv-builder-matrix"
+                  lang={lang}
+                  dir={localeDir(lang)}
+                >
+                  <button
+                    type="button"
+                    className="cv-builder-matrix-label"
+                    aria-pressed={allOn}
+                    onClick={() => setKeys(keys, !allOn)}
+                  >
+                    {caption}
+                  </button>
+                  {/* One row per run: the document already groups these tools
+                      by family, and a family is what gets dropped at once. */}
+                  {group.runs.map((run) => (
+                    <div key={run[0]} className="cv-builder-matrix-chips">
+                      {run.map((id) => {
+                        const key = cvKey("skill", id)
+                        const isOn = selection.has(key)
+                        return (
+                          <button
+                            key={id}
+                            type="button"
+                            className={isOn ? "is-active" : undefined}
+                            aria-pressed={isOn}
+                            onClick={() => toggle(key)}
+                          >
+                            {cvSkillLabel(id, doc)}
+                          </button>
+                        )
+                      })}
+                    </div>
+                  ))}
+                </div>
+              )
+            }),
+          )}
         </section>
 
         <footer className="cv-builder-foot">

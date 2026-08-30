@@ -299,60 +299,30 @@
           "suffix": ", Armée de l'air, Tsahal"
         }
       },
-      "skills": {
-        "engineering": {
-          "parts": [
-            {
-              "label": "Développement\u00a0: ",
-              "text": "JavaScript, Python, C#, PHP, MATLAB, Bash, PowerShell, Shell\u00a0; React, Vue.js, Angular, HTML, CSS/SCSS/SASS, responsive design, Redux\u00a0; Node.js, Express, API REST\u00a0; MongoDB, MySQL, SQL Server\u00a0; "
-            },
-            {
-              "label": "Bases de données\u00a0: ",
-              "text": "phpMyAdmin, Studio 3T\u00a0; "
-            },
-            {
-              "label": "Outils de dev\u00a0: ",
-              "text": "Visual Studio Code, Postman\u00a0;"
-            },
-            {
-              "label": " Web\u00a0: ",
-              "text": "plateformes SaaS, PWA\u00a0; "
-            },
-            {
-              "label": "Principes\u00a0: ",
-              "text": "programmation orientée objet et réactive."
-            }
-          ]
-        },
-        "platforms": {
-          "parts": [
-            {
-              "label": "Plateformes et infra\u00a0: ",
-              "text": "Docker, Docker Compose, Git, GitHub\u00a0; Linux (Ubuntu), Windows, Windows Server, macOS\u00a0; AWS EC2/S3\u00a0; "
-            },
-            {
-              "label": "Cloud et virtualisation\u00a0:",
-              "text": " VMware ESXi, Proxmox\u00a0; machines virtuelles multi-OS."
-            }
-          ]
-        },
-        "security": {
-          "parts": [
-            {
-              "label": "Sécurité, IAM et réseau\u00a0: ",
-              "text": "AzureAD, Entra ID, Okta, Active Directory, GPO, LDAP, SSO, SCIM, SAML, OIDC, RBAC, Microsoft XDR\u00a0; ICAP, zones DNS, pare-feu, proxys, Fortinet\u00a0; certificats SSL/TLS et SAN, JWT."
-            }
-          ]
-        },
-        "ops": {
-          "parts": [
-            {
-              "label": "Ops, supervision et collaboration\u00a0: ",
-              "text": "Grafana, Prometheus, BetterStack\u00a0; Zendesk, Jira, Confluence\u00a0; SSH, SCP, RDP, VNC, Telnet, PuTTY, AnyDesk\u00a0; Microsoft Intune\u00a0; Microsoft 365 Word, Excel, PowerPoint, Outlook, OneDrive, SharePoint, Visio\u00a0; TimeClock365, Gong, Salesforce, SalesLoft, TravelPerk, HiBob\u00a0; Figma, Adobe Suite, Avocode, Lunacy\u00a0; Zoom, Slack, Microsoft Teams."
-            }
-          ]
-        }
-      }
+      "skillLabels": {
+        "engineering": "Développement\u00a0: ",
+        "database-tools": "Bases de données\u00a0: ",
+        "dev-tools": "Outils de dev\u00a0: ",
+        "web": "Web\u00a0: ",
+        "principles": "Principes\u00a0: ",
+        "platforms": "Plateformes et infra\u00a0: ",
+        "cloud": "Cloud et virtualisation\u00a0: ",
+        "security": "Sécurité, IAM et réseau\u00a0: ",
+        "ops": "Ops, supervision et collaboration\u00a0: "
+      },
+      "skillTerms": {
+        "responsive-design": "responsive design",
+        "rest": "API REST",
+        "saas-platforms": "plateformes SaaS",
+        "pwa": "PWA",
+        "oop-reactive": "programmation orientée objet et réactive",
+        "multi-os-vms": "machines virtuelles multi-OS",
+        "dns-records": "zones DNS",
+        "firewalls": "pare-feu",
+        "proxies": "proxys",
+        "ssl-san-certs": "certificats SSL/TLS et SAN"
+      },
+      "skillJoin": "\u00a0; "
     }
   }
 }

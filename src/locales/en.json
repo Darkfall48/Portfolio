@@ -299,51 +299,30 @@
           "suffix": ", Air Force, IDF"
         }
       },
-      "skills": {
-        "engineering": {
-          "parts": [
-            {
-              "label": "Engineering: ",
-              "text": "JavaScript, Python, C#, PHP, MATLAB, Bash, PowerShell, Shell; React, Vue.js, Angular, HTML, CSS/SCSS/SASS, Responsive Design, Redux; Node.js, Express, REST APIs; MongoDB, MySQL, SQL Server; "
-            },
-            { "label": "Database tools: ", "text": "phpMyAdmin, Studio 3T; " },
-            { "label": "Dev tools: ", "text": "Visual Studio Code, Postman;" },
-            { "label": " Web: ", "text": "SaaS platforms, PWAs; " },
-            {
-              "label": "Principles: ",
-              "text": "Object-Oriented & Reactive Programming."
-            }
-          ]
-        },
-        "platforms": {
-          "parts": [
-            {
-              "label": "Platforms & Infra: ",
-              "text": "Docker, Docker Compose, Git, GitHub; Linux (Ubuntu), Windows, Windows Server, macOS; AWS EC2/S3; "
-            },
-            {
-              "label": "Cloud & Virtualization:",
-              "text": " VMware ESXi, Proxmox; multi-OS virtual machines."
-            }
-          ]
-        },
-        "security": {
-          "parts": [
-            {
-              "label": "Security, IAM & Networking: ",
-              "text": "AzureAD, Entra ID, Okta, Active Directory, GPO, LDAP, SSO, SCIM, SAML, OIDC, RBAC, Microsoft XDR; ICAP, DNS records, firewalls, proxies, Fortinet; SSL/TLS & SAN certificates, JWT."
-            }
-          ]
-        },
-        "ops": {
-          "parts": [
-            {
-              "label": "Ops, Monitoring & Collaboration: ",
-              "text": "Grafana, Prometheus, BetterStack; Zendesk, Jira, Confluence; SSH, SCP, RDP, VNC, Telnet, PuTTY, AnyDesk; Microsoft Intune; Microsoft 365 Word, Excel, PowerPoint, Outlook, OneDrive, SharePoint, Visio; TimeClock365, Gong, Salesforce, SalesLoft, TravelPerk, HiBob; Figma, Adobe Suite, Avocode, Lunacy; Zoom, Slack, Microsoft Teams."
-            }
-          ]
-        }
-      }
+      "skillLabels": {
+        "engineering": "Engineering: ",
+        "database-tools": "Database tools: ",
+        "dev-tools": "Dev tools: ",
+        "web": "Web: ",
+        "principles": "Principles: ",
+        "platforms": "Platforms & Infra: ",
+        "cloud": "Cloud & Virtualization: ",
+        "security": "Security, IAM & Networking: ",
+        "ops": "Ops, Monitoring & Collaboration: "
+      },
+      "skillTerms": {
+        "responsive-design": "Responsive Design",
+        "rest": "REST APIs",
+        "saas-platforms": "SaaS platforms",
+        "pwa": "PWAs",
+        "oop-reactive": "Object-Oriented & Reactive Programming",
+        "multi-os-vms": "multi-OS virtual machines",
+        "dns-records": "DNS records",
+        "firewalls": "firewalls",
+        "proxies": "proxies",
+        "ssl-san-certs": "SSL/TLS & SAN certificates"
+      },
+      "skillJoin": "; "
     }
   }
 }
