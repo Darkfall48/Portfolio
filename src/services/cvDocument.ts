@@ -1,6 +1,7 @@
 //? Content / i18n
 import { cvKey, cvSections } from "../content/cv"
 import { profile } from "../content/profile"
+import type { Locale } from "../i18n"
 
 /** Shape of the `cv.doc` branch of the locale files. */
 export type CvEmphasis = { lead: string; text: string }
@@ -52,7 +53,8 @@ export type CvTemplateData = {
   footnote: string
 }
 
-const visible = <T extends { hidden?: boolean }>(item: T) => item.hidden !== true
+const visible = <T extends { hidden?: boolean }>(item: T) =>
+  item.hidden !== true
 
 export function buildCvData(
   doc: CvDoc,
@@ -148,8 +150,17 @@ const TEXT_WIDTH_PT = (11900 - 306 - 254) / 20
 const LINE_SPACING = 300 / 240
 /** Arial's line box relative to its point size. */
 const LINE_BOX = 1.15
-/** Mean Arial advance per character, measured on the reference's wrap points. */
-const GLYPH_WIDTH = 0.45
+/**
+ * Mean Arial advance per character, fitted per language against Word's own
+ * pagination of the full CV. It absorbs more than glyph width: French sits
+ * lower not because its letters are narrower but because its longer words
+ * leave more slack at the end of each line than a character count implies.
+ */
+const GLYPH_WIDTH: Record<Locale, number> = {
+  en: 0.45,
+  fr: 0.43,
+  he: 0.45,
+}
 
 const lineHeight = (sizePt: number) => sizePt * LINE_BOX * LINE_SPACING
 
@@ -164,15 +175,17 @@ const BODY_PT = 10.5
 const SUMMARY_INDENT = 284
 const BULLET_INDENT = 720
 
-function height(text: string, sizePt: number, indentTwips = 0): number {
-  const width = TEXT_WIDTH_PT - indentTwips / 20
-  const perLine = Math.max(1, Math.floor(width / (sizePt * GLYPH_WIDTH)))
-  const lines = Math.max(1, Math.ceil(text.length / perLine))
-  return lines * lineHeight(sizePt)
-}
-
 /** Fraction of the page the selection is expected to take, 1 being full. */
-export function estimateCvFill(data: CvTemplateData): number {
+export function estimateCvFill(data: CvTemplateData, locale: Locale): number {
+  const glyph = GLYPH_WIDTH[locale]
+
+  function height(text: string, sizePt: number, indentTwips = 0): number {
+    const width = TEXT_WIDTH_PT - indentTwips / 20
+    const perLine = Math.max(1, Math.floor(width / (sizePt * glyph)))
+    const lines = Math.max(1, Math.ceil(text.length / perLine))
+    return lines * lineHeight(sizePt)
+  }
+
   let total = MASTHEAD_PT
 
   if (data.hasSummary) {
@@ -219,4 +232,3 @@ export function estimateCvFill(data: CvTemplateData): number {
 
   return total / USABLE_HEIGHT_PT
 }
-

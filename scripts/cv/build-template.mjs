@@ -1,8 +1,11 @@
-// Rebuilds the docxtemplater CV template from the reference .docx.
+// Rebuilds the docxtemplater CV templates from the reference .docx.
 //
 // Only word/document.xml is rewritten: styles, numbering, fonts, page margins
 // and the decorative rule under the header are carried over untouched, so the
 // generated CV keeps the exact formatting of the reference document.
+//
+// Two templates come out of one pass. The mirrored one is the same document
+// read from the right, for the Hebrew CV.
 //
 // Run with: npm run cv:template
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs"
@@ -13,7 +16,10 @@ import PizZip from "pizzip"
 // phone number; the template it produces holds a placeholder instead, so it is
 // safe to commit and to serve from the public site.
 const SOURCE = "CVs/2026/Sidney Sebban 2026 - IT Specialist.docx"
-const TARGET = "public/cv/cv-template.docx"
+const TARGETS = {
+  ltr: "public/cv/cv-template.docx",
+  rtl: "public/cv/cv-template-rtl.docx",
+}
 
 const zip = new PizZip(readFileSync(SOURCE))
 const xml = zip.file("word/document.xml").asText()
@@ -171,8 +177,103 @@ const out = [
 
 const document = xml.slice(0, bodyStart) + out + sectPr + xml.slice(bodyEnd)
 
-zip.file("word/document.xml", document)
-mkdirSync(dirname(TARGET), { recursive: true })
-writeFileSync(TARGET, zip.generate({ type: "nodebuffer" }))
+// --- Mirrored variant ------------------------------------------------------
+// The reference was authored in a Hebrew Word, so its paragraph styles are
+// already bidi and every paragraph opts out with `<w:bidi w:val="0"/>`. Making
+// the Hebrew CV is mostly a matter of letting them opt back in.
 
-console.log(`template written to ${TARGET}`)
+/** The schema fixes the order inside w:pPr: bidi sits after tabs, before spacing. */
+function bidiParagraph(pPr) {
+  const cleaned = pPr.replace('<w:bidi w:val="0"/>', "")
+  if (cleaned.includes("<w:bidi/>")) return cleaned
+
+  // The paragraph mark's own rPr can hold elements that share these names, so
+  // the insertion point is looked for ahead of it only.
+  const limit = cleaned.includes("<w:rPr>")
+    ? cleaned.indexOf("<w:rPr>")
+    : cleaned.indexOf("</w:pPr>")
+  const at = ["<w:spacing", "<w:ind", "<w:jc"]
+    .map((tag) => cleaned.indexOf(tag))
+    .filter((index) => index !== -1 && index < limit)
+    .reduce((min, index) => Math.min(min, index), limit)
+
+  return `${cleaned.slice(0, at)}<w:bidi/>${cleaned.slice(at)}`
+}
+
+/**
+ * Word takes reading order from the run, not from the paragraph: `w:bidi`
+ * alone right-aligns the text and moves the list bullets, but still lays the
+ * runs out left to right, which scrambles a Hebrew sentence. Only the runs
+ * carrying document copy are flipped. The name, phone and email stay Latin
+ * whatever the language, and marking them would reorder the separators that
+ * sit between them in the contact line.
+ */
+const LATIN_FIELDS = ["{name}", "{phone}", "{email}"]
+
+function rtlRun(run) {
+  if (!run.includes("{")) return run
+  if (LATIN_FIELDS.some((field) => run.includes(field))) return run
+
+  return run.replace(/<w:rPr>[\s\S]*?<\/w:rPr>/, (rPr) => {
+    if (rPr.includes("<w:rtl/>")) return rPr
+    // rtl comes after u and before lang in the run property order.
+    const lang = rPr.indexOf("<w:lang ")
+    const at = lang === -1 ? rPr.lastIndexOf("</w:rPr>") : lang
+    return `${rPr.slice(0, at)}<w:rtl/>${rPr.slice(at)}`
+  })
+}
+
+function mirrorDocument(source) {
+  return source
+    .replace(/<w:pPr>[\s\S]*?<\/w:pPr>/g, bidiParagraph)
+    .replace(/<w:r(?: [^>]*)?>[\s\S]*?<\/w:r>/g, rtlRun)
+    .replace(/<w:jc w:val="right"\/>/g, '<w:jc w:val="__flip"/>')
+    .replace(/<w:jc w:val="left"\/>/g, '<w:jc w:val="right"/>')
+    .replace(/<w:jc w:val="__flip"\/>/g, '<w:jc w:val="left"/>')
+    .replace(
+      /<w:pgMar w:top="(\d+)" w:right="(\d+)" w:bottom="(\d+)" w:left="(\d+)"/,
+      (_, top, right, bottom, left) =>
+        `<w:pgMar w:top="${top}" w:right="${left}" w:bottom="${bottom}" w:left="${right}"`,
+    )
+    .replace("<w:docGrid", "<w:bidi/><w:docGrid")
+}
+
+/**
+ * List bullets hang off the start of the line, which moves to the right. The
+ * marker needs its own direction too: with only the indent mirrored, Word
+ * anchors the glyph on the right indent but still draws it rightwards, which
+ * puts it out in the margin.
+ */
+const mirrorNumbering = (source) =>
+  source.replace(/<\/w:rPr><\/w:lvl>/g, "<w:rtl/></w:rPr></w:lvl>")
+
+// --- Output ----------------------------------------------------------------
+function write(target, parts) {
+  const out = new PizZip(readFileSync(SOURCE))
+  for (const [name, content] of Object.entries(parts)) out.file(name, content)
+
+  // Word refuses the whole file over a single unbalanced tag, and the error it
+  // reports points at a byte offset rather than at the paragraph, so the count
+  // is checked here where the cause is still obvious.
+  const rebuilt = out.file("word/document.xml").asText()
+  const count = (pattern) => (rebuilt.match(pattern) ?? []).length
+  const opened = count(/<w:p(?: [^>]*)?>/g) - count(/<w:p(?: [^>]*)?\/>/g)
+  const closed = count(/<\/w:p>/g)
+  if (opened !== closed) {
+    throw new Error(
+      `${target} has unbalanced paragraphs: ${opened} opened, ${closed} closed`,
+    )
+  }
+
+  mkdirSync(dirname(target), { recursive: true })
+  writeFileSync(target, out.generate({ type: "nodebuffer" }))
+  console.log(`template written to ${target}`)
+}
+
+write(TARGETS.ltr, { "word/document.xml": document })
+write(TARGETS.rtl, {
+  "word/document.xml": mirrorDocument(document),
+  "word/numbering.xml": mirrorNumbering(
+    zip.file("word/numbering.xml").asText(),
+  ),
+})

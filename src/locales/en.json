@@ -149,6 +149,7 @@
       "open": "Build a CV",
       "title": "CV builder",
       "lead": "Pick the lines to keep. The document keeps the reference formatting and has to stay on one page.",
+      "language": "Document language",
       "phone": "Phone",
       "phonePlaceholder": "054-0000000",
       "phoneHint": "Stays in this browser. Never committed, never published.",

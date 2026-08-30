@@ -149,6 +149,7 @@
       "open": "בניית קורות חיים",
       "title": "בניית קורות חיים",
       "lead": "בחר אילו שורות להשאיר. המסמך שומר על העיצוב המקורי וחייב להיכנס לעמוד אחד.",
+      "language": "שפת המסמך",
       "phone": "טלפון",
       "phonePlaceholder": "054-0000000",
       "phoneHint": "נשמר בדפדפן הזה בלבד. לא נשמר בגיט ולא מתפרסם.",
@@ -170,6 +171,182 @@
       "fill": "תפוסת העמוד: {{percent}}%",
       "fillOver": "חורג מעמוד אחד — הסר שורה או שתיים",
       "empty": "לא נבחרה אף שורה"
+    },
+    "doc": {
+      "email": "sidneysebban@gmail.com",
+      "workTitle": "ניסיון תעסוקתי:   ",
+      "educationTitle": "השכלה והכשרות: ",
+      "skillsTitle": "כלים וטכנולוגיות",
+      "languagesLabel": "שפות",
+      "languages": "עברית – שוטפת | אנגלית – שוטפת | צרפתית – שפת אם",
+      "footnote": "*המלצות יימסרו לפי בקשה",
+      "fileTitles": {
+        "full": "IT Specialist, Support Engineer and Full-Stack Developer",
+        "support": "Technical Support Engineer",
+        "it": "IT Specialist",
+        "fullstack": "Full-Stack Developer"
+      },
+      "summary": {
+        "profile": {
+          "lead": "מומחה IT, מהנדס תמיכה טכנית ומפתח Full-Stack רב-תחומי",
+          "text": " עם התמחות באבטחת מידע, ZTNA ותשתיות ארגוניות."
+        },
+        "track-record": {
+          "lead": "",
+          "text": "ניסיון מוכח במתן תמיכה טכנית, בניהול סביבות SaaS ו-On-Prem מורכבות ובפיתוח כלים Full-Stack שמייעלים תהליכים ומשפרים את חוויית המשתמש."
+        },
+        "automation": {
+          "lead": "",
+          "text": "שליטה באוטומציה, בכתיבת סקריפטים ובניהול תשתיות בסביבות Windows, macOS ו-Linux."
+        },
+        "communication": {
+          "lead": "",
+          "text": "לומד מהר ובעל כישורי תקשורת גבוהים, אוהב לעזור לאנשים, לשתף ידע ולבנות מערכות יעילות, מאובטחות וברות-הרחבה."
+        }
+      },
+      "roles": {
+        "cyolo": {
+          "lead": "",
+          "period": "2023-היום:  ",
+          "title": "מומחה IT, מהנדס תמיכה טכנית – Tier 3 ומפתח Full-Stack, Cyolo",
+          "suffix": "",
+          "bullets": {
+            "support": {
+              "lead": "מתן תמיכה טכנית",
+              "text": " לפריסות ארגוניות בסביבות SaaS, On-Prem ו-DMZ."
+            },
+            "escalations": {
+              "lead": "פתרון תקלות טכניות מורכבות",
+              "text": " בתחומי SSO, SCIM, LDAP/S, תעודות SSL/TLS, הגדרות רשת ופרוטוקולי גישה מרחוק (RDP, VNC, Telnet) בפלטפורמות Linux, Windows ו-macOS."
+            },
+            "docker": {
+              "lead": "ניהול ותחזוקה של אשכולות Docker Compose",
+              "text": " בסביבות רב-אתריות."
+            },
+            "jira": {
+              "lead": "כתיבת דוחות Jira מפורטים",
+              "text": " לצוותי המוצר וה-R&D, כולל תיעוד באגים ושלבי שחזור."
+            },
+            "knowledge-base": {
+              "lead": "תחזוקת בסיסי ידע",
+              "text": " ב-Confluence, ב-Zendesk ובמערכות הפנימיות עבור לקוחות ועובדים, והעברת הדרכות."
+            },
+            "zendesk": {
+              "lead": "טיפול יומיומי בפניות Zendesk",
+              "text": " הכוללות תקלות, באגים ובקשות הגדרה, לצד ליווי לקוחות ב-Zoom וב-Microsoft Teams."
+            },
+            "automation": {
+              "lead": "בניית תהליכי אוטומציה",
+              "text": " ב-PowerShell, ב-Python וב-Shell לקליטת עובדים, לסיום העסקה ולניטור."
+            },
+            "cloud": {
+              "lead": "ניהול סביבות ענן היברידיות:",
+              "text": " VMware ESXi, Proxmox ו-AWS."
+            },
+            "saas": {
+              "lead": "ניהול מעל 50 פלטפורמות SaaS",
+              "text": ", כולל אינטגרציות SSO/SCIM, ניהול רישיונות ואופטימיזציה של עלויות."
+            },
+            "infrastructure": {
+              "lead": "אחריות מלאה על תשתית ה-IT הארגונית ואבטחתה",
+              "text": " (AzureAD, Entra ID, M365, Exchange) בעמידה מלאה בתקן SOC 2."
+            },
+            "back-office": {
+              "lead": "פיתוח Cyolo Back-Office",
+              "text": ", פלטפורמת Full-Stack פנימית ולשותפים לניהול טננטים ורישיונות של לקוחות."
+            },
+            "helpdesk": {
+              "lead": "פיתוח ותחזוקה של Cyolo Helpdesk",
+              "text": ", תוסף Full-Stack למוצר המרכזי המאפשר למנהלי Helpdesk לנהל את מחזור חיי המשתמשים מקצה לקצה. תחזוקת התיעוד, ניהול העדכונים ומתן תמיכה שוטפת."
+            }
+          }
+        },
+        "idf": {
+          "lead": "שירות צבאי",
+          "period": ": ",
+          "title": "מהנדס תמיכה טכנית – Tier 2, חיל האוויר, צה״ל",
+          "suffix": " (2018-2021)",
+          "bullets": {
+            "support": {
+              "lead": "מתן תמיכה טכנית 24/7",
+              "text": ", תחזוקת רשת, תוכנה וחומרה, ותיאום מול טכנאים מוסמכים לפי הצורך."
+            },
+            "video": {
+              "lead": "יצירה ועריכה של סרטוני וידאו ",
+              "text": "ב-Adobe Premiere Pro וב-After Effects."
+            },
+            "cabling": {
+              "lead": "תיקון ושדרוג של תשתיות כבילה",
+              "text": " לרשת, לווידאו, לאודיו ולחשמל."
+            }
+          }
+        }
+      },
+      "education": {
+        "coding-academy": {
+          "period": "2022-2023:   ",
+          "title": "תעודת פיתוח Full-Stack Web",
+          "suffix": ", Coding Academy"
+        },
+        "polytechnique": {
+          "period": "2021-2022:   ",
+          "title": "לימודי הנדסת מחשבים",
+          "suffix": ", Polytechnique Montréal, קנדה"
+        },
+        "network-cert": {
+          "period": "2020             ",
+          "title": "הסמכה בניהול רשתות מחשבים",
+          "suffix": ", חיל האוויר, צה״ל"
+        }
+      },
+      "skills": {
+        "engineering": {
+          "parts": [
+            {
+              "label": "פיתוח: ",
+              "text": "JavaScript, Python, C#, PHP, MATLAB, Bash, PowerShell, Shell; React, Vue.js, Angular, HTML, CSS/SCSS/SASS, Responsive Design, Redux; Node.js, Express, REST APIs; MongoDB, MySQL, SQL Server; "
+            },
+            {
+              "label": "כלי בסיסי נתונים: ",
+              "text": "phpMyAdmin, Studio 3T; "
+            },
+            { "label": "כלי פיתוח: ", "text": "Visual Studio Code, Postman;" },
+            { "label": " ווב: ", "text": "פלטפורמות SaaS, אפליקציות PWA; " },
+            {
+              "label": "עקרונות: ",
+              "text": "תכנות מונחה עצמים ותכנות ריאקטיבי."
+            }
+          ]
+        },
+        "platforms": {
+          "parts": [
+            {
+              "label": "פלטפורמות ותשתיות: ",
+              "text": "Docker, Docker Compose, Git, GitHub; Linux (Ubuntu), Windows, Windows Server, macOS; AWS EC2/S3; "
+            },
+            {
+              "label": "ענן ווירטואליזציה:",
+              "text": " VMware ESXi, Proxmox; מכונות וירטואליות במערכות הפעלה מרובות."
+            }
+          ]
+        },
+        "security": {
+          "parts": [
+            {
+              "label": "אבטחה, IAM ורשתות: ",
+              "text": "AzureAD, Entra ID, Okta, Active Directory, GPO, LDAP, SSO, SCIM, SAML, OIDC, RBAC, Microsoft XDR; ICAP, רשומות DNS, חומות אש, פרוקסי, Fortinet; תעודות SSL/TLS ו-SAN, JWT."
+            }
+          ]
+        },
+        "ops": {
+          "parts": [
+            {
+              "label": "תפעול, ניטור ושיתוף פעולה: ",
+              "text": "Grafana, Prometheus, BetterStack; Zendesk, Jira, Confluence; SSH, SCP, RDP, VNC, Telnet, PuTTY, AnyDesk; Microsoft Intune; Microsoft 365 Word, Excel, PowerPoint, Outlook, OneDrive, SharePoint, Visio; TimeClock365, Gong, Salesforce, SalesLoft, TravelPerk, HiBob; Figma, Adobe Suite, Avocode, Lunacy; Zoom, Slack, Microsoft Teams."
+            }
+          ]
+        }
+      }
     }
   }
 }

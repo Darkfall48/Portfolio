@@ -11,6 +11,8 @@ import {
   cvSections,
   isSameSelection,
 } from "../content"
+import { SUPPORTED_LOCALES, isLocale, localeDir } from "../i18n"
+import type { Locale } from "../i18n"
 
 //? Services
 import {
@@ -42,7 +44,7 @@ type Props = {
 }
 
 export function CvBuilder({ isOpen, onClose }: Props) {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const titleId = useId()
   const closeRef = useRef<HTMLButtonElement>(null)
   const [selection, setSelection] = useState(cvFullSelection)
@@ -50,17 +52,32 @@ export function CvBuilder({ isOpen, onClose }: Props) {
   const [isBusy, setIsBusy] = useState(false)
   const [error, setError] = useState("")
 
+  // Reading in one language while applying in another is normal, so the
+  // document keeps its own language and only starts from the site's.
+  const [lang, setLang] = useState<Locale>(() => {
+    const active = i18n.resolvedLanguage ?? ""
+    return isLocale(active) ? active : "en"
+  })
+  // The angle the file name is derived from, until the field is typed into.
+  const [titleKey, setTitleKey] = useState("full")
+  const [customName, setCustomName] = useState<string | null>(null)
+
   // The document wording is a nested branch of the locale file rather than a
   // flat string, so it comes back as an object.
-  const doc = t("cv.doc", { returnObjects: true }) as unknown as CvDoc
-  const [filename, setFilename] = useState(() =>
-    cvFileName(doc.fileTitles.full),
+  const doc = useMemo(
+    () =>
+      i18n.getFixedT(lang)("cv.doc", {
+        returnObjects: true,
+      }) as unknown as CvDoc,
+    [i18n, lang],
   )
+  const filename =
+    customName ?? cvFileName(doc.fileTitles[titleKey] ?? doc.fileTitles.full)
   const data = useMemo(
     () => buildCvData(doc, selection, phone),
     [doc, selection, phone],
   )
-  const fill = estimateCvFill(data)
+  const fill = estimateCvFill(data, lang)
   const percent = Math.round(fill * 100)
   const isEmpty =
     !data.hasSummary && !data.hasRoles && !data.hasEducation && !data.hasSkills
@@ -97,16 +114,17 @@ export function CvBuilder({ isOpen, onClose }: Props) {
   }
 
   /** Angles carry their own file name, so picking one renames the download. */
-  function applyPreset(keys: Set<string>, titleKey: string) {
+  function applyPreset(keys: Set<string>, key: string) {
     setSelection(keys)
-    setFilename(cvFileName(doc.fileTitles[titleKey]))
+    setTitleKey(key)
+    setCustomName(null)
   }
 
   async function onDownload() {
     setIsBusy(true)
     setError("")
     try {
-      const blob = await renderCvDocx(data)
+      const blob = await renderCvDocx(data, lang)
       const safe = sanitizeFileName(filename) || cvFileName(doc.fileTitles.full)
       downloadBlob(blob, `${safe}.docx`)
     } catch (cause) {
@@ -127,7 +145,11 @@ export function CvBuilder({ isOpen, onClose }: Props) {
           checked={selection.has(key)}
           onChange={() => toggle(key)}
         />
-        <span>{label}</span>
+        {/* These are lines of the document, not UI copy, so they carry the
+            document's own language and direction rather than the panel's. */}
+        <span lang={lang} dir={localeDir(lang)}>
+          {label}
+        </span>
       </label>
     )
   }
@@ -164,6 +186,21 @@ export function CvBuilder({ isOpen, onClose }: Props) {
         </header>
         <p className="cv-builder-lead">{t("cv.builder.lead")}</p>
 
+        <div className="cv-builder-chips" role="group">
+          <p className="cv-builder-chips-label">{t("cv.builder.language")}</p>
+          {SUPPORTED_LOCALES.map((locale) => (
+            <button
+              key={locale}
+              type="button"
+              className={locale === lang ? "is-active" : undefined}
+              aria-pressed={locale === lang}
+              onClick={() => setLang(locale)}
+            >
+              {t(`lang.${locale}`)}
+            </button>
+          ))}
+        </div>
+
         <div className="cv-builder-fields">
           <label className="cv-builder-field">
             <span className="cv-builder-field-label">
@@ -186,14 +223,14 @@ export function CvBuilder({ isOpen, onClose }: Props) {
               type="text"
               value={filename}
               spellCheck={false}
-              onChange={(event) => setFilename(event.target.value)}
+              onChange={(event) => setCustomName(event.target.value)}
             />
             <small>{t("cv.builder.filenameHint")}</small>
           </label>
         </div>
 
-        <div className="cv-builder-presets" role="group">
-          <p className="cv-builder-presets-label">{t("cv.builder.angle")}</p>
+        <div className="cv-builder-chips" role="group">
+          <p className="cv-builder-chips-label">{t("cv.builder.angle")}</p>
           {cvPresets
             .filter((preset) => preset.hidden !== true)
             .map((preset) => {
@@ -229,6 +266,9 @@ export function CvBuilder({ isOpen, onClose }: Props) {
           <h3>{t("cv.builder.summary")}</h3>
           {cvSections.summary.map((item) => {
             const entry = doc.summary[item.id]
+            // i18next falls back a whole branch, not a single leaf, so a
+            // half-translated locale would otherwise crash the panel.
+            if (!entry) return null
             return line(
               cvKey("summary", item.id),
               `${entry.lead}${entry.text}`.trim(),
@@ -240,6 +280,7 @@ export function CvBuilder({ isOpen, onClose }: Props) {
           <h3>{t("cv.builder.experience")}</h3>
           {cvSections.roles.map((role) => {
             const entry = doc.roles[role.id]
+            if (!entry) return null
             return (
               <div key={role.id} className="cv-builder-role">
                 {line(
@@ -248,6 +289,7 @@ export function CvBuilder({ isOpen, onClose }: Props) {
                 )}
                 {role.bullets.map((bullet) => {
                   const text = entry.bullets[bullet.id]
+                  if (!text) return null
                   return line(
                     cvKey("bullet", role.id, bullet.id),
                     `${text.lead}${text.text}`.trim(),
@@ -263,6 +305,7 @@ export function CvBuilder({ isOpen, onClose }: Props) {
           <h3>{t("cv.builder.education")}</h3>
           {cvSections.education.map((item) => {
             const entry = doc.education[item.id]
+            if (!entry) return null
             return line(
               cvKey("education", item.id),
               `${entry.period}${entry.title}${entry.suffix}`.trim(),
@@ -274,6 +317,7 @@ export function CvBuilder({ isOpen, onClose }: Props) {
           <h3>{t("cv.builder.skills")}</h3>
           {cvSections.skills.map((item) => {
             const entry = doc.skills[item.id]
+            if (!entry) return null
             return line(
               cvKey("skills", item.id),
               entry.parts.map((part) => part.label + part.text).join(""),

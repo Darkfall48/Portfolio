@@ -150,7 +150,8 @@
     color: $color-accent-2;
   }
 
-  &-presets {
+  // Shared by the document language row and the angle row.
+  &-chips {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -183,7 +184,7 @@
     }
   }
 
-  &-presets-label {
+  &-chips-label {
     font-family: $font-mono;
     font-size: 0.7rem;
     letter-spacing: 0.14em;

@@ -149,6 +149,7 @@
       "open": "Composer un CV",
       "title": "Composer un CV",
       "lead": "Choisissez les lignes à garder. Le document conserve la mise en forme de référence et doit tenir sur une page.",
+      "language": "Langue du document",
       "phone": "Téléphone",
       "phonePlaceholder": "054-0000000",
       "phoneHint": "Reste dans ce navigateur. Jamais versionné, jamais publié.",
@@ -170,6 +171,188 @@
       "fill": "Remplissage : {{percent}} %",
       "fillOver": "Dépasse une page — retirez une ligne ou deux",
       "empty": "Aucune ligne sélectionnée"
+    },
+    "doc": {
+      "email": "sidneysebban@gmail.com",
+      "workTitle": "Expérience professionnelle\u00a0:   ",
+      "educationTitle": "Formation et certifications\u00a0: ",
+      "skillsTitle": "Outils et technologies",
+      "languagesLabel": "Langues",
+      "languages": "Hébreu – Courant | Anglais – Courant | Français – Langue maternelle",
+      "footnote": "*Recommandations disponibles sur demande",
+      "fileTitles": {
+        "full": "Spécialiste IT, Ingénieur Support et Développeur Full-Stack",
+        "support": "Ingénieur Support Technique",
+        "it": "Spécialiste IT",
+        "fullstack": "Développeur Full-Stack"
+      },
+      "summary": {
+        "profile": {
+          "lead": "Spécialiste IT, ingénieur support technique et développeur full-stack polyvalent",
+          "text": ", spécialisé en cybersécurité, ZTNA et infrastructure d'entreprise."
+        },
+        "track-record": {
+          "lead": "",
+          "text": "Expérience solide en support technique, en administration d'environnements SaaS et on-premise complexes et en développement d'outils full-stack qui fluidifient les opérations et l'expérience utilisateur."
+        },
+        "automation": {
+          "lead": "",
+          "text": "Maîtrise de l'automatisation, du scripting et de la gestion d'infrastructure sous Windows, macOS et Linux."
+        },
+        "communication": {
+          "lead": "",
+          "text": "Apprentissage rapide et sens de la communication, avec le goût d'aider, de transmettre et de bâtir des systèmes efficaces, sûrs et évolutifs."
+        }
+      },
+      "roles": {
+        "cyolo": {
+          "lead": "",
+          "period": "2023-aujourd'hui\u00a0:  ",
+          "title": "Spécialiste IT, Ingénieur Support Technique – Niveau 3 & Développeur Full-Stack, Cyolo",
+          "suffix": "",
+          "bullets": {
+            "support": {
+              "lead": "Assurer le support technique",
+              "text": " de déploiements entreprise en SaaS, on-premise et DMZ."
+            },
+            "escalations": {
+              "lead": "Résoudre des incidents complexes",
+              "text": " touchant au SSO, SCIM, LDAP/S, aux certificats SSL/TLS, aux configurations réseau et aux protocoles d'accès distant (RDP, VNC, Telnet) sous Linux, Windows et macOS."
+            },
+            "docker": {
+              "lead": "Administrer et dépanner des clusters Docker Compose",
+              "text": " répartis sur plusieurs sites."
+            },
+            "jira": {
+              "lead": "Rédiger des rapports Jira",
+              "text": " pour les équipes Produit et R&D, avec documentation et étapes de reproduction."
+            },
+            "knowledge-base": {
+              "lead": "Maintenir les KB",
+              "text": " sur Confluence, Zendesk et en interne pour les clients et les équipes, et animer les formations."
+            },
+            "zendesk": {
+              "lead": "Traiter les tickets Zendesk",
+              "text": " au quotidien — incidents, anomalies et demandes de configuration — et accompagner les clients via Zoom et Microsoft Teams."
+            },
+            "automation": {
+              "lead": "Développer les automatisations",
+              "text": " PowerShell, Python et Shell pour l'onboarding, l'offboarding et la supervision."
+            },
+            "cloud": {
+              "lead": "Gérer des environnements cloud hybrides\u00a0:",
+              "text": " VMware ESXi, Proxmox et AWS."
+            },
+            "saas": {
+              "lead": "Piloter 50+ plateformes SaaS",
+              "text": ", intégrations SSO/SCIM, gestion des licences et optimisation des coûts."
+            },
+            "infrastructure": {
+              "lead": "Administrer et sécuriser l'infrastructure IT",
+              "text": " (AzureAD, Entra ID, M365, Exchange) en pleine conformité SOC 2."
+            },
+            "back-office": {
+              "lead": "Concevoir Cyolo Back-Office",
+              "text": ", plateforme full-stack interne et partenaire pour gérer tenants et licences clients."
+            },
+            "helpdesk": {
+              "lead": "Concevoir et maintenir Cyolo Helpdesk",
+              "text": ", module full-stack greffé au produit qui donne aux administrateurs la main sur tout le cycle de vie des utilisateurs. Documentation, mises à jour et support continu."
+            }
+          }
+        },
+        "idf": {
+          "lead": "Service militaire",
+          "period": "\u00a0: ",
+          "title": "Ingénieur Support Technique – Niveau 2, Armée de l'air, Tsahal",
+          "suffix": " (2018-2021)",
+          "bullets": {
+            "support": {
+              "lead": "Assurer un support technique 24/7",
+              "text": ", maintenir réseau, logiciels et matériel, et coordonner les techniciens qualifiés au besoin."
+            },
+            "video": {
+              "lead": "Réaliser et monter des vidéos ",
+              "text": "sous Adobe Premiere Pro et After Effects."
+            },
+            "cabling": {
+              "lead": "Réparer et améliorer le câblage réseau",
+              "text": ", vidéo, audio et électrique."
+            }
+          }
+        }
+      },
+      "education": {
+        "coding-academy": {
+          "period": "2022-2023\u00a0:   ",
+          "title": "Certificat de développement web full-stack",
+          "suffix": ", Coding Academy"
+        },
+        "polytechnique": {
+          "period": "2021-2022\u00a0:   ",
+          "title": "Études de génie informatique",
+          "suffix": ", Polytechnique Montréal, Canada"
+        },
+        "network-cert": {
+          "period": "2020             ",
+          "title": "Certification en gestion de réseaux informatiques",
+          "suffix": ", Armée de l'air, Tsahal"
+        }
+      },
+      "skills": {
+        "engineering": {
+          "parts": [
+            {
+              "label": "Développement\u00a0: ",
+              "text": "JavaScript, Python, C#, PHP, MATLAB, Bash, PowerShell, Shell\u00a0; React, Vue.js, Angular, HTML, CSS/SCSS/SASS, responsive design, Redux\u00a0; Node.js, Express, API REST\u00a0; MongoDB, MySQL, SQL Server\u00a0; "
+            },
+            {
+              "label": "Bases de données\u00a0: ",
+              "text": "phpMyAdmin, Studio 3T\u00a0; "
+            },
+            {
+              "label": "Outils de dev\u00a0: ",
+              "text": "Visual Studio Code, Postman\u00a0;"
+            },
+            {
+              "label": " Web\u00a0: ",
+              "text": "plateformes SaaS, PWA\u00a0; "
+            },
+            {
+              "label": "Principes\u00a0: ",
+              "text": "programmation orientée objet et réactive."
+            }
+          ]
+        },
+        "platforms": {
+          "parts": [
+            {
+              "label": "Plateformes et infra\u00a0: ",
+              "text": "Docker, Docker Compose, Git, GitHub\u00a0; Linux (Ubuntu), Windows, Windows Server, macOS\u00a0; AWS EC2/S3\u00a0; "
+            },
+            {
+              "label": "Cloud et virtualisation\u00a0:",
+              "text": " VMware ESXi, Proxmox\u00a0; machines virtuelles multi-OS."
+            }
+          ]
+        },
+        "security": {
+          "parts": [
+            {
+              "label": "Sécurité, IAM et réseau\u00a0: ",
+              "text": "AzureAD, Entra ID, Okta, Active Directory, GPO, LDAP, SSO, SCIM, SAML, OIDC, RBAC, Microsoft XDR\u00a0; ICAP, zones DNS, pare-feu, proxys, Fortinet\u00a0; certificats SSL/TLS et SAN, JWT."
+            }
+          ]
+        },
+        "ops": {
+          "parts": [
+            {
+              "label": "Ops, supervision et collaboration\u00a0: ",
+              "text": "Grafana, Prometheus, BetterStack\u00a0; Zendesk, Jira, Confluence\u00a0; SSH, SCP, RDP, VNC, Telnet, PuTTY, AnyDesk\u00a0; Microsoft Intune\u00a0; Microsoft 365 Word, Excel, PowerPoint, Outlook, OneDrive, SharePoint, Visio\u00a0; TimeClock365, Gong, Salesforce, SalesLoft, TravelPerk, HiBob\u00a0; Figma, Adobe Suite, Avocode, Lunacy\u00a0; Zoom, Slack, Microsoft Teams."
+            }
+          ]
+        }
+      }
     }
   }
 }
