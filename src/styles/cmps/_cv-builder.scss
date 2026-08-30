@@ -1,0 +1,383 @@
+@use "../setup/variables" as *;
+
+.cv-builder {
+  position: fixed;
+  inset: 0;
+  z-index: 25;
+  // Same parking trick as the detail panel: the sheet stays mounted so it keeps
+  // a box to slide from, and `clip` trims the overflow without creating a
+  // scroll container that would fight the slide.
+  overflow: clip;
+  visibility: hidden;
+  pointer-events: none;
+  transition: visibility 0s 420ms;
+
+  &.is-open {
+    visibility: visible;
+    pointer-events: auto;
+    transition: visibility 0s;
+  }
+
+  &-backdrop {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background: $color-backdrop;
+    opacity: 0;
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    transition: opacity $ease-out;
+  }
+
+  &.is-open &-backdrop {
+    opacity: 1;
+  }
+
+  &-sheet {
+    position: absolute;
+    inset-block: 0;
+    inset-inline-end: 0;
+    display: flex;
+    flex-direction: column;
+    gap: $space-md;
+    width: min(44rem, 100%);
+    padding: clamp(1.4rem, 4vh, 2.4rem) clamp(1.1rem, 2.2vw, 2rem);
+    background:
+      radial-gradient(
+        520px 320px at 100% 0%,
+        rgb($accent-2-rgb / 0.12),
+        transparent 62%
+      ),
+      $color-bg-mid;
+    border-inline-start: 1px solid rgb($accent-2-rgb / 0.42);
+    box-shadow: -24px 0 60px rgb($shadow-rgb / 0.5);
+    overflow: auto;
+    transform: translateX(calc(var(--dir, 1) * 100%));
+    transition: transform $ease-out;
+  }
+
+  html[dir="rtl"] &-sheet {
+    box-shadow: 24px 0 60px rgb($shadow-rgb / 0.5);
+  }
+
+  &.is-open &-sheet {
+    transform: translateX(0);
+  }
+
+  &-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: $space-md;
+  }
+
+  &-title {
+    font-size: clamp(1.4rem, 3vw, 1.9rem);
+    line-height: 1.1;
+  }
+
+  &-close {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 2.1rem;
+    height: 2.1rem;
+    font-size: 1rem;
+    color: $color-accent-2;
+    border: 1px solid $color-line;
+    border-radius: $radius;
+    transition:
+      color $ease,
+      border-color $ease,
+      background $ease;
+
+    &:hover,
+    &:focus-visible {
+      color: $color-text;
+      border-color: rgb($accent-2-rgb / 0.5);
+      background: rgb($accent-2-rgb / 0.14);
+    }
+  }
+
+  &-lead {
+    max-width: 52ch;
+    color: $color-muted;
+  }
+
+  &-fields {
+    display: grid;
+    gap: $space-md;
+    grid-template-columns: minmax(9rem, 1fr) minmax(15rem, 2fr);
+
+    @media (max-width: $break-narrow) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &-field {
+    display: grid;
+    gap: 0.35rem;
+    align-content: start;
+
+    input {
+      min-inline-size: 0;
+      padding: 0.5rem 0.7rem;
+      font-family: $font-mono;
+      font-size: 0.85rem;
+      color: $color-text;
+      background: rgb($shadow-rgb / 0.18);
+      border: 1px solid $color-line;
+      border-radius: $radius;
+      transition: border-color $ease;
+
+      &:focus-visible {
+        border-color: rgb($accent-2-rgb / 0.6);
+      }
+    }
+
+    small {
+      font-size: 0.72rem;
+      color: $color-muted;
+    }
+  }
+
+  &-field-label {
+    font-family: $font-mono;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: $color-accent-2;
+  }
+
+  &-presets {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: $space-sm;
+
+    button {
+      padding: 0.35rem 0.8rem;
+      font-family: $font-mono;
+      font-size: 0.74rem;
+      letter-spacing: 0.06em;
+      color: $color-muted;
+      border: 1px solid $color-line;
+      border-radius: $radius;
+      transition:
+        color $ease,
+        border-color $ease,
+        background $ease;
+
+      &:hover,
+      &:focus-visible {
+        color: $color-text;
+        border-color: rgb($accent-2-rgb / 0.5);
+      }
+
+      &.is-active {
+        color: $color-text;
+        border-color: rgb($accent-2-rgb / 0.7);
+        background: rgb($accent-2-rgb / 0.16);
+      }
+    }
+  }
+
+  &-presets-label {
+    font-family: $font-mono;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: $color-accent-2;
+  }
+
+  &-bulk {
+    display: flex;
+    gap: $space-sm;
+
+    button {
+      padding: 0.35rem 0.8rem;
+      font-family: $font-mono;
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      color: $color-muted;
+      border: 1px solid $color-line;
+      border-radius: $radius;
+      transition:
+        color $ease,
+        border-color $ease;
+
+      &:hover,
+      &:focus-visible {
+        color: $color-text;
+        border-color: rgb($accent-2-rgb / 0.5);
+      }
+    }
+  }
+
+  &-section {
+    display: grid;
+    gap: 0.2rem;
+    padding-block-start: $space-md;
+    border-block-start: 1px solid $color-line;
+
+    h3 {
+      margin-block-end: 0.3rem;
+      font-family: $font-mono;
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: $color-accent-2;
+    }
+  }
+
+  &-role + &-role {
+    margin-block-start: $space-sm;
+  }
+
+  &-line {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.55rem;
+    align-items: start;
+    padding: 0.22rem 0.3rem;
+    font-size: 0.84rem;
+    line-height: 1.45;
+    color: $color-muted;
+    border-radius: $radius;
+    cursor: pointer;
+    transition:
+      color $ease,
+      background $ease;
+
+    &:hover {
+      color: $color-text;
+      background: rgb($accent-2-rgb / 0.07);
+    }
+
+    // Bullets sit under the role they belong to.
+    &.is-nested {
+      padding-inline-start: 1.5rem;
+    }
+
+    input {
+      margin-block-start: 0.28em;
+      accent-color: $color-accent-2;
+      cursor: pointer;
+    }
+
+    &:has(input:checked) {
+      color: $color-text;
+    }
+  }
+
+  &-foot {
+    position: sticky;
+    inset-block-end: 0;
+    display: grid;
+    gap: $space-sm;
+    padding-block: $space-md;
+    background: $color-bg-mid;
+    border-block-start: 1px solid $color-line;
+  }
+
+  &-fill {
+    display: grid;
+    gap: 0.35rem;
+    font-family: $font-mono;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    color: $color-muted;
+
+    &.is-over {
+      color: $color-accent-2;
+    }
+  }
+
+  // A native progress element carries the value, so the fill needs no inline
+  // style. Its two shadow parts have to be targeted per engine.
+  &-fill-bar {
+    appearance: none;
+    inline-size: 100%;
+    block-size: 3px;
+    border: 0;
+    background: $color-line;
+
+    &::-webkit-progress-bar {
+      background: $color-line;
+    }
+
+    &::-webkit-progress-value {
+      background: $color-accent-2;
+      transition: inline-size $ease;
+    }
+
+    &::-moz-progress-bar {
+      background: $color-accent-2;
+    }
+  }
+
+  &-fill.is-over &-fill-bar {
+    &::-webkit-progress-value {
+      background: $color-accent;
+    }
+
+    &::-moz-progress-bar {
+      background: $color-accent;
+    }
+  }
+
+  &-download {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1rem;
+    font-family: $font-mono;
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    color: $color-accent-2;
+    border: 1px solid rgb($accent-2-rgb / 0.42);
+    border-radius: $radius;
+    transition:
+      color $ease,
+      border-color $ease,
+      background $ease;
+
+    &:hover:not(:disabled),
+    &:focus-visible:not(:disabled) {
+      color: $color-text;
+      border-color: rgb($accent-2-rgb / 0.6);
+      background: rgb($accent-2-rgb / 0.14);
+    }
+
+    &:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    &[aria-busy="true"] svg {
+      animation: cv-builder-spin 900ms linear infinite;
+    }
+  }
+
+  &-error {
+    font-size: 0.76rem;
+    color: $color-accent;
+  }
+}
+
+@keyframes cv-builder-spin {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cv-builder-backdrop,
+  .cv-builder-sheet,
+  .cv-builder-download[aria-busy="true"] svg {
+    transition: none;
+    animation: none;
+  }
+}

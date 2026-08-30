@@ -8,10 +8,17 @@
     "dev": "vite",
     "build": "tsc -p tsconfig.app.json --noEmit && vite build",
     "preview": "vite preview",
-    "deploy": "npm run build && gh-pages -d dist"
+    "deploy": "npm run build && gh-pages -d dist",
+    "cv:template": "node scripts/cv/build-template.mjs",
+    "cv:inspect": "node scripts/cv/inspect-docx.mjs",
+    "cv:extract": "node scripts/cv/extract-content.mjs",
+    "cv:sample": "node scripts/cv/render-sample.mjs",
+    "cv:pdf": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/cv/docx-to-pdf.ps1"
   },
   "dependencies": {
+    "docxtemplater": "^3.69.3",
     "i18next": "^25.4.0",
+    "pizzip": "^3.2.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-i18next": "^15.7.3",

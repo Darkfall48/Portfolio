@@ -7,5 +7,6 @@ dist-ssr
 !.env.example
 CVs/
 assets-src/
+.tmp/
 .DS_Store
 *.log

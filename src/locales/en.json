@@ -143,5 +143,206 @@
     "platforms": "Platforms and cloud",
     "fullstack": "Full-stack",
     "ops": "Automation and ops"
+  },
+  "cv": {
+    "builder": {
+      "open": "Build a CV",
+      "title": "CV builder",
+      "lead": "Pick the lines to keep. The document keeps the reference formatting and has to stay on one page.",
+      "phone": "Phone",
+      "phonePlaceholder": "054-0000000",
+      "phoneHint": "Stays in this browser. Never committed, never published.",
+      "filename": "File name",
+      "filenameHint": "Saved as .docx. Picking an angle rewrites it.",
+      "summary": "Profile",
+      "experience": "Work experience",
+      "education": "Education and courses",
+      "skills": "Tools and technologies",
+      "angle": "Angle",
+      "presets": {
+        "support": "Support engineer",
+        "it": "IT specialist",
+        "fullstack": "Full-stack"
+      },
+      "selectAll": "Select all",
+      "clear": "Clear",
+      "download": "Download .docx",
+      "fill": "Page fill: {{percent}}%",
+      "fillOver": "Over one page — remove a line or two",
+      "empty": "Nothing selected"
+    },
+    "doc": {
+      "email": "sidneysebban@gmail.com",
+      "workTitle": "Work Experience:   ",
+      "educationTitle": "Education and Courses: ",
+      "skillsTitle": "Tools and Technologies",
+      "languagesLabel": "Languages",
+      "languages": "Hebrew – Fluent | English – Fluent | French – Mother Tongue",
+      "footnote": "*Recommendations will be provided upon request",
+      "fileTitles": {
+        "full": "IT Specialist, Support Engineer and Full-Stack Developer",
+        "support": "Technical Support Engineer",
+        "it": "IT Specialist",
+        "fullstack": "Full-Stack Developer"
+      },
+      "summary": {
+        "profile": {
+          "lead": "Multidisciplinary IT Specialist, Technical Support Engineer and Full-Stack Developer",
+          "text": " with expertise in cybersecurity, ZTNA, and enterprise infrastructure."
+        },
+        "track-record": {
+          "lead": "",
+          "text": "Proven track record delivering technical support, managing complex SaaS and on-prem environments, and developing full-stack tools that streamline operations and enhance user experience."
+        },
+        "automation": {
+          "lead": "",
+          "text": "Skilled in automation, scripting, and infrastructure management across Windows, macOS, and Linux environments."
+        },
+        "communication": {
+          "lead": "",
+          "text": "Fast learner with strong communication skills, passionate about helping people, sharing knowledge, and building efficient, secure, and scalable systems."
+        }
+      },
+      "roles": {
+        "cyolo": {
+          "lead": "",
+          "period": "2023-Present:  ",
+          "title": "IT Specialist, Technical Support Engineer – Tier 3 & Full-Stack Developer, Cyolo",
+          "suffix": "",
+          "bullets": {
+            "support": {
+              "lead": "Provide technical support",
+              "text": " for enterprise deployments in SaaS, on-prem, and DMZ environments."
+            },
+            "escalations": {
+              "lead": "Resolve complex technical issues",
+              "text": " involving SSO, SCIM, LDAP/S, SSL/TLS certificates, network configurations, and remote access protocols (RDP, VNC, Telnet) on Linux, Windows, and macOS platforms."
+            },
+            "docker": {
+              "lead": "Manage and troubleshoot Docker Compose clusters",
+              "text": " across multi-site environments."
+            },
+            "jira": {
+              "lead": "Draft detailed Jira reports",
+              "text": " for Product and R&D teams with clear bug documentation and reproduction steps."
+            },
+            "knowledge-base": {
+              "lead": "Maintain KBs",
+              "text": " on Confluence, Zendesk, and internal systems for customers and staff, and lead training sessions."
+            },
+            "zendesk": {
+              "lead": "Handle daily Zendesk",
+              "text": " tickets including incidents, bugs, and configuration requests, while assisting customers via Zoom and Microsoft Teams."
+            },
+            "automation": {
+              "lead": "Build automation workflows",
+              "text": " in PowerShell, Python, and Shell for onboarding, offboarding, and monitoring."
+            },
+            "cloud": {
+              "lead": "Manage hybrid-cloud environments:",
+              "text": " VMware ESXi, Proxmox, and AWS."
+            },
+            "saas": {
+              "lead": "Oversee 50+ SaaS platforms",
+              "text": ", including SSO/SCIM integrations, license management, and cost optimization."
+            },
+            "infrastructure": {
+              "lead": "Own and secure enterprise’s IT infrastructure",
+              "text": " (AzureAD, Entra ID, M365, Exchange) in full SOC2 compliance."
+            },
+            "back-office": {
+              "lead": "Build Cyolo Back-Office",
+              "text": ", an internal and partner full-stack platform for managing customer tenants and licenses."
+            },
+            "helpdesk": {
+              "lead": "Build and maintain Cyolo Helpdesk",
+              "text": ", a full-stack add-on to the core product enabling helpdesk admins to fully manage user lifecycles. Maintain documentation, manage updates, and provide ongoing support."
+            }
+          }
+        },
+        "idf": {
+          "lead": "Military service",
+          "period": ": ",
+          "title": "Technical Support Engineer – Tier 2, Air Force, IDF",
+          "suffix": " (2018-2021)",
+          "bullets": {
+            "support": {
+              "lead": "Providing 24/7 technical support",
+              "text": ", maintaining network, software, and hardware, and coordinating with qualified technicians as needed."
+            },
+            "video": {
+              "lead": "Creating and editing videos ",
+              "text": "with Adobe Premiere Pro and After Effects."
+            },
+            "cabling": {
+              "lead": "Repairing, and improving network",
+              "text": ", video, audio, and electrical cables."
+            }
+          }
+        }
+      },
+      "education": {
+        "coding-academy": {
+          "period": "2022-2023:   ",
+          "title": "Full-Stack Web Development Certificate",
+          "suffix": ", Coding Academy"
+        },
+        "polytechnique": {
+          "period": "2021-2022:   ",
+          "title": "Computer Engineering Studies",
+          "suffix": ", Polytechnique Montreal, Canada"
+        },
+        "network-cert": {
+          "period": "2020             ",
+          "title": "Computer Network Management Certification",
+          "suffix": ", Air Force, IDF"
+        }
+      },
+      "skills": {
+        "engineering": {
+          "parts": [
+            {
+              "label": "Engineering: ",
+              "text": "JavaScript, Python, C#, PHP, MATLAB, Bash, PowerShell, Shell; React, Vue.js, Angular, HTML, CSS/SCSS/SASS, Responsive Design, Redux; Node.js, Express, REST APIs; MongoDB, MySQL, SQL Server; "
+            },
+            { "label": "Database tools: ", "text": "phpMyAdmin, Studio 3T; " },
+            { "label": "Dev tools: ", "text": "Visual Studio Code, Postman;" },
+            { "label": " Web: ", "text": "SaaS platforms, PWAs; " },
+            {
+              "label": "Principles: ",
+              "text": "Object-Oriented & Reactive Programming."
+            }
+          ]
+        },
+        "platforms": {
+          "parts": [
+            {
+              "label": "Platforms & Infra: ",
+              "text": "Docker, Docker Compose, Git, GitHub; Linux (Ubuntu), Windows, Windows Server, macOS; AWS EC2/S3; "
+            },
+            {
+              "label": "Cloud & Virtualization:",
+              "text": " VMware ESXi, Proxmox; multi-OS virtual machines."
+            }
+          ]
+        },
+        "security": {
+          "parts": [
+            {
+              "label": "Security, IAM & Networking: ",
+              "text": "AzureAD, Entra ID, Okta, Active Directory, GPO, LDAP, SSO, SCIM, SAML, OIDC, RBAC, Microsoft XDR; ICAP, DNS records, firewalls, proxies, Fortinet; SSL/TLS & SAN certificates, JWT."
+            }
+          ]
+        },
+        "ops": {
+          "parts": [
+            {
+              "label": "Ops, Monitoring & Collaboration: ",
+              "text": "Grafana, Prometheus, BetterStack; Zendesk, Jira, Confluence; SSH, SCP, RDP, VNC, Telnet, PuTTY, AnyDesk; Microsoft Intune; Microsoft 365 Word, Excel, PowerPoint, Outlook, OneDrive, SharePoint, Visio; TimeClock365, Gong, Salesforce, SalesLoft, TravelPerk, HiBob; Figma, Adobe Suite, Avocode, Lunacy; Zoom, Slack, Microsoft Teams."
+            }
+          ]
+        }
+      }
+    }
   }
 }

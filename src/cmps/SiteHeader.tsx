@@ -14,7 +14,7 @@ import { useTheme } from "../hooks/useTheme"
 import { useTlvClock } from "../hooks/useTlvClock"
 
 //? Icons
-import { FiDownload, FiLoader, FiMoon, FiSun } from "react-icons/fi"
+import { FiDownload, FiFileText, FiLoader, FiMoon, FiSun } from "react-icons/fi"
 
 const LANG_LABELS: Record<Locale, string> = {
   en: "EN",
@@ -26,7 +26,11 @@ const LANG_LABELS: Record<Locale, string> = {
 // the click for a moment. It reports nothing about real progress.
 const CV_FEEDBACK_MS = 1100
 
-export function SiteHeader() {
+type Props = {
+  onBuildCv: () => void
+}
+
+export function SiteHeader({ onBuildCv }: Props) {
   const { t, i18n } = useTranslation()
   const active = i18n.language.slice(0, 2) as Locale
   const requestLocale = useRequestLocale()
@@ -96,6 +100,16 @@ export function SiteHeader() {
             </button>
           ))}
         </div>
+        <button
+          type="button"
+          className="site-header-build"
+          title={t("cv.builder.open")}
+          aria-label={t("cv.builder.open")}
+          onClick={onBuildCv}
+        >
+          <FiFileText aria-hidden="true" />
+          <span>{t("cv.builder.open")}</span>
+        </button>
         {cvHref ? (
           <a
             className={`site-header-cv${isCvBusy ? " is-busy" : ""}`}

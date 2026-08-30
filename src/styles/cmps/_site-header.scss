@@ -172,6 +172,38 @@
   }
 
   // Primary call to action in the bar: filled, not a bare text link.
+  // Outlined next to the filled CV download: building one is the secondary
+  // path, downloading the ready-made PDF stays the primary one.
+  &-build {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.36rem 0.7rem;
+    font-family: $font-mono;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: $color-accent-2;
+    border: 1px solid rgb($accent-2-rgb / 0.45);
+    border-radius: $radius;
+    transition:
+      color $ease,
+      border-color $ease,
+      background $ease;
+
+    svg {
+      flex-shrink: 0;
+      font-size: 0.9rem;
+    }
+
+    &:hover,
+    &:focus-visible {
+      color: $color-text;
+      border-color: rgb($accent-2-rgb / 0.7);
+      background: rgb($accent-2-rgb / 0.14);
+    }
+  }
+
   &-cv {
     display: inline-flex;
     align-items: center;

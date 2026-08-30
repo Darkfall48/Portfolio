@@ -10,6 +10,7 @@ import type {
 } from "../content"
 
 //? Components
+import { CvBuilder } from "../cmps/CvBuilder"
 import { DetailPanel } from "../cmps/DetailPanel"
 import { ExperienceList } from "../cmps/ExperienceList"
 import { ProfileCard } from "../cmps/ProfileCard"
@@ -26,11 +27,12 @@ export function Home() {
   const tier = useLayoutTier()
   const [panel, setPanel] = useState<PanelTarget | null>(null)
   const [expanded, setExpanded] = useState<ExpandablePanel | null>(null)
+  const [isCvOpen, setIsCvOpen] = useState(false)
 
-  // Skipped while the dialog is up so one Escape does not both close the
-  // dialog and collapse the panel behind it.
+  // Skipped while a dialog is up so one Escape does not both close the dialog
+  // and collapse the panel behind it.
   useEffect(() => {
-    if (!expanded || panel) return
+    if (!expanded || panel || isCvOpen) return
 
     function onKey(event: KeyboardEvent) {
       if (event.key === "Escape") setExpanded(null)
@@ -38,7 +40,7 @@ export function Home() {
 
     document.addEventListener("keydown", onKey)
     return () => document.removeEventListener("keydown", onKey)
-  }, [expanded, panel])
+  }, [expanded, panel, isCvOpen])
 
   function openExperience(id: ContentId) {
     setPanel({ kind: "experience", id })
@@ -66,7 +68,7 @@ export function Home() {
 
   return (
     <div className="home">
-      <SiteHeader />
+      <SiteHeader onBuildCv={() => setIsCvOpen(true)} />
       <main
         className={`home-main${expanded ? ` is-expanded-${expanded}` : ""}`}
       >
@@ -89,6 +91,7 @@ export function Home() {
         />
       </main>
       <DetailPanel target={panel} onClose={() => setPanel(null)} />
+      <CvBuilder isOpen={isCvOpen} onClose={() => setIsCvOpen(false)} />
     </div>
   )
 }

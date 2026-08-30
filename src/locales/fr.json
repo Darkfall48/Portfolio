@@ -143,5 +143,33 @@
     "platforms": "Plateformes et cloud",
     "fullstack": "Full-stack",
     "ops": "Automatisation et exploitation"
+  },
+  "cv": {
+    "builder": {
+      "open": "Composer un CV",
+      "title": "Composer un CV",
+      "lead": "Choisissez les lignes à garder. Le document conserve la mise en forme de référence et doit tenir sur une page.",
+      "phone": "Téléphone",
+      "phonePlaceholder": "054-0000000",
+      "phoneHint": "Reste dans ce navigateur. Jamais versionné, jamais publié.",
+      "filename": "Nom du fichier",
+      "filenameHint": "Enregistré en .docx. Choisir un angle le réécrit.",
+      "summary": "Profil",
+      "experience": "Expérience professionnelle",
+      "education": "Formation et certifications",
+      "skills": "Outils et technologies",
+      "angle": "Angle",
+      "presets": {
+        "support": "Ingénieur support",
+        "it": "Spécialiste IT",
+        "fullstack": "Full-stack"
+      },
+      "selectAll": "Tout cocher",
+      "clear": "Tout décocher",
+      "download": "Télécharger le .docx",
+      "fill": "Remplissage : {{percent}} %",
+      "fillOver": "Dépasse une page — retirez une ligne ou deux",
+      "empty": "Aucune ligne sélectionnée"
+    }
   }
 }
