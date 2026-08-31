@@ -1,0 +1,11 @@
+Ingénieur Support Technique N2/N3 (H/F)
+Éditeur de solutions de sécurité réseau, nous recherchons un ingénieur support
+pour prendre en charge les escalades clients grands comptes. En lien direct avec
+le chef de projet et la R&D, vous qualifiez, reproduisez et documentez les
+incidents complexes.
+Environnement technique : Linux (Ubuntu, RedHat), Windows Server, Docker et
+Docker Compose, certificats SSL/TLS, LDAP et Active Directory, SSO (SAML,
+OIDC), protocoles d'accès distant (RDP, SSH, VNC). Outillage : Zendesk, Jira,
+Confluence, Grafana. Scripting Python ou Bash apprécié.
+Une expérience en environnement Kubernetes serait un plus, en vue de notre
+migration prévue l'an prochain. Livraison express des correctifs attendue.

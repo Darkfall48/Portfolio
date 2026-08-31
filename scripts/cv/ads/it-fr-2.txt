@@ -1,0 +1,17 @@
+Responsable Informatique (H/F)
+
+Groupe de trois cents collaborateurs répartis sur quatre sites, nous créons un
+poste de responsable informatique pour reprendre l'ensemble du parc et des
+services internes. Vous êtes l'interlocuteur unique de la direction sur ces
+sujets et vous pilotez les prestataires.
+
+Périmètre : administration de Microsoft 365, Entra ID et Exchange, gestion du
+parc via Intune, application du MFA et des accès conditionnels, maintenance des
+serveurs Windows Server et des hôtes VMware, gestion des machines virtuelles
+multi-OS. Réseau : DNS, pare-feu Fortinet, VPN, proxy inverse. Vous automatisez
+les arrivées et les départs en PowerShell.
+
+Vous suivez également le catalogue SaaS et ses intégrations SSO et SCIM, et
+vous préparez les preuves pour l'audit SOC 2.
+
+Une expérience de Jamf serait un plus.

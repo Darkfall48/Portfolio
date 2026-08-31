@@ -1,0 +1,8 @@
+Customer Support Engineer - SaaS Platform
+Join a small support team owning tickets from first response to root cause. You
+will reproduce customer issues, file clear bug reports for R&D, and keep our
+knowledge base honest. Day to day: Zendesk, Jira, Confluence, and a lot of log
+reading across Linux containers. Comfortable with REST APIs and Postman, basic
+SQL, and reading a stack trace without panicking. We use Grafana and Prometheus
+for monitoring. Experience supporting SSO integrations (SAML, OIDC) is a strong
+plus. This is a fast-paced team and we expect you to react quickly.

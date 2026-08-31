@@ -1,0 +1,13 @@
+Technical Support Engineer, Tier 2
+Our platform serves enterprise customers who expect answers fast, so you will
+need to react quickly and work well with teams outside support.
+
+What you will do:
+- Own escalated tickets in Zendesk from first touch to root cause
+- Reproduce issues on Linux and Windows Server, inside Docker containers
+- Debug SSL/TLS certificates, LDAP binds and SAML assertions
+- Read logs and dashboards in Grafana, and file clear bugs in Jira
+- Keep the runbooks honest in Confluence
+
+Nice to have:
+- Kubernetes, or scripting in Python or Bash

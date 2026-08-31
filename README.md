@@ -44,6 +44,7 @@ npm run cv:template                   # rebuild both templates from CVs/2026/...
 npm run cv:extract                    # print the reference wording as JSON, to seed cv.doc
 npm run cv:sample -- he 054-0000000   # render every line to .tmp/cv-sample-he.docx, through the app's own generator
 npm run cv:sample -- en "" ad.txt     # render what the builder would tailor for that job ad
+npm run cv:match                      # replay every ad in scripts/cv/ads and the matcher's traps
 npm run cv:pdf -- <in.docx> [out.pdf] # convert with Word, refuse anything over one page
 ```
 
@@ -80,9 +81,19 @@ Matching only against your own inventory can never report what you lack, so `unc
 
 Tailoring then picks an angle rather than packing the page: the full document already fits, so filling to the budget would hand back the full document whatever the ad said. What an angle really does is leave out what dilutes it, and that judgement is already in `cvPresets`. The offer picks an angle, overrules it wherever it asked for something the angle had dropped, and the page is trimmed from the least relevant end if that pushes it over. Landing on an angle also renames the download, exactly as clicking it would.
 
-The job title picks the angle, and the tools only break a tie. Measured over a corpus of twelve ads, all three angles routinely covered the same 84% of an ad's tools, because the tools are largely shared; the choice then fell to whichever preset happened to be leanest, which means nothing. An ad states the role it is hiring for in its first line, and that is what a recruiter screens on. The tie-break is coverage times density — coverage alone rewards the roomiest angle for having room, density alone rewards the smallest.
+The job title picks the angle, and the tools only break a tie. Measured over the ad corpus, all three angles routinely covered the same 84% of an ad's tools, because the tools are largely shared; the choice then fell to whichever preset happened to be leanest, which means nothing. An ad states the role it is hiring for in its first line, and that is what a recruiter screens on. The tie-break is coverage times density — coverage alone rewards the roomiest angle for having room, density alone rewards the smallest.
 
-Recognised terms are listed in the panel on purpose. Case-sensitivity handles the ordinary words, but nothing catches a false positive that opens a sentence, and only the eye can tell.
+What an ad insists on counts double what it merely hopes for, and a gap against a requirement is not a gap against a wish. The colon tells the two apart: `Nice to have:` opens a list and everything under it is a wish, while `Kubernetes exposure a plus` is an aside and demotes only its own sentence — plenty of ads close a paragraph that way and then carry on with requirements. A list runs until the ad opens another one, so a `Nice to have:` cannot swallow the `Networking basics:` behind it. The headings live in `bonusHeadings`, in all three languages like `roleTerms`.
+
+Tailoring reports what it did rather than silently rewriting a hundred rows: the angle it chose, the job title that chose it, how many lines it added and removed, and an undo. A marked row names the tools it answers on hover, because the tags behind a line are a judgement its wording does not show. Recognised terms are listed for the same reason — case-sensitivity handles the ordinary words, but nothing catches a false positive that opens a sentence, and only the eye can tell.
+
+A chip can sit in the inventory without appearing in the CV, and `m365` does: the estate bullet claims the tenant, the skills line has no room to repeat it, and an ad asking for Microsoft 365 must not be answered by the Office suite sitting further down that line. Vocabulary and printed content are the same list on purpose, but they do not have to be the same subset of it.
+
+### Trusting the matcher
+
+`npm run cv:match` replays every ad in `scripts/cv/ads` and must land each one on the angle its file name claims, on one page. Add an ad by dropping `<angle>-<locale>-<n>.txt` in that folder; the file name is the expectation. The ads are written for this repository, not scraped: no employer copy, no real posting.
+
+The same run exercises the traps the matcher is known to fall into — the tool against the ordinary word, a term wrapped over two lines, an ad shouted in capitals, a requirement against a wish, an empty box. Without it the matcher is a set of heuristics over prose with nothing holding them in place: a new alias, a retouched `dropSkills` or an extra `roleTerms` entry can reroute an ad, and the presets are now matcher parameters as much as content. The check is what makes them safe to edit.
 
 ### CV languages
 

@@ -1,0 +1,7 @@
+IT Systems Administrator
+Own the internal estate for a 300-person company. Day to day you will run
+Microsoft 365 and Entra ID, manage devices through Intune, enforce conditional
+access and MFA, and keep us audit-ready for SOC 2. You will administer our SaaS
+stack, handle onboarding and offboarding automation in PowerShell, and look
+after VMware and our Windows Server fleet. Nice to have: Jamf, Okta, and
+experience with a SIEM. Networking basics: DNS, firewalls, VPN.

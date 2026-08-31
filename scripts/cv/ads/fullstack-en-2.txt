@@ -1,0 +1,8 @@
+Software Engineer - Internal Tools
+We build the tools the rest of the company runs on: admin consoles, tenant and
+licence management, provisioning dashboards. You will own features end to end,
+from a Figma mockup to production. Stack is React, Node.js, Express and MongoDB,
+with REST APIs and JWT auth. Some of the work touches SCIM provisioning and SSO,
+so an appetite for identity plumbing helps. We deploy with Docker. You should be
+comfortable in a small team where everyone reviews everyone. Swift feedback
+loops, and we go to production daily.

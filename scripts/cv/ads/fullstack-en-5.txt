@@ -1,0 +1,8 @@
+Frontend Engineer
+We are looking for a front-end developer to own the interface of our customer
+portal. You will build in React with TypeScript, style with SCSS, and turn Figma
+files into responsive, accessible screens that hold up on a phone. State is
+managed with Redux in the older areas and with hooks in the newer ones. You will
+consume a REST API and occasionally reach into the Node.js layer behind it to
+add what you need. We test in the browser, we use Git and GitHub, and we deploy
+with Docker. Some familiarity with PWA behaviour would be welcome.

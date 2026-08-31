@@ -1,0 +1,9 @@
+IT Operations Specialist - Cloud and Identity
+We are consolidating a decade of accumulated tooling and we need someone to own
+the result. The estate is AWS first, with EC2 and S3 workloads, but identity is
+where the work is: Entra ID, AzureAD, Okta for the workforce, SSO and SCIM
+provisioning into every SaaS application we buy. You will enforce conditional
+access and MFA, run RBAC reviews, and keep Defender XDR healthy. Compliance is
+part of the job, SOC 2 specifically. Windows Server and VMware are still in the
+picture and will be for years. Automation in PowerShell and Python is expected.
+Kubernetes and Terraform are a plus but not a requirement.

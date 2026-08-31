@@ -1,0 +1,15 @@
+Administrateur Systèmes (H/F)
+
+Environnement :
+• Microsoft 365, Entra ID, Exchange Online
+• Intune pour la gestion du parc, MFA et accès conditionnel
+• Windows Server, Active Directory, GPO
+• VMware et Proxmox, machines virtuelles multi-OS
+• DNS, pare-feu, VPN, proxy inverse, certificats SAN
+• Scripting PowerShell et Python
+
+Vous assurez l'exploitation quotidienne, la sauvegarde et la restauration, et
+vous participez à la mise en conformité SOC 2. Vous documentez ce que vous
+faites : c'est une exigence du poste, pas une préférence.
+
+Souhaité : Ansible, Terraform.

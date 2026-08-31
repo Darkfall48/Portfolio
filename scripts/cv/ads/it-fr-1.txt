@@ -1,0 +1,10 @@
+Administrateur Systèmes et Réseaux (H/F)
+Au sein de la DSI, vous êtes le référent unique du parc informatique interne.
+Vous administrez Microsoft 365, Entra ID et Exchange, gérez le parc via Intune,
+appliquez les politiques d'accès conditionnel et le MFA, et maintenez la
+conformité SOC 2. Vous automatisez les arrivées et départs en PowerShell.
+Infrastructure : Windows Server, VMware, machines virtuelles multi-OS, DNS,
+pare-feu et proxy inverse, Fortinet. Vous gérez également le catalogue SaaS de
+l'entreprise et les intégrations SSO / SCIM.
+Le poste est rattaché au chef de service informatique. Une vue d'ensemble des
+enjeux de sécurité est attendue.

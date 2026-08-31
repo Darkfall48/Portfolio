@@ -1,0 +1,10 @@
+Senior Technical Support Engineer (Tier 3)
+We are a cybersecurity vendor shipping a Zero Trust access product on-premise,
+in the cloud and in DMZ environments. You will own escalated cases end to end
+and work with cross-functional teams to go the extra mile for our customers,
+delivering swift resolution on the toughest issues.
+Requirements: strong troubleshooting on Linux and Windows Server, hands-on with
+Docker and docker-compose, solid grasp of SAML, OIDC, SCIM and LDAP, TLS
+certificate debugging, and remote access protocols such as RDP and SSH.
+Experience with Zendesk and Jira, and writing customer-facing documentation in
+Confluence. Kubernetes and Datadog exposure a plus. Scripting in Python or Bash.

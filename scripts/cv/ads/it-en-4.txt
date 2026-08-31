@@ -1,0 +1,17 @@
+Infrastructure Engineer
+
+Who we are: a profitable, bootstrapped company that has been shipping for eleven
+years. We are not a startup and we do not pretend to be one. We value people who
+finish things, who write down what they learned, and who are comfortable being
+the only person who understands a system for a while. Hybrid, three days in the
+office, and we mean it.
+
+What the job actually is: keeping the lights on for a hybrid estate that has
+grown faster than its documentation. VMware ESXi and Proxmox clusters on one
+side, AWS EC2 and S3 workloads on the other, and a fleet of Windows Server boxes
+in between. You will inherit Active Directory, GPO, Exchange Online and AzureAD,
+and you will be asked to make them boring. Certificates, including SAN
+certificates, reverse proxy configuration, DNS, firewalls and VPN are all yours.
+
+We expect fluent PowerShell and enough Python to automate the rest. Terraform
+and Ansible are on the roadmap, so exposure to either would be welcome.

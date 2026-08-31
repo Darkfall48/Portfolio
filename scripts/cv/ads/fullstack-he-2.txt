@@ -1,0 +1,10 @@
+מפתח/ת Full-Stack
+
+דרוש/ה מפתח/ת לצוות הפיתוח שלנו, לעבודה על מוצר ווב המשמש לקוחות ארגוניים.
+
+הסטאק: React ו-TypeScript בצד הלקוח, Node.js ו-Express בצד השרת, MongoDB
+כבסיס הנתונים הראשי, REST API ואימות מבוסס JWT. עבודה מול עיצובים ב-Figma,
+פיתוח ממשקים רספונסיביים ב-SCSS. הרצה על AWS בקונטיינרים של Docker, ניהול
+קוד ב-Git ו-GitHub.
+
+יתרון: GraphQL, PostgreSQL או Redis.

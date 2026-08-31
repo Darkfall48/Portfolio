@@ -1,0 +1,16 @@
+Escalation Engineer
+
+About us: we are a Series B company of 120 people, backed by tier-one investors,
+with an office in Tel Aviv and a fully remote engineering group. We believe in
+ownership, in blameless postmortems, and in hiring people who care more about
+the customer than about being right. Our values are curiosity, candour and
+craft. We offer equity, a learning budget, and a genuinely flat structure.
+
+The role: you sit between support and R&D and own the cases nobody else could
+close. That means reproducing a customer environment locally, reading through
+container logs, and turning a vague complaint into a filed defect an engineer
+can act on. You will spend real time in Zendesk, Jira and Confluence.
+
+Requirements: Linux, Windows Server, Docker, an understanding of SAML and OIDC,
+LDAP and Active Directory, TLS certificate debugging, and remote access over
+RDP or SSH. REST APIs and Postman for reproducing calls. Python or Bash.

@@ -1,0 +1,14 @@
+Technicien Support Applicatif N2 (H/F)
+
+Environnement technique :
+• Postes Linux et Windows Server, virtualisation VMware
+• Conteneurs Docker et Docker Compose
+• Bases MongoDB et MySQL, requêtes SQL de vérification
+• Annuaire LDAP, Active Directory, fédération SSO (SAML, OIDC)
+• Outillage : Zendesk, Jira, Confluence, Postman
+
+Vos missions : réception et qualification des tickets, reproduction des
+incidents, escalade documentée vers l'équipe de développement, mise à jour de
+la base de connaissances.
+
+Un atout : la connaissance de Kubernetes ou de Prometheus.

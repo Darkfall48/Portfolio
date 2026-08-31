@@ -13,6 +13,7 @@
     "cv:inspect": "node scripts/cv/inspect-docx.mjs",
     "cv:extract": "node scripts/cv/extract-content.mjs",
     "cv:sample": "node scripts/cv/render-sample.mjs",
+    "cv:match": "node scripts/cv/check-match.mjs",
     "cv:pdf": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/cv/docx-to-pdf.ps1"
   },
   "dependencies": {

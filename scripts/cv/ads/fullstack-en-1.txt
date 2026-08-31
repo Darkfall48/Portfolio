@@ -1,0 +1,7 @@
+Full-Stack Engineer (React / Node)
+Join the product team building our customer-facing web application. Stack:
+React with TypeScript on the front end, Node.js and Express on the back, MongoDB
+for storage, REST APIs throughout. You will work with Figma handoffs and ship
+responsive interfaces. We run everything on AWS in Docker containers, with
+GitHub Actions for CI and Grafana for dashboards. Bonus: experience with SSO and
+SCIM provisioning, GraphQL, or PostgreSQL.

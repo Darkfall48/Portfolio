@@ -1,0 +1,10 @@
+Network and Systems Administrator
+A manufacturing group with six sites is hiring a network administrator to take
+over its internal infrastructure. You will manage the Fortinet estate, site to
+site VPN tunnels, DNS zones and firewall rules, and the reverse proxy in front
+of our internal applications. On the systems side you will run Windows Server,
+Active Directory and GPO, VMware hosts and a set of multi-OS virtual machines,
+and you will administer Microsoft 365 and Exchange for 600 mailboxes. Device
+management goes through Intune. Scripting is expected, in PowerShell above all.
+Certificate lifecycle, including SAN certificates, sits with this role. You
+report to the head of IT and you go on call one week in four.

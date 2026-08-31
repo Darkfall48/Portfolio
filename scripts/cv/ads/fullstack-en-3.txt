@@ -1,0 +1,15 @@
+Full-Stack Developer
+
+The stack:
+- React with TypeScript, SCSS, responsive layouts from Figma handoffs
+- Node.js and Express behind a REST API
+- MongoDB, with some MySQL still in service
+- JWT authentication, and SSO through SAML and OIDC
+- Docker for local work and for deployment on AWS
+- Git and GitHub, with GitHub Actions running the pipeline
+
+You will own features end to end, review other people's work, and be reviewed
+in turn. We ship small and often.
+
+Bonus:
+- GraphQL, PostgreSQL, or Redis

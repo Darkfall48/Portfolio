@@ -103,6 +103,14 @@ export const skillChips: SkillChip[] = [
     aliases: ["Azure AD", "Azure Active Directory"],
   },
   { id: "entra", label: "Entra ID", aliases: ["Entra"] },
+  // Administering the tenant, which the estate bullet claims and the skills
+  // line has no room to repeat. Carried here so an ad asking for Microsoft 365
+  // is answered by that bullet rather than by the Office suite further down.
+  {
+    id: "m365",
+    label: "Microsoft 365",
+    aliases: ["M365", "Office 365", "O365"],
+  },
   { id: "okta", label: "Okta" },
   { id: "active-directory", label: "Active Directory" },
   { id: "gpo", label: "GPO" },
@@ -174,11 +182,9 @@ export const skillChips: SkillChip[] = [
     cvLabel: "Microsoft Intune",
     aliases: ["Endpoint Manager"],
   },
-  {
-    id: "m365-word",
-    label: "Microsoft 365 Word",
-    aliases: ["Microsoft 365", "M365", "Office 365", "O365"],
-  },
+  // Named as the document names it, and matched by nothing: an ad that says
+  // "Microsoft 365" is asking for the tenant above, not for a word processor.
+  { id: "m365-word", label: "Microsoft 365 Word" },
   { id: "excel", label: "Excel" },
   { id: "powerpoint", label: "PowerPoint" },
   { id: "outlook", label: "Outlook" },
@@ -232,6 +238,47 @@ export const ambiguousTerms: string[] = [
   "React",
   "Teams",
   "Vue",
+]
+
+/**
+ * How an ad marks the end of what it insists on. What follows one of these is
+ * a wish, not a requirement, and the two should not weigh the same — nor
+ * should a gap against one read like a gap against the other.
+ */
+export const bonusHeadings: string[] = [
+  "nice to have",
+  "good to have",
+  "bonus",
+  "a plus",
+  "advantage",
+  "advantageous",
+  "desirable",
+  "welcome",
+  "ideally",
+  "optional",
+  "not required",
+  // "preferred" alone is no good: "the preferred candidate will have X" is a
+  // requirement, and the qualifier only means a wish when it heads a list.
+  "preferred qualifications",
+  "preferred skills",
+  "un plus",
+  "un atout",
+  "un avantage",
+  "apprécié",
+  "appréciée",
+  "souhaité",
+  "souhaitée",
+  "serait un plus",
+  "idéalement",
+  "de préférence",
+  "facultatif",
+  "non requis",
+  "non requise",
+  "יתרון",
+  "יתרון משמעותי",
+  "רצוי",
+  "נשמח",
+  "לא חובה",
 ]
 
 /**

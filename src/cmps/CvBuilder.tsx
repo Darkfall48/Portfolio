@@ -13,6 +13,7 @@ import {
   isSameSelection,
   skillChip,
 } from "../content"
+import type { ContentId } from "../content/types"
 import { SUPPORTED_LOCALES, isLocale, localeDir } from "../i18n"
 import type { Locale } from "../i18n"
 
@@ -32,19 +33,38 @@ import { matchOffer, tailorSelection } from "../services/jobMatch"
 import { FiDownload, FiLoader, FiX } from "react-icons/fi"
 
 const PHONE_STORAGE_KEY = "portfolio-cv-phone"
+const OFFER_STORAGE_KEY = "portfolio-cv-offer"
 
-function readStoredPhone(): string {
+function readStored(key: string): string {
   try {
-    return localStorage.getItem(PHONE_STORAGE_KEY) ?? ""
+    return localStorage.getItem(key) ?? ""
   } catch {
     // Private mode or blocked storage — the field just starts empty.
     return ""
   }
 }
 
+function writeStored(key: string, value: string): void {
+  try {
+    localStorage.setItem(key, value)
+  } catch {
+    // Ignore quota and privacy errors: the CV still generates this session.
+  }
+}
+
 type Props = {
   isOpen: boolean
   onClose: () => void
+}
+
+/** The outcome of a tailoring, kept so the panel can explain and undo it. */
+type Applied = {
+  angle: ContentId
+  because: string[]
+  added: number
+  removed: number
+  previous: Set<string>
+  previousTitle: string
 }
 
 /** A row can be driven by its own key, or by whatever sits under it. */
@@ -60,14 +80,18 @@ export function CvBuilder({ isOpen, onClose }: Props) {
   const titleId = useId()
   const closeRef = useRef<HTMLButtonElement>(null)
   const [selection, setSelection] = useState(cvFullSelection)
-  const [phone, setPhone] = useState(readStoredPhone)
-  const [offer, setOffer] = useState("")
+  const [phone, setPhone] = useState(() => readStored(PHONE_STORAGE_KEY))
+  // Getting a tailored CV right takes more than one pass, so the ad outlives
+  // the panel rather than having to be fetched and pasted again.
+  const [offer, setOffer] = useState(() => readStored(OFFER_STORAGE_KEY))
   const [pasteFailed, setPasteFailed] = useState(false)
   const offerRef = useRef<HTMLTextAreaElement>(null)
   const [isBusy, setIsBusy] = useState(false)
   const [error, setError] = useState("")
 
   const match = useMemo(() => matchOffer(offer), [offer])
+  /** What the last tailoring did, and what it did it to, so it can be undone. */
+  const [applied, setApplied] = useState<Applied | null>(null)
 
   // Reading in one language while applying in another is normal, so the
   // document keeps its own language and only starts from the site's.
@@ -114,6 +138,9 @@ export function CvBuilder({ isOpen, onClose }: Props) {
 
   /** Every change repairs the header invariant, presets included. */
   function update(mutate: (keys: Set<string>) => void) {
+    // Once a row is ticked by hand the summary no longer describes what is on
+    // screen, so it stops claiming to.
+    setApplied(null)
     setSelection((current) => {
       const next = new Set(current)
       mutate(next)
@@ -140,11 +167,13 @@ export function CvBuilder({ isOpen, onClose }: Props) {
 
   function onPhoneChange(value: string) {
     setPhone(value)
-    try {
-      localStorage.setItem(PHONE_STORAGE_KEY, value)
-    } catch {
-      // Ignore quota / privacy errors: the CV still generates this session.
-    }
+    writeStored(PHONE_STORAGE_KEY, value)
+  }
+
+  function onOfferChange(value: string) {
+    setOffer(value)
+    setPasteFailed(false)
+    writeStored(OFFER_STORAGE_KEY, value)
   }
 
   /**
@@ -154,9 +183,7 @@ export function CvBuilder({ isOpen, onClose }: Props) {
    */
   async function onPasteOffer() {
     try {
-      const text = await navigator.clipboard.readText()
-      setOffer(text)
-      setPasteFailed(false)
+      onOfferChange(await navigator.clipboard.readText())
     } catch {
       setPasteFailed(true)
       offerRef.current?.focus()
@@ -170,10 +197,52 @@ export function CvBuilder({ isOpen, onClose }: Props) {
     setCustomName(null)
   }
 
-  /** Tailoring lands on an angle, so it renames the download like a click. */
+  /** Clicking an angle by hand replaces whatever the offer had decided. */
+  function onPickAngle(keys: Set<string>, key: string) {
+    setApplied(null)
+    applyPreset(keys, key)
+  }
+
+  /**
+   * A marked row says it answers the offer; this says what it answers. The
+   * tags behind a line are a judgement, not something its wording shows, so
+   * they are worth reading before trusting the row.
+   */
+  function whyLine(key: string, full: string): string {
+    const evidence = match.evidence.get(key)
+    if (!evidence) return full
+    const tools = evidence.map((id) => skillChip(id)?.label ?? id).join(", ")
+    return `${full}\n\n${t("cv.builder.offerBecause")} ${tools}`
+  }
+
+  /**
+   * Tailoring rewrites a hundred checkboxes at once, which is only trustworthy
+   * if it says what it did and can be taken back.
+   */
   function onTailor() {
-    const { keys, angle } = tailorSelection(match, doc, lang, phone)
+    const { keys, angle, because } = tailorSelection(match, doc, lang, phone)
+    let added = 0
+    let removed = 0
+    for (const key of keys) if (!selection.has(key)) added += 1
+    for (const key of selection) if (!keys.has(key)) removed += 1
+
+    setApplied({
+      angle,
+      because,
+      added,
+      removed,
+      previous: selection,
+      previousTitle: titleKey,
+    })
     applyPreset(keys, angle)
+  }
+
+  function onUndoTailor() {
+    if (!applied) return
+    setSelection(applied.previous)
+    setTitleKey(applied.previousTitle)
+    setCustomName(null)
+    setApplied(null)
   }
 
   async function onDownload() {
@@ -226,7 +295,7 @@ export function CvBuilder({ isOpen, onClose }: Props) {
             document's own language and direction rather than the panel's. */}
         <span
           className="cv-builder-line-copy"
-          title={full}
+          title={whyLine(key, full)}
           lang={lang}
           dir={localeDir(lang)}
         >
@@ -329,10 +398,7 @@ export function CvBuilder({ isOpen, onClose }: Props) {
                 <button
                   type="button"
                   disabled={offer === ""}
-                  onClick={() => {
-                    setOffer("")
-                    setPasteFailed(false)
-                  }}
+                  onClick={() => onOfferChange("")}
                 >
                   {t("cv.builder.offerClear")}
                 </button>
@@ -344,7 +410,7 @@ export function CvBuilder({ isOpen, onClose }: Props) {
               rows={3}
               value={offer}
               placeholder={t("cv.builder.offerPlaceholder")}
-              onChange={(event) => setOffer(event.target.value)}
+              onChange={(event) => onOfferChange(event.target.value)}
             />
             <small>
               {pasteFailed
@@ -360,9 +426,21 @@ export function CvBuilder({ isOpen, onClose }: Props) {
                   <span className="cv-builder-offer-legend">
                     {t("cv.builder.offerFound")}
                   </span>
-                  {match.found.map((id) => (
-                    <span key={id} className="cv-builder-offer-term">
-                      {skillChip(id)?.label}
+                  {match.found.map((demand) => (
+                    <span
+                      key={demand.value}
+                      className={
+                        demand.required
+                          ? "cv-builder-offer-term"
+                          : "cv-builder-offer-term is-bonus"
+                      }
+                      title={
+                        demand.required
+                          ? t("cv.builder.offerRequired")
+                          : t("cv.builder.offerBonus")
+                      }
+                    >
+                      {skillChip(demand.value)?.label}
                     </span>
                   ))}
                 </p>
@@ -377,9 +455,21 @@ export function CvBuilder({ isOpen, onClose }: Props) {
                   <span className="cv-builder-offer-legend">
                     {t("cv.builder.offerGaps")}
                   </span>
-                  {match.gaps.map((term) => (
-                    <span key={term} className="cv-builder-offer-term">
-                      {term}
+                  {match.gaps.map((demand) => (
+                    <span
+                      key={demand.value}
+                      className={
+                        demand.required
+                          ? "cv-builder-offer-term"
+                          : "cv-builder-offer-term is-bonus"
+                      }
+                      title={
+                        demand.required
+                          ? t("cv.builder.offerRequired")
+                          : t("cv.builder.offerBonus")
+                      }
+                    >
+                      {demand.value}
                     </span>
                   ))}
                 </p>
@@ -393,6 +483,28 @@ export function CvBuilder({ isOpen, onClose }: Props) {
               >
                 {t("cv.builder.tailor")}
               </button>
+
+              {applied ? (
+                <p className="cv-builder-offer-applied">
+                  <span>
+                    {t("cv.builder.offerAngle")}{" "}
+                    <strong>
+                      {t(`cv.builder.presets.${applied.angle}`, {
+                        defaultValue: t("cv.builder.selectAll"),
+                      })}
+                    </strong>
+                    {applied.because.length > 0 ? (
+                      <em>{` — “${applied.because[0]}”`}</em>
+                    ) : null}
+                  </span>
+                  <span className="cv-builder-offer-delta">
+                    {`+${applied.added} / −${applied.removed}`}
+                  </span>
+                  <button type="button" onClick={onUndoTailor}>
+                    {t("cv.builder.offerUndo")}
+                  </button>
+                </p>
+              ) : null}
             </div>
           ) : null}
         </div>
@@ -410,7 +522,7 @@ export function CvBuilder({ isOpen, onClose }: Props) {
                   type="button"
                   className={isActive ? "is-active" : undefined}
                   aria-pressed={isActive}
-                  onClick={() => applyPreset(keys, preset.id)}
+                  onClick={() => onPickAngle(keys, preset.id)}
                 >
                   {t(`cv.builder.presets.${preset.id}`)}
                 </button>
@@ -421,7 +533,7 @@ export function CvBuilder({ isOpen, onClose }: Props) {
         <div className="cv-builder-bulk">
           <button
             type="button"
-            onClick={() => applyPreset(cvFullSelection(), "full")}
+            onClick={() => onPickAngle(cvFullSelection(), "full")}
           >
             {t("cv.builder.selectAll")}
           </button>

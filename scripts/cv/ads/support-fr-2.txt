@@ -1,0 +1,17 @@
+Ingénieur Support Technique (H/F) - Éditeur SaaS
+
+Notre client, éditeur d'une plateforme de gestion utilisée par plus de deux
+cents entreprises, recherche un ingénieur support pour renforcer son équipe
+niveau 2. Le poste est rattaché au chef de service et suppose une vue
+d'ensemble du produit comme de son infrastructure.
+
+Vos missions : prendre en charge les demandes clients dans Zendesk, qualifier
+et reproduire les anomalies, rédiger les fiches de contournement dans
+Confluence, et remonter les défauts à la R&D via Jira. Vous intervenez sur des
+environnements Linux et Windows Server, conteneurisés avec Docker.
+
+Compétences attendues : diagnostic de certificats SSL/TLS, LDAP et Active
+Directory, authentification SSO en SAML et OIDC, accès distant RDP et SSH,
+lecture de logs et de tableaux de bord Grafana. Scripting Python ou Bash.
+
+La réactivité est essentielle : nos clients attendent une réponse express.

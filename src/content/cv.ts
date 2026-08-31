@@ -94,7 +94,7 @@ export const cvSections: CvSections = {
         { id: "automation", skills: ["powershell", "python", "shell"] },
         { id: "cloud", skills: ["esxi", "proxmox", "aws"] },
         { id: "saas", skills: ["saas-platforms", "sso", "scim"] },
-        { id: "infrastructure", skills: ["azuread", "entra", "soc2"] },
+        { id: "infrastructure", skills: ["azuread", "entra", "m365", "soc2"] },
         // The wording names no stack, but this is what building it took.
         { id: "back-office", skills: ["react", "node", "mongodb", "rest"] },
         { id: "helpdesk", skills: ["react", "node", "rest", "scim"] },

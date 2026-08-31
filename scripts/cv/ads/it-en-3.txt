@@ -1,0 +1,14 @@
+IT Administrator - Modern Workplace
+
+You will own the identity and device estate end to end.
+
+Responsibilities:
+- Administer Microsoft 365 and Entra ID for 400 staff
+- Manage laptops through Intune, enforce MFA and conditional access
+- Run onboarding and offboarding automation in PowerShell
+- Maintain Active Directory, GPO policy and our Windows Server fleet
+- Keep the SaaS catalogue and its SSO and SCIM integrations in order
+- Support the SOC 2 audit cycle with evidence and RBAC reviews
+
+Nice to have:
+- Jamf for the Mac fleet, Okta, or exposure to a SIEM

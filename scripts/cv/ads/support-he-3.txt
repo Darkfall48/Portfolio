@@ -1,0 +1,3 @@
+איש תמיכה טכנית
+צוות קטן, לקוחות ארגוניים, מוצר On-Premise.
+נדרש ניסיון ב-Linux, Windows Server, Docker, SAML ו-Zendesk. Python יתרון.

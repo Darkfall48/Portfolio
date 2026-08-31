@@ -227,12 +227,24 @@
     color: $color-text;
     border: 1px solid rgb($accent-2-rgb / 0.45);
     border-radius: $radius;
+
+    // What the ad only wishes for reads quieter than what it insists on.
+    &.is-bonus {
+      color: $color-muted;
+      border-style: dashed;
+      border-color: $color-line;
+    }
   }
 
+  // A gap the ad insists on is the one thing here worth interrupting for.
   &-offer-terms.is-gap &-offer-term {
-    color: $color-muted;
-    border-color: $color-line;
-    border-style: dashed;
+    color: $color-text;
+    border-color: rgb($accent-rgb / 0.55);
+
+    &.is-bonus {
+      color: $color-muted;
+      border-color: $color-line;
+    }
   }
 
   &-offer-apply {
@@ -258,6 +270,46 @@
       opacity: 0.45;
       cursor: not-allowed;
     }
+  }
+
+  // Tailoring rewrites a hundred rows at once, so it reports what it did.
+  &-offer-applied {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.5rem;
+    font-size: 0.76rem;
+    color: $color-muted;
+
+    strong {
+      color: $color-accent-2;
+      font-weight: 500;
+    }
+
+    em {
+      font-style: normal;
+      color: $color-muted;
+    }
+
+    button {
+      font-family: $font-mono;
+      font-size: 0.7rem;
+      color: $color-muted;
+      text-decoration: underline;
+      text-underline-offset: 0.2em;
+      transition: color $ease;
+
+      &:hover,
+      &:focus-visible {
+        color: $color-text;
+      }
+    }
+  }
+
+  &-offer-delta {
+    font-family: $font-mono;
+    font-size: 0.72rem;
+    color: $color-accent;
   }
 
   // Shared by the document language row and the angle row.

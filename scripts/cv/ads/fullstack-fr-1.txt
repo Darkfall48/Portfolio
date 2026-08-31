@@ -1,0 +1,9 @@
+Développeur Full-Stack JavaScript (H/F)
+Vous rejoignez une équipe produit de huit personnes pour construire notre
+application web métier. Stack : React et TypeScript côté front, Node.js et
+Express côté back, MongoDB en base, API REST. Intégration à partir des maquettes
+Figma, développement responsive, attention portée à l'accessibilité.
+Déploiement conteneurisé avec Docker sur AWS. Versioning Git et GitHub.
+Vous travaillez en lien avec le chef de produit. Une expérience en Vue ou en
+Angular est appréciée mais non requise. Livraison en flux continu, mise en
+production express plusieurs fois par semaine.

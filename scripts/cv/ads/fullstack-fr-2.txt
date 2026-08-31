@@ -1,0 +1,16 @@
+Développeur Web Full-Stack (H/F)
+
+Nous recherchons un développeur pour rejoindre une équipe de six personnes et
+travailler sur notre application métier, utilisée quotidiennement par nos
+clients grands comptes.
+
+Stack technique : React et TypeScript côté client, Node.js et Express côté
+serveur, MongoDB en base principale, API REST et authentification JWT.
+Intégration des maquettes Figma, développement responsive et accessible en
+SCSS. Conteneurisation Docker, hébergement AWS, versioning Git et GitHub.
+
+Vous participez aux revues de code et aux choix d'architecture. Le rythme est
+soutenu mais la qualité prime : nous ne livrons pas en express au détriment des
+tests.
+
+Une expérience de Vue ou d'Angular est appréciée.

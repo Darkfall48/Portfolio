@@ -1,0 +1,8 @@
+Backend Engineer - Platform
+You will work on the services behind our product: a REST API in Node.js and
+Express, MongoDB for most of the data and MySQL for the parts that never got
+migrated, and a provisioning layer that speaks SCIM and SAML to our customers'
+identity providers. JWT everywhere. Everything runs in Docker on AWS, with
+GitHub Actions for CI and Grafana and Prometheus for monitoring. You will write
+Python for the tooling around it. We care about tests and about not being woken
+up at night. Experience with Golang or PostgreSQL would be an advantage.

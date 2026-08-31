@@ -1,0 +1,5 @@
+מפתח/ת Full-Stack
+דרוש/ה מפתח/ת פול-סטאק לצוות המוצר שלנו. הסטאק שלנו: React ו-TypeScript בצד
+הלקוח, Node.js ו-Express בצד השרת, MongoDB כבסיס נתונים ו-REST API.
+עבודה מול עיצובים ב-Figma ופיתוח ממשקים רספונסיביים. הרצה על AWS בקונטיינרים
+של Docker, ניהול קוד ב-Git ו-GitHub. יתרון: ניסיון עם SSO, MySQL, או Redis.

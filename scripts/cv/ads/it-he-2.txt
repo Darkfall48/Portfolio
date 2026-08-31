@@ -1,0 +1,16 @@
+מנהל מערכות מידע
+
+חברה גלובלית עם כ-500 עובדים מחפשת מנהל מערכות שיוביל את מערך ה-IT הפנימי.
+
+תחומי אחריות:
+• ניהול Microsoft 365, Entra ID ו-Exchange Online
+• ניהול תחנות קצה באמצעות Intune, אכיפת MFA וגישה מותנית
+• תחזוקת שרתי Windows Server, Active Directory ו-GPO
+• סביבות וירטואליזציה VMware ו-Proxmox
+• תשתיות רשת: DNS, פיירוול, VPN ו-Reverse Proxy
+• אוטומציה של תהליכי קליטה ועזיבה ב-PowerShell
+
+בנוסף, ניהול קטלוג ה-SaaS הארגוני כולל אינטגרציות SSO ו-SCIM, וליווי תהליך
+ההסמכה ל-SOC 2.
+
+יתרון: Okta, Jamf, Terraform.

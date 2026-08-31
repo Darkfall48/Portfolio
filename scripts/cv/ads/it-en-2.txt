@@ -1,0 +1,8 @@
+IT Operations Engineer - Hybrid Infrastructure
+You will be the go-to person for everything infrastructure. Responsibilities
+include running our VMware ESXi and Proxmox clusters, managing AWS EC2 and S3
+workloads, maintaining Active Directory and GPO policy, and administering
+AzureAD and Exchange Online. Security work: Defender XDR rollout, RBAC reviews,
+certificate lifecycle including SAN certificates, and reverse proxy config.
+We expect scripting in PowerShell and Python. Terraform and Ansible experience
+welcome. You will collaborate with teams across the business.
