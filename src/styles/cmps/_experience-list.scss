@@ -9,10 +9,16 @@
     @include hud-title;
   }
 
-  &-items {
+  // The three visible rows fill the cell, so auto margin cannot separate
+  // the footer from the last role. Air lives on the slot, not the chip.
+  .panel-more-slot {
+    padding-block-start: 0.7rem;
+  }
+
+  &-body {
     @include panel-list;
     position: relative;
-    gap: clamp(0.25rem, 1vh, 0.7rem);
+    flex: 1;
     margin-block-start: clamp(0.5rem, 1.4vh, 1rem);
     padding-inline-start: 0.95rem;
 
@@ -30,6 +36,15 @@
         transparent
       );
       pointer-events: none;
+    }
+  }
+
+  &-items {
+    display: grid;
+    gap: clamp(0.25rem, 1vh, 0.7rem);
+
+    &.is-rest {
+      padding-block-start: clamp(0.25rem, 1vh, 0.7rem);
     }
   }
 

@@ -14,17 +14,28 @@
     }
   }
 
-  // This panel carries the secondary accent, so its control follows.
+  // This panel carries the secondary accent, so its controls follow.
   .panel-expand-btn:hover,
-  .panel-expand-btn:focus-visible {
+  .panel-expand-btn:focus-visible,
+  .panel-more:hover,
+  .panel-more:focus-visible {
     color: $color-accent-2;
     background: $color-accent-2-dim;
   }
 
-  &-items {
+  &-body {
     @include panel-list;
-    gap: clamp(0.25rem, 1vh, 0.7rem);
+    flex: 1;
     margin-block-start: clamp(0.5rem, 1.4vh, 1rem);
+  }
+
+  &-items {
+    display: grid;
+    gap: clamp(0.25rem, 1vh, 0.7rem);
+
+    &.is-rest {
+      padding-block-start: clamp(0.25rem, 1vh, 0.7rem);
+    }
   }
 
   &-item {

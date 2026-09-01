@@ -45,3 +45,47 @@
     border-color: $color-line;
   }
 }
+
+// Leftover cell holds the control; padding lives here so the chip itself
+// stays small and a hover fill cannot stretch into a slab.
+.panel-more-slot {
+  display: flex;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-block-start: auto;
+  padding-block-start: 0.5rem;
+}
+
+.panel-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.2rem 0.35rem;
+  font-family: $font-mono;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: $color-muted;
+  border: 1px solid transparent;
+  border-radius: $radius;
+  background: transparent;
+  transition:
+    color $ease,
+    background $ease;
+
+  svg {
+    flex-shrink: 0;
+    font-size: 0.75rem;
+  }
+
+  &:hover,
+  &:focus-visible {
+    color: $color-accent;
+    background: $color-accent-dim;
+  }
+}
+
+html[lang="he"] .panel-more {
+  letter-spacing: 0.04em;
+  text-transform: none;
+}
