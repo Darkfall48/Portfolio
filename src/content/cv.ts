@@ -96,8 +96,8 @@ export const cvSections: CvSections = {
         { id: "saas", skills: ["saas-platforms", "sso", "scim"] },
         { id: "infrastructure", skills: ["azuread", "entra", "soc2"] },
         // The wording names no stack, but this is what building it took.
-        { id: "back-office", skills: ["react", "node", "mongodb", "rest"] },
-        { id: "helpdesk", skills: ["react", "node", "rest", "scim"] },
+        { id: "back-office", skills: ["react", "node", "mongodb", "rest", "json", "webhooks"] },
+        { id: "helpdesk", skills: ["react", "node", "rest", "json", "webhooks", "scim"] },
       ],
     },
     {
@@ -143,7 +143,7 @@ export const cvSections: CvSections = {
               "responsive-design",
               "redux",
             ],
-            ["node", "express", "rest"],
+            ["node", "express", "rest", "json", "webhooks"],
             ["mongodb", "mysql", "sql-server"],
           ],
         },
@@ -401,6 +401,8 @@ export const cvPresets: CvPreset[] = [
       "node",
       "express",
       "rest",
+      "json",
+      "webhooks",
       "mongodb",
       "mysql",
       "sql-server",
