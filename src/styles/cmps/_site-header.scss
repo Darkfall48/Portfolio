@@ -40,7 +40,7 @@
     align-items: center;
     gap: 0.5rem;
     font-family: $font-mono;
-    font-size: 0.78rem;
+    font-size: 0.84rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: $color-muted;
@@ -64,14 +64,14 @@
     &::before {
       content: "·";
       font-family: $font-mono;
-      font-size: 0.78rem;
+      font-size: 0.84rem;
       color: $color-muted;
     }
   }
 
   &-year {
     font-family: $font-mono;
-    font-size: 0.78rem;
+    font-size: 0.84rem;
     letter-spacing: 0.14em;
     color: $color-accent;
     font-variant-numeric: tabular-nums;
@@ -82,7 +82,7 @@
     align-items: center;
     gap: 0.5rem;
     font-family: $font-mono;
-    font-size: 0.7rem;
+    font-size: 0.76rem;
     letter-spacing: 0.12em;
     color: $color-accent;
     font-variant-numeric: tabular-nums;
@@ -132,7 +132,7 @@
       min-width: 2.5rem;
       padding: 0.3rem 0.5rem;
       text-align: center;
-      font-size: 0.72rem;
+      font-size: 0.78rem;
       letter-spacing: 0.08em;
       color: $color-muted;
       transition: color $ease;
@@ -180,7 +180,7 @@
     gap: 0.45rem;
     padding: 0.36rem 0.7rem;
     font-family: $font-mono;
-    font-size: 0.72rem;
+    font-size: 0.78rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: $color-accent-2;
@@ -210,7 +210,7 @@
     gap: 0.45rem;
     padding: 0.36rem 0.7rem;
     font-family: $font-mono;
-    font-size: 0.72rem;
+    font-size: 0.78rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: $color-on-accent;

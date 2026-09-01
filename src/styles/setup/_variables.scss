@@ -40,6 +40,8 @@ $space-md: 1rem;
 $radius: 0.2rem;
 $break-narrow: 768px;
 $break-wide: 1280px;
+// Ultrawide only: extra inline padding so columns stop stretching forever.
+$break-huge: 2200px;
 
 // $ease / $ease-out bundle a duration. Use $ease-fn when the duration is set
 // separately, otherwise the bundled duration is parsed as an animation delay.

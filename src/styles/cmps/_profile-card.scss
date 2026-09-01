@@ -3,6 +3,9 @@
 
 .profile-card {
   @include panel;
+  // Inline-size only: a size container needs a defined block size, and these
+  // panels are auto-height on stacked layouts, where that would collapse.
+  container-type: inline-size;
   background:
     radial-gradient(
       560px 320px at 100% 0%,
@@ -46,7 +49,7 @@
     // Sans rather than the HUD mono: Plex Mono stops at the 500 weight here, and
     // a synthesised 600 smears these spaced small caps.
     font-family: $font-sans;
-    font-size: 0.58rem;
+    font-size: 0.64rem;
     font-weight: 600;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -85,7 +88,7 @@
   // portrait. A vh basis collapsed it on wide, short windows.
   &-photo {
     flex-shrink: 0;
-    width: clamp(6rem, 10vw, 11.5rem);
+    width: clamp(6.5rem, 8vw + 3vh, 13.5rem);
     aspect-ratio: 1;
     object-fit: cover;
     border-radius: $radius;
@@ -112,7 +115,7 @@
     align-items: center;
     gap: 0.55rem;
     font-family: $font-mono;
-    font-size: 0.7rem;
+    font-size: clamp(0.72rem, 0.4vw + 0.35vh, 0.86rem);
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: $color-accent;
@@ -129,9 +132,9 @@
 
   &-name {
     margin-block-start: clamp(0.25rem, 0.8vh, 0.5rem);
-    // Trimmed from 3.4vw so the name still fits on one line beside the
-    // portrait at the narrowest desktop width.
-    font-size: clamp(1.6rem, 3vw, 2.85rem);
+    // 2.4vw matches the old 1280px size so the name stays on one line beside
+    // the portrait; the higher ceiling is what a large monitor actually uses.
+    font-size: clamp(1.6rem, 0.4rem + 2.4vw, 3.35rem);
     line-height: 1.02;
     background: linear-gradient(
       100deg,
@@ -148,14 +151,15 @@
 
   &-headline {
     margin-block-start: clamp(0.3rem, 0.9vh, 0.55rem);
-    max-width: 30ch;
-    font-size: clamp(0.88rem, 1vw, 1.02rem);
+    max-width: 42ch;
+    font-size: clamp(0.95rem, 0.55vw + 0.4vh, 1.2rem);
     color: $color-accent;
   }
 
   &-lead {
     margin-block-start: clamp(0.4rem, 1.2vh, 0.8rem);
-    max-width: 38ch;
+    max-width: 48ch;
+    font-size: clamp(0.95rem, 0.4vw + 0.4vh, 1.12rem);
     color: $color-muted;
   }
 
@@ -165,7 +169,7 @@
     gap: 0.4rem;
     margin-block-start: clamp(0.4rem, 1vh, 0.7rem);
     font-family: $font-mono;
-    font-size: 0.74rem;
+    font-size: clamp(0.78rem, 0.35vw + 0.3vh, 0.92rem);
     letter-spacing: 0.06em;
     color: $color-text;
 
@@ -179,7 +183,9 @@
 
   &-meta {
     display: grid;
-    gap: clamp(0.3rem, 0.9vh, 0.6rem);
+    gap: clamp(0.35rem, 1vh, 0.75rem);
+    // Pins this block (and the links after it) to the foot of the tall desktop
+    // card so contact stays on the bottom edge.
     margin-block: auto 0;
     padding-block-start: clamp(0.6rem, 1.6vh, 1.1rem);
 
@@ -190,7 +196,7 @@
 
     dt {
       font-family: $font-mono;
-      font-size: 0.66rem;
+      font-size: clamp(0.7rem, 0.3vw + 0.3vh, 0.82rem);
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: $color-muted;
@@ -198,7 +204,7 @@
 
     dd {
       margin-block-start: 0.1rem;
-      font-size: 0.86rem;
+      font-size: clamp(0.9rem, 0.4vw + 0.35vh, 1.05rem);
       color: $color-text;
     }
 
@@ -220,9 +226,9 @@
       display: inline-flex;
       align-items: center;
       gap: 0.4rem;
-      padding: 0.34rem 0.62rem;
+      padding: 0.4rem 0.7rem;
       font-family: $font-mono;
-      font-size: 0.72rem;
+      font-size: clamp(0.76rem, 0.35vw + 0.3vh, 0.88rem);
       letter-spacing: 0.06em;
       color: $color-accent;
       text-decoration: none;
@@ -268,6 +274,7 @@
       "location links";
     column-gap: clamp(1rem, 3vw, 2.4rem);
     align-content: start;
+    justify-content: start;
   }
 
   .profile-card-identity {
@@ -276,9 +283,7 @@
 
   .profile-card-lead {
     grid-area: lead;
-    // Wider than the desktop measure: here the column is the constraint, and
-    // 38ch left the paragraph looking like a ribbon inside it.
-    max-width: 44ch;
+    max-width: 52ch;
   }
 
   .profile-card-location {
@@ -287,22 +292,15 @@
 
   .profile-card-meta {
     grid-area: meta;
-    // Its area spans two rows, and this list is a grid of its own: left to
-    // stretch, it would pull its two rows apart to fill the height.
     align-self: start;
-    // The auto margin that pins this to the foot of the desktop card would push
-    // it down its own area here, away from the identity block it sits beside.
     margin-block-start: 0;
   }
 
-  // Bottom row, so the links line up with the location across the card.
   .profile-card-links {
     grid-area: links;
     align-self: end;
   }
 
-  // The details now hold the corner the ribbon crosses, so they reserve the
-  // room the identity block reserves on desktop.
   .profile-card.is-open-to-work .profile-card-meta {
     padding-inline-end: 1.75rem;
   }
