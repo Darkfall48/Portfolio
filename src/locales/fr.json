@@ -1,10 +1,11 @@
 {
   "profile": {
     "headline": "Ingénieur identité et accès — ZTNA, N3, full-stack",
-    "lead": "Deux postes en parallèle chez un éditeur Zero Trust : le N3 sur les déploiements grands comptes, et le parc interne sous SOC 2 dont je suis seul responsable — plus les plateformes full-stack que les deux utilisent.",
+    "lead": "Trois casquettes chez un éditeur Zero Trust : le N3 sur les déploiements grands comptes, le parc interne sous SOC 2 dont je suis seul responsable, et les plateformes full-stack que les deux utilisent.",
     "location": "Tel Aviv",
     "kicker": "ZTNA · Identité · N3",
-    "education": "Génie informatique, Polytechnique Montréal",
+    "education": "Génie informatique, Polytechnique Montréal · Certificat full-stack",
+    "languagesList": "FR · EN · HE",
     "educationLabel": "Formation",
     "volunteering": "Magen David Adom · Cadet de police · Pompier",
     "volunteeringLabel": "Bénévolat",
@@ -44,7 +45,7 @@
     "current-role": {
       "org": "Cyolo",
       "title": "Support N3, infrastructure IT et full-stack",
-      "summary": "Deux postes chez un éditeur ZTNA — les escalades clients et le parc interne — plus les plateformes qui servent aux deux.",
+      "summary": "Trois casquettes chez un éditeur ZTNA — les escalades clients, le parc interne, et les plateformes qui servent aux deux.",
       "body": [
         "N3 — Je porte les escalades sur les déploiements ZTNA grands comptes, en SaaS, on-prem et DMZ, y compris les architectures multi-tenant et les chaînes de proxys.",
         "N3 — Je résous les pannes d’identité et de transport : SSO, SCIM, LDAP/S, certificats SSL/TLS et SAN, RDP, VNC, Telnet et HTTP/HTTPS, sur Linux, Windows et macOS.",
@@ -267,7 +268,23 @@
             },
             "helpdesk": {
               "lead": "Concevoir et maintenir Cyolo Helpdesk",
-              "text": ", module full-stack greffé au produit qui donne aux administrateurs la main sur tout le cycle de vie des utilisateurs. Documentation, mises à jour et support continu."
+              "text": ", module full-stack greffé au produit — React, Redux, Node, Docker, PWA et RBAC — pour le cycle de vie des utilisateurs, les applications et les coffres. Documentation, mises à jour et support continu."
+            }
+          }
+        },
+        "robotika": {
+          "lead": "",
+          "period": "2023\u00a0:   ",
+          "title": "Développeur de projets logiciels et matériels, Robotika",
+          "suffix": "",
+          "bullets": {
+            "rfid": {
+              "lead": "Construire une chaîne RFID vers code-barres",
+              "text": " qui lit les puces dans des chaussures et alimente un site vitrine de marque."
+            },
+            "automation": {
+              "lead": "Livrer des automatisations clients",
+              "text": " : déplacement de fichiers depuis Excel ou CSV, pilotage vidéo par Arduino, et traceur à plume en G-code."
             }
           }
         },

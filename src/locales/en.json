@@ -1,10 +1,11 @@
 {
   "profile": {
     "headline": "Identity & Access Engineer — ZTNA, Tier-3, Full-Stack",
-    "lead": "Two roles at once at a Zero Trust vendor: Tier-3 on enterprise deployments, and sole owner of the internal estate under SOC 2 — plus the full-stack platforms both sides run on.",
+    "lead": "Three hats at a Zero Trust vendor: Tier-3 on enterprise deployments, sole owner of the internal estate under SOC 2, and the full-stack platforms both sides run on.",
     "location": "Tel Aviv",
     "kicker": "ZTNA · Identity · Tier-3",
-    "education": "Computer engineering, Polytechnique Montréal",
+    "education": "Computer engineering, Polytechnique Montréal · Full-stack certificate",
+    "languagesList": "FR · EN · HE",
     "educationLabel": "Education",
     "volunteering": "Magen David Adom · Police cadet · Firefighter",
     "volunteeringLabel": "Volunteered",
@@ -44,7 +45,7 @@
     "current-role": {
       "org": "Cyolo",
       "title": "Tier-3 support, IT infrastructure & full-stack",
-      "summary": "Two roles at a ZTNA vendor — customer escalations and the internal estate — plus the platforms behind both.",
+      "summary": "Three hats at a ZTNA vendor — customer escalations, the internal estate, and the platforms behind both.",
       "body": [
         "Tier-3 — Own escalations on enterprise ZTNA deployments across SaaS, on-prem, and DMZ, including multi-tenant networking and proxy architectures.",
         "Tier-3 — Resolve identity and transport failures: SSO, SCIM, LDAP/S, SSL/TLS and SAN certificates, RDP, VNC, Telnet, and HTTP/HTTPS, on Linux, Windows, and macOS.",
@@ -267,7 +268,23 @@
             },
             "helpdesk": {
               "lead": "Build and maintain Cyolo Helpdesk",
-              "text": ", a full-stack add-on to the core product enabling helpdesk admins to fully manage user lifecycles. Maintain documentation, manage updates, and provide ongoing support."
+              "text": ", a full-stack add-on to the core product — React, Redux, Node, Docker, PWA, and RBAC — so helpdesk admins manage user lifecycles, applications, and vaults. Documentation, releases, and ongoing support."
+            }
+          }
+        },
+        "robotika": {
+          "lead": "",
+          "period": "2023:   ",
+          "title": "Software and Hardware Projects Developer, Robotika",
+          "suffix": "",
+          "bullets": {
+            "rfid": {
+              "lead": "Built an RFID-to-barcode pipeline",
+              "text": " that reads tags in footwear and feeds a brand-facing website."
+            },
+            "automation": {
+              "lead": "Delivered client automation",
+              "text": ": file movement from Excel or CSV lists, Arduino-driven video control, and a G-code pen plotter."
             }
           }
         },

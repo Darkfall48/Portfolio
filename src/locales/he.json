@@ -1,10 +1,11 @@
 {
   "profile": {
     "headline": "מהנדס זהות והרשאות — ZTNA, תמיכה בדרגה 3, Full-Stack",
-    "lead": "שני תפקידים במקביל אצל ספק Zero Trust: דרגה 3 על פריסות ארגוניות, ואחריות בלעדית על סביבת ה-IT הפנימית תחת SOC 2 — ובנוסף הפלטפורמות שמשרתות את שניהם.",
+    "lead": "שלושה כובעים אצל ספק Zero Trust: דרגה 3 על פריסות ארגוניות, אחריות בלעדית על סביבת ה-IT הפנימית תחת SOC 2, והפלטפורמות Full-Stack שמשרתות את שניהם.",
     "location": "תל אביב",
     "kicker": "ZTNA · זהות · דרגה 3",
-    "education": "הנדסת מחשבים, Polytechnique Montréal",
+    "education": "הנדסת מחשבים, Polytechnique Montréal · תעודת Full-Stack",
+    "languagesList": "FR · EN · HE",
     "educationLabel": "השכלה",
     "volunteering": "מגן דוד אדום · שיטור קהילתי · כיבוי אש",
     "volunteeringLabel": "התנדבות",
@@ -44,7 +45,7 @@
     "current-role": {
       "org": "Cyolo",
       "title": "תמיכה בדרגה 3, תשתיות IT ו-Full-Stack",
-      "summary": "שני תפקידים אצל ספק ZTNA — אסקלציות של לקוחות וסביבת ה-IT הפנימית — ובנוסף הפלטפורמות שמשרתות את שניהם.",
+      "summary": "שלושה כובעים אצל ספק ZTNA — אסקלציות של לקוחות, סביבת ה-IT הפנימית, והפלטפורמות שמשרתות את שניהם.",
       "body": [
         "דרגה 3 — אחריות על אסקלציות בפריסות ZTNA ארגוניות ב-SaaS, on-prem ו-DMZ, כולל ארכיטקטורות multi-tenant ושרשראות proxy.",
         "דרגה 3 — פתרון תקלות זהות ותעבורה: SSO, SCIM, LDAP/S, תעודות SSL/TLS ו-SAN, RDP, VNC, Telnet ו-HTTP/HTTPS, על Linux, Windows ו-macOS.",
@@ -267,7 +268,23 @@
             },
             "helpdesk": {
               "lead": "פיתוח ותחזוקה של Cyolo Helpdesk",
-              "text": ", תוסף Full-Stack למוצר המרכזי המאפשר למנהלי Helpdesk לנהל את מחזור חיי המשתמשים מקצה לקצה. תחזוקת התיעוד, ניהול העדכונים ומתן תמיכה שוטפת."
+              "text": ", תוסף Full-Stack למוצר המרכזי — React, Redux, Node, Docker, PWA ו-RBAC — לניהול מחזור חיי המשתמשים, אפליקציות וכספות. תיעוד, עדכונים ותמיכה שוטפת."
+            }
+          }
+        },
+        "robotika": {
+          "lead": "",
+          "period": "2023:   ",
+          "title": "מפתח פרויקטי תוכנה וחומרה, Robotika",
+          "suffix": "",
+          "bullets": {
+            "rfid": {
+              "lead": "בניית מערכת RFID לברקוד",
+              "text": " שקוראת תגים בנעליים ומזינה אתר תדמית של מותג."
+            },
+            "automation": {
+              "lead": "אספקת אוטומציות ללקוחות",
+              "text": ": העברת קבצים מרשימות Excel או CSV, שליטה בנגן וידאו ב-Arduino, ומכונת שרטוט בעט בקוד G."
             }
           }
         },

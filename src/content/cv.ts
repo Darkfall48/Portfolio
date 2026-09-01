@@ -94,17 +94,39 @@ export const cvSections: CvSections = {
         { id: "automation", skills: ["powershell", "python", "shell"] },
         { id: "cloud", skills: ["esxi", "proxmox", "aws"] },
         { id: "saas", skills: ["saas-platforms", "sso", "scim"] },
-        { id: "infrastructure", skills: ["azuread", "entra", "soc2"] },
+        { id: "infrastructure", skills: ["azuread", "entra", "exchange", "soc2"] },
         // The wording names no stack, but this is what building it took.
         { id: "back-office", skills: ["react", "node", "mongodb", "rest", "json", "webhooks"] },
-        { id: "helpdesk", skills: ["react", "node", "rest", "json", "webhooks", "scim"] },
+        {
+          id: "helpdesk",
+          skills: [
+            "react",
+            "redux",
+            "node",
+            "docker",
+            "pwa",
+            "rbac",
+            "rest",
+            "json",
+            "webhooks",
+            "scim",
+          ],
+        },
+      ],
+    },
+    {
+      id: "robotika",
+      bullets: [
+        { id: "rfid", skills: ["python"] },
+        { id: "automation", skills: ["python", "excel"] },
       ],
     },
     {
       id: "idf",
       bullets: [
         { id: "support" },
-        { id: "video", skills: ["adobe"] },
+        // Off-target for the roles this CV is sent to; the copy stays in locales.
+        { id: "video", skills: ["adobe"], hidden: true },
         { id: "cabling" },
       ],
     },
@@ -208,6 +230,7 @@ export const cvSections: CvSections = {
               "excel",
               "powerpoint",
               "outlook",
+              "exchange",
               "onedrive",
               "sharepoint",
               "visio",
@@ -216,6 +239,7 @@ export const cvSections: CvSections = {
               "timeclock365",
               "gong",
               "salesforce",
+              "mesh",
               "salesloft",
               "travelperk",
               "hibob",
@@ -322,6 +346,7 @@ export const cvPresets: CvPreset[] = [
     drop: [
       cvKey("bullet", "cyolo", "saas"),
       cvKey("bullet", "cyolo", "back-office"),
+      cvKey("bullet", "robotika", "rfid"),
     ],
     // Hypervisors and databases stay: this vendor ships on-premise and in a
     // DMZ, so a Tier 3 desk troubleshoots them. What goes is the front-end
@@ -382,6 +407,7 @@ export const cvPresets: CvPreset[] = [
     drop: [
       cvKey("bullet", "cyolo", "jira"),
       cvKey("bullet", "cyolo", "zendesk"),
+      cvKey("bullet", "robotika", "rfid"),
     ],
     // Scripting and its editor stay, because an estate is run with them. The
     // application stack does not: this angle is not applying to build a
@@ -445,6 +471,8 @@ export const cvPresets: CvPreset[] = [
       cvKey("bullet", "cyolo", "zendesk"),
       cvKey("bullet", "idf", "video"),
       cvKey("bullet", "idf", "cabling"),
+      cvKey("bullet", "robotika", "rfid"),
+      cvKey("bullet", "robotika", "automation"),
     ],
     // The line to draw here is protocol against product. Having implemented
     // SAML, SCIM and OIDC is engineering work an interviewer will dig into;
@@ -477,12 +505,14 @@ export const cvPresets: CvPreset[] = [
       "excel",
       "powerpoint",
       "outlook",
+      "exchange",
       "onedrive",
       "sharepoint",
       "visio",
       "timeclock365",
       "gong",
       "salesforce",
+      "mesh",
       "salesloft",
       "travelperk",
       "hibob",
