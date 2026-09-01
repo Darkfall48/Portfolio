@@ -1,4 +1,5 @@
 @use "../setup/variables" as *;
+@use "../setup/mixins" as *;
 
 .cv-builder {
   position: fixed;
@@ -41,18 +42,26 @@
     display: flex;
     flex-direction: column;
     gap: $space-md;
-    width: min(44rem, 100%);
-    padding: clamp(1.4rem, 4vh, 2.4rem) clamp(1.1rem, 2.2vw, 2rem);
+    width: min(46rem, 100%);
+    height: 100%;
+    // No bottom padding: the footer owns that space, because a padding on the
+    // scrolling column is the first thing a tall panel eats into.
+    padding: clamp(1.2rem, 3vh, 2rem) clamp(1.1rem, 2.2vw, 2rem) 0;
     background:
       radial-gradient(
         520px 320px at 100% 0%,
         rgb($accent-2-rgb / 0.12),
         transparent 62%
       ),
+      radial-gradient(
+        420px 280px at 0% 100%,
+        rgb($accent-rgb / 0.06),
+        transparent 60%
+      ),
       $color-bg-mid;
     border-inline-start: 1px solid rgb($accent-2-rgb / 0.42);
     box-shadow: -24px 0 60px rgb($shadow-rgb / 0.5);
-    overflow: auto;
+    overflow: hidden;
     transform: translateX(calc(var(--dir, 1) * 100%));
     transition: transform $ease-out;
   }
@@ -67,6 +76,7 @@
 
   &-head {
     display: flex;
+    flex-shrink: 0;
     align-items: flex-start;
     justify-content: space-between;
     gap: $space-md;
@@ -101,8 +111,55 @@
   }
 
   &-lead {
+    flex-shrink: 0;
     max-width: 52ch;
     color: $color-muted;
+  }
+
+  &-body {
+    display: flex;
+    flex-direction: column;
+    gap: $space-md;
+    flex: 1;
+    min-height: 0;
+    overflow: auto;
+    padding-inline-end: 0.2rem;
+  }
+
+  // Same HUD cards as the home panels: numbered, bordered, one concern.
+  &-block {
+    display: grid;
+    gap: 0.65rem;
+    padding: 0.75rem 0.9rem 0.85rem;
+    background: $color-surface;
+    border: 1px solid $color-line;
+    border-radius: $radius;
+    box-shadow: inset 0 1px 0 rgb($accent-rgb / 0.06);
+  }
+
+  &-block-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.4rem $space-sm;
+  }
+
+  &-block-title {
+    @include hud-title;
+    color: $color-accent-2;
+
+    .hud-index {
+      color: rgb($accent-2-rgb / 0.55);
+    }
+  }
+
+  &-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.55rem $space-sm;
   }
 
   &-fields {
@@ -139,6 +196,7 @@
 
     textarea {
       resize: vertical;
+      min-block-size: 4.5rem;
       line-height: 1.5;
     }
 
@@ -159,14 +217,6 @@
   &-offer {
     display: grid;
     gap: $space-sm;
-  }
-
-  &-offer-head {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 0.5rem;
   }
 
   &-offer-tools {
@@ -198,19 +248,44 @@
   }
 
   &-offer-read {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.7rem 0.9rem;
+    padding: 0.7rem 0.8rem;
+    background: rgb($shadow-rgb / 0.16);
+    border: 1px solid $color-line;
+    border-radius: $radius;
+  }
+
+  &-offer-rows {
     display: grid;
-    gap: 0.4rem;
-    justify-items: start;
+    grid-template-columns: max-content 1fr;
+    gap: 0.4rem 0.7rem;
+    align-items: baseline;
+    flex: 1 1 18rem;
+    min-inline-size: 0;
   }
 
   // The recognised terms are listed on purpose: a short name like React turns
   // up in prose that has nothing to do with the tool, and only the eye can
   // tell. The gauge is a hint, not a verdict.
+  // Dissolved into the grid above so both rows share one legend column.
   &-offer-terms {
+    display: contents;
+  }
+
+  &-offer-list {
     display: flex;
     flex-wrap: wrap;
-    align-items: baseline;
     gap: 0.3rem;
+  }
+
+  &-offer-empty {
+    grid-column: 1 / -1;
+    font-size: 0.78rem;
+    color: $color-muted;
   }
 
   &-offer-legend {
@@ -236,13 +311,15 @@
   }
 
   &-offer-apply {
-    padding: 0.35rem 0.8rem;
+    flex-shrink: 0;
+    padding: 0.4rem 0.85rem;
     font-family: $font-mono;
     font-size: 0.74rem;
     letter-spacing: 0.06em;
     color: $color-accent-2;
     border: 1px solid rgb($accent-2-rgb / 0.45);
     border-radius: $radius;
+    background: rgb($accent-2-rgb / 0.08);
     transition:
       color $ease,
       border-color $ease,
@@ -251,7 +328,7 @@
     &:hover:not(:disabled),
     &:focus-visible:not(:disabled) {
       color: $color-text;
-      background: rgb($accent-2-rgb / 0.14);
+      background: rgb($accent-2-rgb / 0.16);
     }
 
     &:disabled {
@@ -329,16 +406,21 @@
   &-section {
     display: grid;
     gap: 0.2rem;
-    padding-block-start: $space-md;
+    padding-block-start: 0.65rem;
     border-block-start: 1px solid $color-line;
 
+    &:first-of-type {
+      padding-block-start: 0;
+      border-block-start: 0;
+    }
+
     h3 {
-      margin-block-end: 0.3rem;
+      margin-block-end: 0.35rem;
       font-family: $font-mono;
       font-size: 0.7rem;
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: $color-accent-2;
+      color: $color-muted;
     }
   }
 
@@ -405,13 +487,16 @@
   // dropping a family of tools is the common move, not dropping one of them.
   &-matrix {
     display: grid;
-    gap: 0.3rem;
-    padding-block: 0.25rem 0.5rem;
+    gap: 0.4rem;
+    padding-block: 0.35rem 0.7rem;
   }
 
   &-matrix-label {
     justify-self: start;
-    font-size: 0.78rem;
+    font-family: $font-mono;
+    font-size: 0.72rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
     color: $color-muted;
     transition: color $ease;
 
@@ -423,6 +508,14 @@
     &[aria-pressed="true"] {
       color: $color-accent-2;
     }
+  }
+
+  // The runs are indented under the caption, so a group of forty tools still
+  // reads as one group and the next caption is unmistakably a new one.
+  &-matrix-runs {
+    display: grid;
+    gap: 0.3rem;
+    padding-inline-start: 0.7rem;
   }
 
   &-matrix-chips {
@@ -465,18 +558,27 @@
   }
 
   &-foot {
-    position: sticky;
-    inset-block-end: 0;
-    display: grid;
-    gap: $space-sm;
+    display: flex;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: $space-sm $space-md;
     padding-block: $space-md;
+    padding-block-end: calc(
+      clamp(1.2rem, 3vh, 2rem) + env(safe-area-inset-bottom)
+    );
+    // Same inset as a block card, so the gauge lines up with the copy above
+    // instead of sitting flush against the rule.
+    padding-inline: 0.9rem;
     background: $color-bg-mid;
     border-block-start: 1px solid $color-line;
   }
 
   &-fill {
     display: grid;
+    flex: 1 1 14rem;
     gap: 0.35rem;
+    min-inline-size: 0;
     font-family: $font-mono;
     font-size: 0.72rem;
     letter-spacing: 0.06em;
@@ -487,11 +589,18 @@
     }
   }
 
+  &-fill-text {
+    overflow-wrap: anywhere;
+  }
+
   // A native progress element carries the value, so the fill needs no inline
   // style. Its two shadow parts have to be targeted per engine.
   &-fill-bar {
     appearance: none;
+    display: block;
+    overflow: hidden;
     inline-size: 100%;
+    min-inline-size: 0;
     block-size: 3px;
     border: 0;
     background: $color-line;
@@ -525,23 +634,27 @@
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    padding: 0.6rem 1rem;
+    padding: 0.55rem 1.05rem;
     font-family: $font-mono;
     font-size: 0.78rem;
-    letter-spacing: 0.06em;
-    color: $color-accent-2;
-    border: 1px solid rgb($accent-2-rgb / 0.42);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $color-on-accent;
+    background: $color-accent;
+    border: 1px solid $color-accent;
     border-radius: $radius;
     transition:
-      color $ease,
-      border-color $ease,
-      background $ease;
+      box-shadow $ease,
+      filter $ease;
 
     &:hover:not(:disabled),
     &:focus-visible:not(:disabled) {
-      color: $color-text;
-      border-color: rgb($accent-2-rgb / 0.6);
-      background: rgb($accent-2-rgb / 0.14);
+      box-shadow: 0 0 22px $color-glow;
+      filter: brightness(1.08);
+    }
+
+    @media (max-width: $break-narrow - 1px) {
+      width: 100%;
     }
 
     &:disabled {
@@ -555,9 +668,27 @@
   }
 
   &-error {
+    grid-column: 1 / -1;
     font-size: 0.76rem;
     color: $color-accent;
   }
+}
+
+html[lang="he"] .cv-builder-block-title,
+html[lang="he"] .cv-builder-section h3,
+html[lang="he"] .cv-builder-field-label,
+html[lang="he"] .cv-builder-chips-label,
+html[lang="he"] .cv-builder-offer-legend,
+html[lang="he"] .cv-builder-download {
+  letter-spacing: 0.04em;
+  text-transform: none;
+}
+
+// Keyed on the row's own lang, not the document's: the captions are CV content
+// and follow the export language, which need not be the interface language.
+.cv-builder-matrix[lang="he"] .cv-builder-matrix-label {
+  letter-spacing: 0.04em;
+  text-transform: none;
 }
 
 @keyframes cv-builder-spin {
