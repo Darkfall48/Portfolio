@@ -3,15 +3,22 @@
 
 .experience-list {
   @include panel;
+  container-type: inline-size;
 
   &-title {
     @include hud-title;
   }
 
-  &-items {
+  // The three visible rows fill the cell, so auto margin cannot separate
+  // the footer from the last role. Air lives on the slot, not the chip.
+  .panel-more-slot {
+    padding-block-start: 0.7rem;
+  }
+
+  &-body {
     @include panel-list;
     position: relative;
-    gap: clamp(0.2rem, 0.7vh, 0.45rem);
+    flex: 1;
     margin-block-start: clamp(0.5rem, 1.4vh, 1rem);
     padding-inline-start: 0.95rem;
 
@@ -29,6 +36,15 @@
         transparent
       );
       pointer-events: none;
+    }
+  }
+
+  &-items {
+    display: grid;
+    gap: clamp(0.25rem, 1vh, 0.7rem);
+
+    &.is-rest {
+      padding-block-start: clamp(0.25rem, 1vh, 0.7rem);
     }
   }
 
@@ -63,19 +79,19 @@
       direction: ltr;
       unicode-bidi: isolate;
       font-family: $font-mono;
-      font-size: 0.7rem;
+      font-size: clamp(0.74rem, 0.35vw + 0.3vh, 0.88rem);
       letter-spacing: 0.1em;
       color: $color-accent;
     }
 
     &-org {
-      font-size: clamp(0.95rem, 1.1vw, 1.1rem);
+      font-size: clamp(1rem, 0.55rem + 3.8cqi, 1.28rem);
       font-weight: 600;
       line-height: 1.2;
     }
 
     &-role {
-      font-size: 0.84rem;
+      font-size: clamp(0.88rem, 0.4vw + 0.3vh, 1.05rem);
       color: $color-muted;
     }
   }

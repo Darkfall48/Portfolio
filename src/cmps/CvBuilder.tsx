@@ -340,57 +340,70 @@ export function CvBuilder({ isOpen, onClose }: Props) {
         </header>
         <p className="cv-builder-lead">{t("cv.builder.lead")}</p>
 
-        <div className="cv-builder-chips" role="group">
-          <p className="cv-builder-chips-label">{t("cv.builder.language")}</p>
-          {SUPPORTED_LOCALES.map((locale) => (
-            <button
-              key={locale}
-              type="button"
-              className={locale === lang ? "is-active" : undefined}
-              aria-pressed={locale === lang}
-              onClick={() => setLang(locale)}
-            >
-              {t(`lang.${locale}`)}
-            </button>
-          ))}
-        </div>
+        <div className="cv-builder-body">
+          <section className="cv-builder-block">
+            <h3 className="cv-builder-block-title">
+              <span className="hud-index" aria-hidden="true">
+                01
+              </span>
+              {t("cv.builder.setup")}
+            </h3>
+            <div className="cv-builder-chips" role="group">
+              <p className="cv-builder-chips-label">
+                {t("cv.builder.language")}
+              </p>
+              {SUPPORTED_LOCALES.map((locale) => (
+                <button
+                  key={locale}
+                  type="button"
+                  className={locale === lang ? "is-active" : undefined}
+                  aria-pressed={locale === lang}
+                  onClick={() => setLang(locale)}
+                >
+                  {t(`lang.${locale}`)}
+                </button>
+              ))}
+            </div>
 
-        <div className="cv-builder-fields">
-          <label className="cv-builder-field">
-            <span className="cv-builder-field-label">
-              {t("cv.builder.phone")}
-            </span>
-            <input
-              type="tel"
-              value={phone}
-              placeholder={t("cv.builder.phonePlaceholder")}
-              onChange={(event) => onPhoneChange(event.target.value)}
-            />
-            <small>{t("cv.builder.phoneHint")}</small>
-          </label>
-
-          <label className="cv-builder-field">
-            <span className="cv-builder-field-label">
-              {t("cv.builder.filename")}
-            </span>
-            <input
-              type="text"
-              value={filename}
-              spellCheck={false}
-              onChange={(event) => setCustomName(event.target.value)}
-            />
-            <small>{t("cv.builder.filenameHint")}</small>
-          </label>
-        </div>
-
-        {/* The automatic version of picking an angle by hand, so it sits with
-            the angles rather than off in a corner of its own. */}
-        <div className="cv-builder-offer">
-          <div className="cv-builder-field">
-            <div className="cv-builder-offer-head">
-              <label className="cv-builder-field-label" htmlFor="cv-offer">
-                {t("cv.builder.offer")}
+            <div className="cv-builder-fields">
+              <label className="cv-builder-field">
+                <span className="cv-builder-field-label">
+                  {t("cv.builder.phone")}
+                </span>
+                <input
+                  type="tel"
+                  value={phone}
+                  placeholder={t("cv.builder.phonePlaceholder")}
+                  onChange={(event) => onPhoneChange(event.target.value)}
+                />
+                <small>{t("cv.builder.phoneHint")}</small>
               </label>
+
+              <label className="cv-builder-field">
+                <span className="cv-builder-field-label">
+                  {t("cv.builder.filename")}
+                </span>
+                <input
+                  type="text"
+                  value={filename}
+                  spellCheck={false}
+                  onChange={(event) => setCustomName(event.target.value)}
+                />
+                <small>{t("cv.builder.filenameHint")}</small>
+              </label>
+            </div>
+          </section>
+
+          {/* The automatic version of picking an angle by hand, so it sits with
+            the angles rather than off in a corner of its own. */}
+          <section className="cv-builder-block">
+            <div className="cv-builder-block-head">
+              <h3 id={`${titleId}-offer`} className="cv-builder-block-title">
+                <span className="hud-index" aria-hidden="true">
+                  02
+                </span>
+                {t("cv.builder.offer")}
+              </h3>
               <span className="cv-builder-offer-tools">
                 <button type="button" onClick={onPasteOffer}>
                   {t("cv.builder.offerPaste")}
@@ -404,264 +417,298 @@ export function CvBuilder({ isOpen, onClose }: Props) {
                 </button>
               </span>
             </div>
-            <textarea
-              id="cv-offer"
-              ref={offerRef}
-              rows={3}
-              value={offer}
-              placeholder={t("cv.builder.offerPlaceholder")}
-              onChange={(event) => onOfferChange(event.target.value)}
-            />
-            <small>
-              {pasteFailed
-                ? t("cv.builder.offerPasteFailed")
-                : t("cv.builder.offerHint")}
-            </small>
-          </div>
-
-          {offer.trim() ? (
-            <div className="cv-builder-offer-read">
-              {match.found.length > 0 ? (
-                <p className="cv-builder-offer-terms">
-                  <span className="cv-builder-offer-legend">
-                    {t("cv.builder.offerFound")}
-                  </span>
-                  {match.found.map((demand) => (
-                    <span
-                      key={demand.value}
-                      className={
-                        demand.required
-                          ? "cv-builder-offer-term"
-                          : "cv-builder-offer-term is-bonus"
-                      }
-                      title={
-                        demand.required
-                          ? t("cv.builder.offerRequired")
-                          : t("cv.builder.offerBonus")
-                      }
-                    >
-                      {skillChip(demand.value)?.label}
-                    </span>
-                  ))}
-                </p>
-              ) : (
-                <p className="cv-builder-offer-legend">
-                  {t("cv.builder.offerNone")}
-                </p>
-              )}
-
-              {match.gaps.length > 0 ? (
-                <p className="cv-builder-offer-terms is-gap">
-                  <span className="cv-builder-offer-legend">
-                    {t("cv.builder.offerGaps")}
-                  </span>
-                  {match.gaps.map((demand) => (
-                    <span
-                      key={demand.value}
-                      className={
-                        demand.required
-                          ? "cv-builder-offer-term"
-                          : "cv-builder-offer-term is-bonus"
-                      }
-                      title={
-                        demand.required
-                          ? t("cv.builder.offerRequired")
-                          : t("cv.builder.offerBonus")
-                      }
-                    >
-                      {demand.value}
-                    </span>
-                  ))}
-                </p>
-              ) : null}
-
-              <button
-                type="button"
-                className="cv-builder-offer-apply"
-                disabled={match.found.length === 0}
-                onClick={onTailor}
-              >
-                {t("cv.builder.tailor")}
-              </button>
-
-              {applied ? (
-                <p className="cv-builder-offer-applied">
-                  <span>
-                    {t("cv.builder.offerAngle")}{" "}
-                    <strong>
-                      {t(`cv.builder.presets.${applied.angle}`, {
-                        defaultValue: t("cv.builder.selectAll"),
-                      })}
-                    </strong>
-                    {applied.because.length > 0 ? (
-                      <em>{` — “${applied.because[0]}”`}</em>
-                    ) : null}
-                  </span>
-                  <span className="cv-builder-offer-delta">
-                    {`+${applied.added} / −${applied.removed}`}
-                  </span>
-                  <button type="button" onClick={onUndoTailor}>
-                    {t("cv.builder.offerUndo")}
-                  </button>
-                </p>
-              ) : null}
-            </div>
-          ) : null}
-        </div>
-
-        <div className="cv-builder-chips" role="group">
-          <p className="cv-builder-chips-label">{t("cv.builder.angle")}</p>
-          {cvPresets
-            .filter((preset) => preset.hidden !== true)
-            .map((preset) => {
-              const keys = cvSyncRoleHeaders(cvPresetSelection(preset))
-              const isActive = isSameSelection(keys, selection)
-              return (
-                <button
-                  key={preset.id}
-                  type="button"
-                  className={isActive ? "is-active" : undefined}
-                  aria-pressed={isActive}
-                  onClick={() => onPickAngle(keys, preset.id)}
-                >
-                  {t(`cv.builder.presets.${preset.id}`)}
-                </button>
-              )
-            })}
-        </div>
-
-        <div className="cv-builder-bulk">
-          <button
-            type="button"
-            onClick={() => onPickAngle(cvFullSelection(), "full")}
-          >
-            {t("cv.builder.selectAll")}
-          </button>
-          <button type="button" onClick={() => setSelection(new Set())}>
-            {t("cv.builder.clear")}
-          </button>
-        </div>
-
-        <section className="cv-builder-section">
-          <h3>{t("cv.builder.summary")}</h3>
-          {cvSections.summary.map((item) => {
-            const entry = doc.summary[item.id]
-            // i18next falls back a whole branch, not a single leaf, so a
-            // half-translated locale would otherwise crash the panel.
-            if (!entry) return null
-            return line(cvKey("summary", item.id), entry.lead, entry.text)
-          })}
-        </section>
-
-        <section className="cv-builder-section">
-          <h3>{t("cv.builder.experience")}</h3>
-          {cvSections.roles.map((role) => {
-            const entry = doc.roles[role.id]
-            if (!entry) return null
-            const bulletKeys = role.bullets.map((bullet) =>
-              cvKey("bullet", role.id, bullet.id),
-            )
-            const someOn = bulletKeys.some((key) => selection.has(key))
-            const allOn = bulletKeys.every((key) => selection.has(key))
-            return (
-              <div key={role.id} className="cv-builder-role">
-                {/* Two rows anchor the whole section, so they stay whole. */}
-                {line(
-                  cvKey("role", role.id),
-                  `${entry.lead}${entry.period}${entry.title}${entry.suffix}`.trim(),
-                  "",
-                  {
-                    checked: someOn,
-                    partial: someOn && !allOn,
-                    onToggle: () => setKeys(bulletKeys, !someOn),
-                  },
-                )}
-                {role.bullets.map((bullet) => {
-                  const text = entry.bullets[bullet.id]
-                  if (!text) return null
-                  return line(
-                    cvKey("bullet", role.id, bullet.id),
-                    text.lead,
-                    text.text,
-                    { nested: true },
-                  )
-                })}
+            <div className="cv-builder-offer">
+              <div className="cv-builder-field">
+                <textarea
+                  id="cv-offer"
+                  aria-labelledby={`${titleId}-offer`}
+                  ref={offerRef}
+                  rows={3}
+                  value={offer}
+                  placeholder={t("cv.builder.offerPlaceholder")}
+                  onChange={(event) => onOfferChange(event.target.value)}
+                />
+                <small>
+                  {pasteFailed
+                    ? t("cv.builder.offerPasteFailed")
+                    : t("cv.builder.offerHint")}
+                </small>
               </div>
-            )
-          })}
-        </section>
 
-        <section className="cv-builder-section">
-          <h3>{t("cv.builder.education")}</h3>
-          {cvSections.education.map((item) => {
-            const entry = doc.education[item.id]
-            if (!entry) return null
-            return line(
-              cvKey("education", item.id),
-              `${entry.period}${entry.title}`.trim(),
-              entry.suffix,
-            )
-          })}
-        </section>
+              {offer.trim() ? (
+                <div className="cv-builder-offer-read">
+                  {/* One shared grid for both rows: the legends size a single
+                  column, so the terms line up under each other. */}
+                  <div className="cv-builder-offer-rows">
+                    {match.found.length > 0 ? (
+                      <p className="cv-builder-offer-terms">
+                        <span className="cv-builder-offer-legend">
+                          {t("cv.builder.offerFound")}
+                        </span>
+                        <span className="cv-builder-offer-list">
+                          {match.found.map((demand) => (
+                            <span
+                              key={demand.value}
+                              className={
+                                demand.required
+                                  ? "cv-builder-offer-term"
+                                  : "cv-builder-offer-term is-bonus"
+                              }
+                              title={
+                                demand.required
+                                  ? t("cv.builder.offerRequired")
+                                  : t("cv.builder.offerBonus")
+                              }
+                            >
+                              {skillChip(demand.value)?.label}
+                            </span>
+                          ))}
+                        </span>
+                      </p>
+                    ) : (
+                      <p className="cv-builder-offer-empty">
+                        {t("cv.builder.offerNone")}
+                      </p>
+                    )}
 
-        <section className="cv-builder-section">
-          <h3>{t("cv.builder.skills")}</h3>
-          {/* Tools are picked one at a time: a paragraph of a hundred of them
-              is only tailorable if the smallest unit is the tool itself. */}
-          {cvSections.skills.map((skillLine) =>
-            skillLine.groups.map((group) => {
-              const keys = group.runs.flat().map((id) => cvKey("skill", id))
-              const allOn = keys.every((key) => selection.has(key))
-              const caption = (doc.skillLabels?.[group.id] ?? group.id)
-                .replace(/[\s\u00a0]*:[\s\u00a0]*$/, "")
-                .trim()
-              return (
-                <div
-                  key={`${skillLine.id}:${group.id}`}
-                  className="cv-builder-matrix"
-                  lang={lang}
-                  dir={localeDir(lang)}
-                >
+                    {match.gaps.length > 0 ? (
+                      <p className="cv-builder-offer-terms is-gap">
+                        <span className="cv-builder-offer-legend">
+                          {t("cv.builder.offerGaps")}
+                        </span>
+                        <span className="cv-builder-offer-list">
+                          {match.gaps.map((demand) => (
+                            <span
+                              key={demand.value}
+                              className={
+                                demand.required
+                                  ? "cv-builder-offer-term"
+                                  : "cv-builder-offer-term is-bonus"
+                              }
+                              title={
+                                demand.required
+                                  ? t("cv.builder.offerRequired")
+                                  : t("cv.builder.offerBonus")
+                              }
+                            >
+                              {demand.value}
+                            </span>
+                          ))}
+                        </span>
+                      </p>
+                    ) : null}
+                  </div>
+
                   <button
                     type="button"
-                    className="cv-builder-matrix-label"
-                    aria-pressed={allOn}
-                    onClick={() => setKeys(keys, !allOn)}
+                    className="cv-builder-offer-apply"
+                    disabled={match.found.length === 0}
+                    onClick={onTailor}
                   >
-                    {caption}
+                    {t("cv.builder.tailor")}
                   </button>
-                  {/* One row per run: the document already groups these tools
-                      by family, and a family is what gets dropped at once. */}
-                  {group.runs.map((run) => (
-                    <div key={run[0]} className="cv-builder-matrix-chips">
-                      {run.map((id) => {
-                        const key = cvKey("skill", id)
-                        const isOn = selection.has(key)
-                        const classes = [
-                          isOn ? "is-active" : "",
-                          match.scores.has(key) ? "is-matched" : "",
-                        ]
-                          .filter(Boolean)
-                          .join(" ")
-                        return (
-                          <button
-                            key={id}
-                            type="button"
-                            className={classes || undefined}
-                            aria-pressed={isOn}
-                            onClick={() => toggle(key)}
-                          >
-                            {cvSkillLabel(id, doc)}
-                          </button>
-                        )
-                      })}
-                    </div>
-                  ))}
+
+                  {applied ? (
+                    <p className="cv-builder-offer-applied">
+                      <span>
+                        {t("cv.builder.offerAngle")}{" "}
+                        <strong>
+                          {t(`cv.builder.presets.${applied.angle}`, {
+                            defaultValue: t("cv.builder.selectAll"),
+                          })}
+                        </strong>
+                        {applied.because.length > 0 ? (
+                          <em>{` — “${applied.because[0]}”`}</em>
+                        ) : null}
+                      </span>
+                      {/* Signed numbers, so RTL must not reorder the signs
+                          behind their digits. */}
+                      <span className="cv-builder-offer-delta" dir="ltr">
+                        {`+${applied.added} / −${applied.removed}`}
+                      </span>
+                      <button type="button" onClick={onUndoTailor}>
+                        {t("cv.builder.offerUndo")}
+                      </button>
+                    </p>
+                  ) : null}
                 </div>
-              )
-            }),
-          )}
-        </section>
+              ) : null}
+            </div>
+          </section>
+
+          <section className="cv-builder-block">
+            <h3 className="cv-builder-block-title">
+              <span className="hud-index" aria-hidden="true">
+                03
+              </span>
+              {t("cv.builder.angle")}
+            </h3>
+            <div className="cv-builder-toolbar">
+              <div className="cv-builder-chips" role="group">
+                {cvPresets
+                  .filter((preset) => preset.hidden !== true)
+                  .map((preset) => {
+                    const keys = cvSyncRoleHeaders(cvPresetSelection(preset))
+                    const isActive = isSameSelection(keys, selection)
+                    return (
+                      <button
+                        key={preset.id}
+                        type="button"
+                        className={isActive ? "is-active" : undefined}
+                        aria-pressed={isActive}
+                        onClick={() => onPickAngle(keys, preset.id)}
+                      >
+                        {t(`cv.builder.presets.${preset.id}`)}
+                      </button>
+                    )
+                  })}
+              </div>
+
+              <div className="cv-builder-bulk">
+                <button
+                  type="button"
+                  onClick={() => onPickAngle(cvFullSelection(), "full")}
+                >
+                  {t("cv.builder.selectAll")}
+                </button>
+                <button type="button" onClick={() => setSelection(new Set())}>
+                  {t("cv.builder.clear")}
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <section className="cv-builder-block">
+            <h3 className="cv-builder-block-title">
+              <span className="hud-index" aria-hidden="true">
+                04
+              </span>
+              {t("cv.builder.lines")}
+            </h3>
+            <section className="cv-builder-section">
+              <h3>{t("cv.builder.summary")}</h3>
+              {cvSections.summary.map((item) => {
+                const entry = doc.summary[item.id]
+                // i18next falls back a whole branch, not a single leaf, so a
+                // half-translated locale would otherwise crash the panel.
+                if (!entry) return null
+                return line(cvKey("summary", item.id), entry.lead, entry.text)
+              })}
+            </section>
+
+            <section className="cv-builder-section">
+              <h3>{t("cv.builder.experience")}</h3>
+              {cvSections.roles.map((role) => {
+                const entry = doc.roles[role.id]
+                if (!entry) return null
+                const bulletKeys = role.bullets.map((bullet) =>
+                  cvKey("bullet", role.id, bullet.id),
+                )
+                const someOn = bulletKeys.some((key) => selection.has(key))
+                const allOn = bulletKeys.every((key) => selection.has(key))
+                return (
+                  <div key={role.id} className="cv-builder-role">
+                    {/* Two rows anchor the whole section, so they stay whole. */}
+                    {line(
+                      cvKey("role", role.id),
+                      `${entry.lead}${entry.period}${entry.title}${entry.suffix}`.trim(),
+                      "",
+                      {
+                        checked: someOn,
+                        partial: someOn && !allOn,
+                        onToggle: () => setKeys(bulletKeys, !someOn),
+                      },
+                    )}
+                    {role.bullets.map((bullet) => {
+                      const text = entry.bullets[bullet.id]
+                      if (!text) return null
+                      return line(
+                        cvKey("bullet", role.id, bullet.id),
+                        text.lead,
+                        text.text,
+                        { nested: true },
+                      )
+                    })}
+                  </div>
+                )
+              })}
+            </section>
+
+            <section className="cv-builder-section">
+              <h3>{t("cv.builder.education")}</h3>
+              {cvSections.education.map((item) => {
+                const entry = doc.education[item.id]
+                if (!entry) return null
+                return line(
+                  cvKey("education", item.id),
+                  `${entry.period}${entry.title}`.trim(),
+                  entry.suffix,
+                )
+              })}
+            </section>
+
+            <section className="cv-builder-section">
+              <h3>{t("cv.builder.skills")}</h3>
+              {/* Tools are picked one at a time: a paragraph of a hundred of them
+              is only tailorable if the smallest unit is the tool itself. */}
+              {cvSections.skills.map((skillLine) =>
+                skillLine.groups.map((group) => {
+                  const keys = group.runs.flat().map((id) => cvKey("skill", id))
+                  const allOn = keys.every((key) => selection.has(key))
+                  const caption = (doc.skillLabels?.[group.id] ?? group.id)
+                    .replace(/[\s\u00a0]*:[\s\u00a0]*$/, "")
+                    .trim()
+                  return (
+                    <div
+                      key={`${skillLine.id}:${group.id}`}
+                      className="cv-builder-matrix"
+                      lang={lang}
+                      dir={localeDir(lang)}
+                    >
+                      <button
+                        type="button"
+                        className="cv-builder-matrix-label"
+                        aria-pressed={allOn}
+                        onClick={() => setKeys(keys, !allOn)}
+                      >
+                        {caption}
+                      </button>
+                      {/* One row per run: the document already groups these tools
+                      by family, and a family is what gets dropped at once. */}
+                      <div className="cv-builder-matrix-runs">
+                        {group.runs.map((run) => (
+                          <div key={run[0]} className="cv-builder-matrix-chips">
+                            {run.map((id) => {
+                              const key = cvKey("skill", id)
+                              const isOn = selection.has(key)
+                              const classes = [
+                                isOn ? "is-active" : "",
+                                match.scores.has(key) ? "is-matched" : "",
+                              ]
+                                .filter(Boolean)
+                                .join(" ")
+                              return (
+                                <button
+                                  key={id}
+                                  type="button"
+                                  className={classes || undefined}
+                                  aria-pressed={isOn}
+                                  onClick={() => toggle(key)}
+                                >
+                                  {cvSkillLabel(id, doc)}
+                                </button>
+                              )
+                            })}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )
+                }),
+              )}
+            </section>
+          </section>
+        </div>
 
         <footer className="cv-builder-foot">
           <div

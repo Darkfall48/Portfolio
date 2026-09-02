@@ -7,6 +7,7 @@ import { isOnHome, skillChip, skillGroups } from "../content"
 
 //? Components
 import { PanelExpand } from "./PanelExpand"
+import { PanelMore } from "./PanelMore"
 
 //? Hooks
 import { useOverflows } from "../hooks/useOverflows"
@@ -24,6 +25,7 @@ export function SkillGroups({ expanded, onToggleExpand }: Props) {
   // only once the panel is really cutting chips off, and stays offered while
   // expanded so the control never disappears under the pointer.
   const overflows = useOverflows(listRef)
+  const hasMore = overflows || expanded
 
   return (
     <section className="skill-groups">
@@ -34,7 +36,7 @@ export function SkillGroups({ expanded, onToggleExpand }: Props) {
         {t("nav.skills")}
         <PanelExpand
           expanded={expanded}
-          hasMore={overflows || expanded}
+          hasMore={hasMore}
           onToggle={onToggleExpand}
         />
       </h2>
@@ -58,6 +60,11 @@ export function SkillGroups({ expanded, onToggleExpand }: Props) {
           </li>
         ))}
       </ul>
+      <PanelMore
+        expanded={expanded}
+        hasMore={hasMore}
+        onToggle={onToggleExpand}
+      />
     </section>
   )
 }

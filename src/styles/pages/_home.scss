@@ -21,8 +21,8 @@
   flex-direction: column;
   min-height: 100dvh;
   overflow: auto;
-  padding-inline: clamp(0.75rem, 1.8vw, 1.5rem);
-  padding-block-end: 0.7rem;
+  padding-inline: clamp(0.75rem, 2.2vw, 2.75rem);
+  padding-block-end: clamp(0.7rem, 1.2vh, 1rem);
 
   &::before,
   &::after {
@@ -70,7 +70,7 @@
   &-main {
     // Held in a custom property so an expanded panel can halve a gutter it is
     // about to sit next to twice over.
-    --home-gap: clamp(0.5rem, 0.7vw, 0.8rem);
+    --home-gap: clamp(0.5rem, 0.9vw, 1rem);
     display: grid;
     flex: 1;
     gap: var(--home-gap);
@@ -157,6 +157,13 @@
   }
 }
 
+@media (max-width: $break-narrow - 1px) {
+  .home-main {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.75rem;
+  }
+}
+
 // Desktop: one viewport, asymmetric grid. Profile and Focus run full height,
 // the middle column splits into a short Experience and a taller Work.
 @media (min-width: $break-wide) {
@@ -212,11 +219,6 @@
     grid-template-rows: minmax(0, 0fr) minmax(0, 1fr);
   }
 
-  // Room for the second line the collapsed card cannot afford.
-  .is-expanded-work .work-list-item-summary {
-    -webkit-line-clamp: 2;
-  }
-
   // Focus spans both rows, so on its own it covers exactly the area of
   // Experience and Selected work stacked. Expanding therefore swallows the
   // middle column whole and folds both of them away.
@@ -231,6 +233,12 @@
   .home-main.is-expanded-skills .experience-list,
   .home-main.is-expanded-skills .work-list {
     @include folded-away;
+  }
+}
+
+@media (min-width: $break-huge) {
+  .home {
+    padding-inline: clamp(1.25rem, 4vw, 4.5rem);
   }
 }
 

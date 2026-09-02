@@ -21,6 +21,10 @@ html {
   // locale, such as the language switcher label, stay inside the family.
   // Fallback is resolved per character, not per element.
   --font-mono: "IBM Plex Mono", "IBM Plex Sans Hebrew", ui-monospace, monospace;
+  // Floor matches the browser default so a phone or 13" laptop does not shrink.
+  // vw/vh take over on a large monitor, where rem-based HUD type would otherwise
+  // sit in a field of unused panel.
+  font-size: clamp(16px, 0.95vw + 0.4vh, 22px);
   background: $color-bg;
   color: $color-text;
 }
@@ -32,7 +36,7 @@ html[dir="rtl"] {
 body {
   margin: 0;
   font-family: $font-sans;
-  font-size: 0.98rem;
+  font-size: 1rem;
   line-height: 1.5;
   background:
     radial-gradient(

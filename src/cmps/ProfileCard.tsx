@@ -48,7 +48,7 @@ export function ProfileCard() {
       <dl className="profile-card-meta">
         <div>
           <dt>{t("profile.languages")}</dt>
-          <dd>{profile.languages.join(" · ")}</dd>
+          <dd>{t("profile.languagesList")}</dd>
         </div>
         <div>
           <dt>{t("profile.educationLabel")}</dt>

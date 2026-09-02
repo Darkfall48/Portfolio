@@ -3,6 +3,7 @@
 
 .work-list {
   @include panel;
+  container-type: inline-size;
 
   &-title {
     @include hud-title;
@@ -13,17 +14,28 @@
     }
   }
 
-  // This panel carries the secondary accent, so its control follows.
+  // This panel carries the secondary accent, so its controls follow.
   .panel-expand-btn:hover,
-  .panel-expand-btn:focus-visible {
+  .panel-expand-btn:focus-visible,
+  .panel-more:hover,
+  .panel-more:focus-visible {
     color: $color-accent-2;
     background: $color-accent-2-dim;
   }
 
-  &-items {
+  &-body {
     @include panel-list;
-    gap: clamp(0.2rem, 0.7vh, 0.45rem);
+    flex: 1;
     margin-block-start: clamp(0.5rem, 1.4vh, 1rem);
+  }
+
+  &-items {
+    display: grid;
+    gap: clamp(0.25rem, 1vh, 0.7rem);
+
+    &.is-rest {
+      padding-block-start: clamp(0.25rem, 1vh, 0.7rem);
+    }
   }
 
   &-item {
@@ -41,7 +53,7 @@
     }
 
     &-name {
-      font-size: clamp(0.92rem, 1.05vw, 1.05rem);
+      font-size: clamp(0.98rem, 0.55rem + 3.6cqi, 1.22rem);
       font-weight: 600;
       line-height: 1.2;
     }
@@ -49,17 +61,10 @@
     &-summary {
       display: -webkit-box;
       overflow: hidden;
-      font-size: 0.82rem;
+      font-size: clamp(0.86rem, 0.4vw + 0.3vh, 1.02rem);
       color: $color-muted;
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 2;
     }
-  }
-}
-
-// One viewport: summaries stay on a single line so three cards always fit.
-@media (min-width: $break-wide) {
-  .work-list-item-summary {
-    -webkit-line-clamp: 1;
   }
 }

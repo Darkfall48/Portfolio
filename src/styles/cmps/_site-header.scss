@@ -3,7 +3,7 @@
 .site-header {
   position: relative;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
   justify-content: space-between;
   gap: 0.4rem $space-md;
@@ -33,6 +33,7 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    min-width: 0;
   }
 
   &-name {
@@ -40,7 +41,7 @@
     align-items: center;
     gap: 0.5rem;
     font-family: $font-mono;
-    font-size: 0.78rem;
+    font-size: 0.84rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: $color-muted;
@@ -64,14 +65,14 @@
     &::before {
       content: "·";
       font-family: $font-mono;
-      font-size: 0.78rem;
+      font-size: 0.84rem;
       color: $color-muted;
     }
   }
 
   &-year {
     font-family: $font-mono;
-    font-size: 0.78rem;
+    font-size: 0.84rem;
     letter-spacing: 0.14em;
     color: $color-accent;
     font-variant-numeric: tabular-nums;
@@ -82,7 +83,7 @@
     align-items: center;
     gap: 0.5rem;
     font-family: $font-mono;
-    font-size: 0.7rem;
+    font-size: 0.76rem;
     letter-spacing: 0.12em;
     color: $color-accent;
     font-variant-numeric: tabular-nums;
@@ -95,6 +96,8 @@
 
   &-nav {
     display: flex;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
     align-items: center;
     gap: $space-sm;
   }
@@ -132,7 +135,7 @@
       min-width: 2.5rem;
       padding: 0.3rem 0.5rem;
       text-align: center;
-      font-size: 0.72rem;
+      font-size: 0.78rem;
       letter-spacing: 0.08em;
       color: $color-muted;
       transition: color $ease;
@@ -174,13 +177,17 @@
   // Primary call to action in the bar: filled, not a bare text link.
   // Outlined next to the filled CV download: building one is the secondary
   // path, downloading the ready-made PDF stays the primary one.
+  // Icon-only below the wide grid; labels return at $break-wide.
   &-build {
     display: inline-flex;
     align-items: center;
-    gap: 0.45rem;
-    padding: 0.36rem 0.7rem;
+    justify-content: center;
+    width: 1.9rem;
+    height: 1.9rem;
+    padding: 0;
+    gap: 0;
     font-family: $font-mono;
-    font-size: 0.72rem;
+    font-size: 0.78rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: $color-accent-2;
@@ -193,7 +200,11 @@
 
     svg {
       flex-shrink: 0;
-      font-size: 0.9rem;
+      font-size: 0.92rem;
+    }
+
+    span {
+      display: none;
     }
 
     &:hover,
@@ -207,10 +218,13 @@
   &-cv {
     display: inline-flex;
     align-items: center;
-    gap: 0.45rem;
-    padding: 0.36rem 0.7rem;
+    justify-content: center;
+    width: 1.9rem;
+    height: 1.9rem;
+    padding: 0;
+    gap: 0;
     font-family: $font-mono;
-    font-size: 0.72rem;
+    font-size: 0.78rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: $color-on-accent;
@@ -225,7 +239,11 @@
 
     svg {
       flex-shrink: 0;
-      font-size: 0.9rem;
+      font-size: 0.92rem;
+    }
+
+    span {
+      display: none;
     }
 
     &:hover,
@@ -256,48 +274,35 @@ html[lang="he"] .site-header-name {
   text-transform: none;
 }
 
-// Icon-only CV button once the label stops fitting. The threshold is content
-// driven, not a layout breakpoint: "Télécharger le CV" is half again as wide as
-// "Download CV", so it is set from the longest locale. The accessible name
-// stays on the anchor's aria-label.
-@media (max-width: 760px) {
+@media (min-width: $break-wide) {
+  .site-header-build,
   .site-header-cv {
-    padding-inline: 0.45rem;
+    width: auto;
+    height: auto;
+    padding: 0.36rem 0.7rem;
+    justify-content: center;
+    gap: 0.45rem;
 
     span {
-      display: none;
+      display: inline;
     }
 
     svg {
-      font-size: 1rem;
+      font-size: 0.9rem;
     }
   }
 }
 
-// Below this the bar cannot hold a single row in any locale, so the two-row
-// layout is declared instead of left to flex-wrap. Deciding it here is what
-// keeps the row count stable: the count used to flip back to one row at 460px,
-// where the clock hides and frees just enough space.
-@media (max-width: 560px) {
-  // Controls keep the top-right corner while the identity block grows downward,
-  // so the bar gains a line without either side drifting to the centre.
+@media (max-width: $break-narrow - 1px) {
   .site-header {
-    align-items: flex-start;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.45rem;
   }
 
-  .site-header-identity {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.2rem;
-  }
-
-  .site-header-meta {
-    // Indented past the status dot so it lines up with the name above it.
-    padding-inline-start: 0.84rem;
-
-    &::before {
-      content: none;
-    }
+  .site-header-nav {
+    justify-content: end;
+    width: 100%;
   }
 
   .site-header-lang-btn {

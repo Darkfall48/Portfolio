@@ -26,6 +26,8 @@ export type {
 export type {
   ContentId,
   ExpandablePanel,
+  ExperienceItem,
   PanelKind,
   PanelTarget,
+  WorkItem,
 } from "./types"
