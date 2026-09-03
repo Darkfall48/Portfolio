@@ -1,0 +1,8 @@
+Full-Stack IAM Engineer
+
+Build customer-facing React and Node.js products that integrate with enterprise
+identity providers. Required experience: SAML, OIDC, SCIM, LDAP, SSO, RBAC,
+REST APIs, Docker Compose, Microsoft Entra ID, and Okta.
+
+You will own releases, technical documentation, and full-stack tools used by
+customers, QA, and R&D. Python automation and LLM integrations are a plus.

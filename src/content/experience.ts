@@ -3,9 +3,9 @@ import { FILLER_ON, fillerExperience } from "./_filler"
 
 export const experience: ExperienceItem[] = [
   {
-    id: "current-role",
+    id: "cyolo",
     start: "2023",
-    end: "present",
+    end: "2026",
     featured: true,
   },
   {

@@ -35,6 +35,10 @@ export const work: WorkItem[] = [
     id: "it-automation",
     featured: true,
   },
+  {
+    id: "ai-workflows",
+    featured: true,
+  },
   // Load-test rows, empty unless FILLER_ON is flipped in _filler.ts.
   ...(FILLER_ON ? fillerWork() : []),
 ]

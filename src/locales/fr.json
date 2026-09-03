@@ -1,9 +1,9 @@
 {
   "profile": {
-    "headline": "Ingénieur identité et accès — ZTNA, N3, full-stack",
-    "lead": "Trois casquettes chez un éditeur Zero Trust : le N3 sur les déploiements grands comptes, le parc interne sous SOC 2 dont je suis seul responsable, et les plateformes full-stack que les deux utilisent.",
+    "headline": "Ingénieur full-stack et solutions techniques — IAM, cybersécurité, automatisation",
+    "lead": "Ingénieur à la croisée de la propriété produit full-stack, des intégrations d’identité, de l’infrastructure d’entreprise et du support N3. J’ai construit des plateformes clients et internes, exploité les cycles de vie utilisateurs sur plus de 50 produits SaaS et automatisé des workflows sécurisés.",
     "location": "Tel Aviv",
-    "kicker": "ZTNA · Identité · N3",
+    "kicker": "Full-stack · IAM · Solutions techniques",
     "education": "Génie informatique, Polytechnique Montréal · Certificat full-stack",
     "languagesList": "FR · EN · HE",
     "educationLabel": "Formation",
@@ -44,20 +44,17 @@
   },
   "experience": {
     "present": "Aujourd’hui",
-    "current-role": {
+    "cyolo": {
       "org": "Cyolo",
-      "title": "Support N3, infrastructure IT et full-stack",
-      "summary": "Trois casquettes chez un éditeur ZTNA — les escalades clients, le parc interne, et les plateformes qui servent aux deux.",
+      "title": "Full-stack, IAM, support N3 et automatisation IT",
+      "summary": "J’ai porté les produits clients et internes, les intégrations d’identité, l’infrastructure, l’automatisation et le dépannage complexe en environnement grand compte.",
       "body": [
-        "N3 — Je porte les escalades sur les déploiements ZTNA grands comptes, en SaaS, on-prem et DMZ, y compris les architectures multi-tenant et les chaînes de proxys.",
-        "N3 — Je résous les pannes d’identité et de transport : SSO, SCIM, LDAP/S, certificats SSL/TLS et SAN, RDP, VNC, Telnet et HTTP/HTTPS, sur Linux, Windows et macOS.",
-        "N3 — J’exploite des clusters Docker Compose multi-sites, et je surveille licences, certificats, tenants et sites via Grafana, Prometheus et BetterStack.",
-        "N3 — J’écris les reproductions Jira dont partent le produit et la R&D, je tiens à jour les bases Confluence et Zendesk, et j’anime la formation qui harmonise les réponses du support.",
-        "IT — Seul responsable du parc d’identité et de sécurité des postes : Entra ID, Azure AD, Microsoft 365, Exchange et Defender XDR, en conformité SOC 2 complète.",
-        "IT — Je définis la politique de MFA et d’accès conditionnel, et j’exploite l’authentification par passkey en production.",
-        "IT — Je couvre une centaine de salariés répartis sur les fuseaux EMEA, AMER et APAC, et j’exploite plus de 50 plateformes SaaS : intégrations SSO/SCIM, licences, coûts et automatisation du cycle de vie.",
-        "IT — Je durcis les accès avec des pare-feux Fortinet, des reverse proxies et l’accès par certificat, je monte de zéro les environnements de test AD, Entra ID, XDR, Intune et GPO pour la R&D, la QA et les ventes, et je pilote la réponse aux incidents.",
-        "Full-stack — Je livre et j’exploite Back-Office pour les salariés et Helpdesk pour les clients, ainsi que les outils de test SAML/OIDC et HTTP dont se servent la QA et la R&D."
+        "J’ai conçu, construit et porté Cyolo Helpdesk de zéro : un add-on client en React, Redux, Node.js, REST, Docker/PWA et RBAC, utilisé pour gérer les cycles de vie utilisateurs, les applications et les coffres.",
+        "J’ai livré seul le frontend de Cyolo Back-Office et contribué à son architecture backend, en centralisant la gestion des tenants, des licences et des certificats pour les équipes internes et les partenaires.",
+        "J’ai piloté les intégrations d’identité et les cycles de vie utilisateurs sur plus de 50 plateformes SaaS, via SSO, SAML, OIDC, SCIM, LDAP/LDAPS, Entra ID et Okta.",
+        "J’ai construit les outils de QA et de R&D pour tester les fournisseurs d’identité SAML/OIDC et inspecter les requêtes HTTP/HTTPS, packagés en Docker Compose.",
+        "J’ai administré et sécurisé les environnements IT d’entreprise avec Microsoft 365, Intune, Microsoft XDR, Fortinet et la virtualisation ; j’ai automatisé l’exploitation en PowerShell, Python et Shell et soutenu la préparation à l’audit SOC 2.",
+        "J’ai assuré un support N2/N3 avancé sur les déploiements SaaS, on-premise, DMZ et multi-sites, en résolvant les problèmes d’identité, de réseau, de proxy, de certificats, de Docker et d’accès distant sous Linux, Windows et macOS."
       ]
     },
     "robotika": {
@@ -138,6 +135,14 @@
         "J’ai automatisé les arrivées, les mobilités et les départs sur plus de 50 plateformes SaaS, pour que la création et la révocation des comptes ne dépendent plus de la mémoire de quelqu’un.",
         "J’ai écrit les scripts de diagnostic et de supervision que le support utilise au quotidien."
       ]
+    },
+    "ai-workflows": {
+      "title": "Workflows assistés par IA",
+      "summary": "Intégrations de LLM, workflows réutilisables et MVP ciblés.",
+      "body": [
+        "J’ai intégré des modèles de langage dans des applications et des workflows d’exploitation, et construit des MVP ciblés propulsés par l’IA pour réduire le travail manuel.",
+        "J’ai conçu des workflows, compétences, règles et instructions structurées réutilisables, pour que les processus assistés par IA donnent des résultats plus constants."
+      ]
     }
   },
   "skills": {
@@ -183,7 +188,9 @@
       "presets": {
         "support": "Ingénieur support",
         "it": "Spécialiste IT",
-        "fullstack": "Full-stack"
+        "fullstack": "Full-stack",
+        "fullstack-iam": "Full-stack IAM",
+        "technical-solutions": "Solutions techniques"
       },
       "selectAll": "Tout cocher",
       "clear": "Tout décocher",
@@ -204,40 +211,42 @@
         "full": "Spécialiste IT, Ingénieur Support et Développeur Full-Stack",
         "support": "Ingénieur Support Technique",
         "it": "Spécialiste IT",
-        "fullstack": "Développeur Full-Stack"
+        "fullstack": "Développeur Full-Stack",
+        "fullstack-iam": "Ingénieur Full-Stack IAM",
+        "technical-solutions": "Ingénieur Solutions Techniques"
       },
       "summary": {
         "profile": {
-          "lead": "Spécialiste IT, ingénieur support technique et développeur full-stack polyvalent",
-          "text": ", spécialisé en cybersécurité, ZTNA et infrastructure d'entreprise."
+          "lead": "Ingénieur avec plus de 3 ans d'expérience dans la high-tech",
+          "text": ", couvrant le développement full-stack, l'identité, la cybersécurité, l'automatisation et le SaaS d'entreprise."
         },
         "track-record": {
-          "lead": "",
-          "text": "Expérience solide en support technique, en administration d'environnements SaaS et on-premise complexes et en développement d'outils full-stack qui fluidifient les opérations et l'expérience utilisateur."
+          "lead": "Conception et pilotage de produits clients de bout en bout",
+          "text": ", en associant propriété produit, intégrations IAM, automatisation et dépannage complexe en entreprise."
         },
         "automation": {
-          "lead": "",
-          "text": "Maîtrise de l'automatisation, du scripting et de la gestion d'infrastructure sous Windows, macOS et Linux."
+          "lead": "Ingénieur pluridisciplinaire aguerri aux environnements d'entreprise complexes",
+          "text": ", sur des déploiements SaaS, on-premise, DMZ et multi-sites."
         },
         "communication": {
-          "lead": "",
-          "text": "Apprentissage rapide et sens de la communication, avec le goût d'aider, de transmettre et de bâtir des systèmes efficaces, sûrs et évolutifs."
+          "lead": "Associe dépannage avancé, identité, infrastructure et automatisation",
+          "text": ", pour livrer des solutions clients fiables avec les équipes Produit et R&D."
         }
       },
       "roles": {
         "cyolo": {
           "lead": "",
-          "period": "2023-aujourd'hui\u00a0:  ",
-          "title": "Spécialiste IT, Ingénieur Support Technique – Niveau 3 & Développeur Full-Stack, Cyolo",
+          "period": "2023-2026\u00a0:  ",
+          "title": "Développeur Full-Stack | Ingénieur Support Technique N3 | Ingénieur Infrastructure/Automatisation IT, Cyolo",
           "suffix": "",
           "bullets": {
             "support": {
-              "lead": "Assurer le support technique",
-              "text": " de déploiements entreprise en SaaS, on-premise et DMZ."
+              "lead": "Assurer un support entreprise N2/N3 avancé",
+              "text": " sur des déploiements SaaS, on-premise, DMZ et multi-sites."
             },
             "escalations": {
-              "lead": "Résoudre des incidents complexes",
-              "text": " touchant au SSO, SCIM, LDAP/S, aux certificats SSL/TLS, aux configurations réseau et aux protocoles d'accès distant (RDP, VNC, Telnet) sous Linux, Windows et macOS."
+              "lead": "Porter les dépannages N3 complexes en entreprise",
+              "text": " sur l'identité, Docker, le réseau et les proxys, SSL/TLS, les certificats et l'accès distant sous Linux, Windows et macOS\u00a0; documenter les analyses et escalader des anomalies reproductibles au Produit et à la R&D."
             },
             "docker": {
               "lead": "Administrer et dépanner des clusters Docker Compose",
@@ -256,28 +265,32 @@
               "text": " au quotidien — incidents, anomalies et demandes de configuration — et accompagner les clients via Zoom et Microsoft Teams."
             },
             "automation": {
-              "lead": "Développer les automatisations",
-              "text": " PowerShell, Python et Shell pour l'onboarding, l'offboarding et la supervision."
+              "lead": "Automatiser l'onboarding, l'offboarding, la supervision et les diagnostics",
+              "text": " en PowerShell, Python et Shell, et construire des workflows assistés par IA ainsi que des MVP ciblés propulsés par l'IA."
             },
             "cloud": {
               "lead": "Gérer des environnements cloud hybrides\u00a0:",
               "text": " VMware ESXi, Proxmox et AWS."
             },
-            "saas": {
-              "lead": "Piloter 50+ plateformes SaaS",
-              "text": ", intégrations SSO/SCIM, gestion des licences et optimisation des coûts."
+            "identity": {
+              "lead": "Piloter les intégrations d'identité et les cycles de vie utilisateurs sur plus de 50 plateformes SaaS",
+              "text": " via SSO, SAML, OIDC, SCIM, LDAP/LDAPS, Microsoft Entra ID et Okta."
             },
             "infrastructure": {
-              "lead": "Administrer et sécuriser l'infrastructure IT",
-              "text": " (AzureAD, Entra ID, M365, Exchange) en pleine conformité SOC 2."
+              "lead": "Administrer et sécuriser l'infrastructure IT d'entreprise",
+              "text": " — Entra ID, Microsoft 365, Exchange, Intune, Microsoft XDR, Fortinet et virtualisation — en soutenant la préparation à l'audit SOC 2."
             },
             "back-office": {
-              "lead": "Concevoir Cyolo Back-Office",
-              "text": ", plateforme full-stack interne et partenaire pour gérer tenants et licences clients."
+              "lead": "Livrer seul le frontend de Cyolo Back-Office",
+              "text": " en contribuant à l'architecture backend, centralisant la gestion des tenants, des licences et des certificats pour les équipes internes et les partenaires."
             },
             "helpdesk": {
-              "lead": "Concevoir et maintenir Cyolo Helpdesk",
-              "text": ", module full-stack greffé au produit — React, Redux, Node, Docker, PWA et RBAC — pour le cycle de vie des utilisateurs, les applications et les coffres. Documentation, mises à jour et support continu."
+              "lead": "Concevoir, construire et porter Cyolo Helpdesk de zéro",
+              "text": "\u00a0: add-on full-stack destiné aux clients, en React, Redux, Node.js, API REST, Docker/PWA et RBAC\u00a0; versions, documentation, maintenance et support inclus."
+            },
+            "qa-tools": {
+              "lead": "Construire des outils full-stack pour la QA et la R&D",
+              "text": "\u00a0: un outil de test des IdP SaaS pour SAML/OIDC et Web Forge pour l'inspection et la manipulation des requêtes HTTP/HTTPS, packagés en Docker Compose."
             }
           }
         },

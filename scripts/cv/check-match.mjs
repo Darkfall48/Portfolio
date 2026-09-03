@@ -70,7 +70,9 @@ const files = readdirSync(ADS)
 if (files.length === 0) throw new Error(`no ads in ${ADS}`)
 
 for (const file of files) {
-  const [expected, locale] = file.replace(/\.txt$/, "").split("-")
+  const parsed = file.match(/^(.*)-(en|fr|he)-\d+\.txt$/)
+  if (!parsed) throw new Error(`invalid ad file name: ${file}`)
+  const [, expected, locale] = parsed
   const text = readFileSync(`${ADS}/${file}`, "utf8")
   const match = matchOffer(text)
   const { keys, angle } = tailorSelection(match, docs[locale], locale, "")

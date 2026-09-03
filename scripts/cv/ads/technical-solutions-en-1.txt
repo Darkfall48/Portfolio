@@ -1,0 +1,8 @@
+Technical Solutions Engineer
+
+Own complex customer implementations across SaaS, on-prem, DMZ, and multi-site
+environments. Required experience: SSO, SAML, OIDC, SCIM, LDAP, Microsoft Entra
+ID, Docker, Linux, Windows, SSL/TLS, certificates, proxies, DNS, and firewalls.
+
+Work with Product and R&D to reproduce issues, document solutions, and automate
+diagnostics with PowerShell and Python. Grafana, Prometheus, and Jira are useful.

@@ -1,9 +1,9 @@
 {
   "profile": {
-    "headline": "Identity & Access Engineer — ZTNA, Tier-3, Full-Stack",
-    "lead": "Three hats at a Zero Trust vendor: Tier-3 on enterprise deployments, sole owner of the internal estate under SOC 2, and the full-stack platforms both sides run on.",
+    "headline": "Full-Stack & Technical Solutions Engineer — IAM, Cybersecurity, Automation",
+    "lead": "Engineer spanning full-stack product ownership, identity integrations, enterprise infrastructure, and L3 support. Built customer-facing and internal platforms, operated user lifecycles across 50+ SaaS products, and automated secure workflows.",
     "location": "Tel Aviv",
-    "kicker": "ZTNA · Identity · Tier-3",
+    "kicker": "Full-Stack · IAM · Technical Solutions",
     "education": "Computer engineering, Polytechnique Montréal · Full-stack certificate",
     "languagesList": "FR · EN · HE",
     "educationLabel": "Education",
@@ -44,20 +44,17 @@
   },
   "experience": {
     "present": "Present",
-    "current-role": {
+    "cyolo": {
       "org": "Cyolo",
-      "title": "Tier-3 support, IT infrastructure & full-stack",
-      "summary": "Three hats at a ZTNA vendor — customer escalations, the internal estate, and the platforms behind both.",
+      "title": "Full-stack, IAM, L3 support & IT automation",
+      "summary": "Owned customer and internal products, identity integrations, infrastructure, automation, and complex enterprise troubleshooting.",
       "body": [
-        "Tier-3 — Own escalations on enterprise ZTNA deployments across SaaS, on-prem, and DMZ, including multi-tenant networking and proxy architectures.",
-        "Tier-3 — Resolve identity and transport failures: SSO, SCIM, LDAP/S, SSL/TLS and SAN certificates, RDP, VNC, Telnet, and HTTP/HTTPS, on Linux, Windows, and macOS.",
-        "Tier-3 — Run multi-site Docker Compose clusters, and watch licenses, certificates, tenants, and sites through Grafana, Prometheus, and BetterStack.",
-        "Tier-3 — Write the Jira repros product and R&D work from, keep the Confluence and Zendesk knowledge bases current, and lead the training that keeps support answers consistent.",
-        "IT — Sole owner of the identity and endpoint estate: Entra ID, Azure AD, Microsoft 365, Exchange, and Defender XDR, under full SOC 2 compliance.",
-        "IT — Set the MFA and conditional access policy, and run passkey sign-in in production.",
-        "IT — Support around a hundred employees across EMEA, AMER, and APAC time zones, and operate 50+ SaaS platforms: SSO/SCIM integrations, licenses, cost, and lifecycle automation.",
-        "IT — Harden access with Fortinet firewalls, reverse proxies, and certificate-based access, build AD, Entra ID, XDR, Intune, and GPO test environments from scratch for R&D, QA, and sales, and lead incident response.",
-        "Full-stack — Ship and operate Back-Office for employees and Helpdesk for customers, plus the SAML/OIDC and HTTP test tools QA and R&D work with."
+        "Designed, built, and owned Cyolo Helpdesk from scratch, a customer-facing React, Redux, Node.js, REST, Docker/PWA, and RBAC add-on used to manage user lifecycles, applications, and vaults.",
+        "Delivered the Cyolo Back-Office frontend independently and contributed to its backend architecture, centralizing tenant, license, and certificate management for internal teams and partners.",
+        "Managed identity integrations and user lifecycles across 50+ SaaS platforms through SSO, SAML, OIDC, SCIM, LDAP/LDAPS, Entra ID, and Okta.",
+        "Built QA and R&D tools for SAML/OIDC identity-provider testing and HTTP/HTTPS request inspection, packaged with Docker Compose.",
+        "Managed and secured enterprise IT environments with Microsoft 365, Intune, Microsoft XDR, Fortinet, and virtualization; automated operations in PowerShell, Python, and Shell and supported SOC 2 readiness.",
+        "Delivered advanced L2/L3 support across SaaS, on-prem, DMZ, and multi-site deployments, resolving identity, network, proxy, certificate, Docker, and remote-access issues across Linux, Windows, and macOS."
       ]
     },
     "robotika": {
@@ -138,6 +135,14 @@
         "Automated joiner, mover, and leaver flows across 50+ SaaS platforms, so account creation and revocation stopped depending on someone remembering.",
         "Wrote the diagnostic and monitoring scripts support runs day to day."
       ]
+    },
+    "ai-workflows": {
+      "title": "AI-assisted workflows",
+      "summary": "LLM integrations, reusable workflows, and focused MVPs.",
+      "body": [
+        "Integrated language models into applications and operational workflows, and built focused AI-powered MVPs to reduce manual work.",
+        "Designed reusable workflows, skills, rules, and structured instructions so AI-assisted processes produce more consistent results."
+      ]
     }
   },
   "skills": {
@@ -183,7 +188,9 @@
       "presets": {
         "support": "Support engineer",
         "it": "IT specialist",
-        "fullstack": "Full-stack"
+        "fullstack": "Full-stack",
+        "fullstack-iam": "Full-stack IAM",
+        "technical-solutions": "Technical solutions"
       },
       "selectAll": "Select all",
       "clear": "Clear",
@@ -204,40 +211,42 @@
         "full": "IT Specialist, Support Engineer and Full-Stack Developer",
         "support": "Technical Support Engineer",
         "it": "IT Specialist",
-        "fullstack": "Full-Stack Developer"
+        "fullstack": "Full-Stack Developer",
+        "fullstack-iam": "Full-Stack IAM Engineer",
+        "technical-solutions": "Technical Solutions Engineer"
       },
       "summary": {
         "profile": {
-          "lead": "Multidisciplinary IT Specialist, Technical Support Engineer and Full-Stack Developer",
-          "text": " with expertise in cybersecurity, ZTNA, and enterprise infrastructure."
+          "lead": "Engineer with 3+ years of high-tech experience",
+          "text": " spanning full-stack development, identity, cybersecurity, automation, and enterprise SaaS."
         },
         "track-record": {
-          "lead": "",
-          "text": "Proven track record delivering technical support, managing complex SaaS and on-prem environments, and developing full-stack tools that streamline operations and enhance user experience."
+          "lead": "Built and owned customer-facing products from scratch",
+          "text": ", combining product ownership with IAM integrations, automation, and complex enterprise troubleshooting."
         },
         "automation": {
-          "lead": "",
-          "text": "Skilled in automation, scripting, and infrastructure management across Windows, macOS, and Linux environments."
+          "lead": "Multidisciplinary engineer experienced in complex enterprise environments",
+          "text": " across SaaS, on-prem, DMZ, and multi-site deployments."
         },
         "communication": {
-          "lead": "",
-          "text": "Fast learner with strong communication skills, passionate about helping people, sharing knowledge, and building efficient, secure, and scalable systems."
+          "lead": "Combines advanced troubleshooting with identity, infrastructure, and automation",
+          "text": ", delivering reliable customer solutions with Product and R&D."
         }
       },
       "roles": {
         "cyolo": {
           "lead": "",
-          "period": "2023-Present:  ",
-          "title": "IT Specialist, Technical Support Engineer – Tier 3 & Full-Stack Developer, Cyolo",
+          "period": "2023-2026:  ",
+          "title": "Full-Stack Developer | L3 Technical Support Engineer | IT Infrastructure/Automation Engineer, Cyolo",
           "suffix": "",
           "bullets": {
             "support": {
-              "lead": "Provide technical support",
-              "text": " for enterprise deployments in SaaS, on-prem, and DMZ environments."
+              "lead": "Delivered advanced L2/L3 enterprise support",
+              "text": " across SaaS, on-prem, DMZ, and multi-site deployments."
             },
             "escalations": {
-              "lead": "Resolve complex technical issues",
-              "text": " involving SSO, SCIM, LDAP/S, SSL/TLS certificates, network configurations, and remote access protocols (RDP, VNC, Telnet) on Linux, Windows, and macOS platforms."
+              "lead": "Owned complex L3 enterprise troubleshooting",
+              "text": " across identity, Docker, network/proxy, SSL/TLS, certificates, and remote access on Linux, Windows, and macOS; documented findings and escalated reproducible bugs to Product and R&D."
             },
             "docker": {
               "lead": "Manage and troubleshoot Docker Compose clusters",
@@ -256,28 +265,32 @@
               "text": " tickets including incidents, bugs, and configuration requests, while assisting customers via Zoom and Microsoft Teams."
             },
             "automation": {
-              "lead": "Build automation workflows",
-              "text": " in PowerShell, Python, and Shell for onboarding, offboarding, and monitoring."
+              "lead": "Automated onboarding, offboarding, monitoring, and diagnostics",
+              "text": " with PowerShell, Python, and Shell, and built AI-assisted workflows and focused AI-powered MVPs."
             },
             "cloud": {
               "lead": "Manage hybrid-cloud environments:",
               "text": " VMware ESXi, Proxmox, and AWS."
             },
-            "saas": {
-              "lead": "Oversee 50+ SaaS platforms",
-              "text": ", including SSO/SCIM integrations, license management, and cost optimization."
+            "identity": {
+              "lead": "Managed identity integrations and user lifecycles across 50+ SaaS platforms",
+              "text": " through SSO, SAML, OIDC, SCIM, LDAP/LDAPS, Microsoft Entra ID, and Okta."
             },
             "infrastructure": {
-              "lead": "Own and secure enterprise’s IT infrastructure",
-              "text": " (AzureAD, Entra ID, M365, Exchange) in full SOC2 compliance."
+              "lead": "Managed and secured enterprise IT infrastructure",
+              "text": ", including Entra ID, Microsoft 365, Exchange, Intune, Microsoft XDR, Fortinet, and virtualization, while supporting SOC 2 audit readiness."
             },
             "back-office": {
-              "lead": "Build Cyolo Back-Office",
-              "text": ", an internal and partner full-stack platform for managing customer tenants and licenses."
+              "lead": "Delivered Cyolo Back-Office frontend independently",
+              "text": " while contributing to backend architecture, centralizing tenant, license, and certificate management for internal teams and partners."
             },
             "helpdesk": {
-              "lead": "Build and maintain Cyolo Helpdesk",
-              "text": ", a full-stack add-on to the core product — React, Redux, Node, Docker, PWA, and RBAC — so helpdesk admins manage user lifecycles, applications, and vaults. Documentation, releases, and ongoing support."
+              "lead": "Designed, built, and owned Cyolo Helpdesk from scratch",
+              "text": ", a customer-facing full-stack add-on built with React, Redux, Node.js, REST APIs, Docker/PWA, and RBAC; owned releases, documentation, maintenance, and support."
+            },
+            "qa-tools": {
+              "lead": "Built full-stack tools for QA and R&D",
+              "text": ", including a SaaS IdP testing tool for SAML/OIDC and Web Forge for HTTP/HTTPS request inspection and manipulation, packaged with Docker Compose."
             }
           }
         },

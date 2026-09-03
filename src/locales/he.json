@@ -1,9 +1,9 @@
 {
   "profile": {
-    "headline": "מהנדס זהות והרשאות — ZTNA, תמיכה בדרגה 3, Full-Stack",
-    "lead": "שלושה כובעים אצל ספק Zero Trust: דרגה 3 על פריסות ארגוניות, אחריות בלעדית על סביבת ה-IT הפנימית תחת SOC 2, והפלטפורמות Full-Stack שמשרתות את שניהם.",
+    "headline": "מהנדס Full-Stack ופתרונות טכניים — IAM, אבטחת מידע ואוטומציה",
+    "lead": "מהנדס שמשלב אחריות מלאה על מוצרי Full-Stack, אינטגרציות זהות, תשתיות ארגוניות ותמיכה בדרגה 3. בניתי פלטפורמות ללקוחות ולשימוש פנימי, ניהלתי מחזורי חיי משתמשים ביותר מ-50 מוצרי SaaS, והטמעתי אוטומציה בתהליכי עבודה מאובטחים.",
     "location": "תל אביב",
-    "kicker": "ZTNA · זהות · דרגה 3",
+    "kicker": "Full-Stack · IAM · פתרונות טכניים",
     "education": "הנדסת מחשבים, Polytechnique Montréal · תעודת Full-Stack",
     "languagesList": "FR · EN · HE",
     "educationLabel": "השכלה",
@@ -44,20 +44,17 @@
   },
   "experience": {
     "present": "היום",
-    "current-role": {
+    "cyolo": {
       "org": "Cyolo",
-      "title": "תמיכה בדרגה 3, תשתיות IT ו-Full-Stack",
-      "summary": "שלושה כובעים אצל ספק ZTNA — אסקלציות של לקוחות, סביבת ה-IT הפנימית, והפלטפורמות שמשרתות את שניהם.",
+      "title": "Full-Stack, IAM, תמיכה בדרגה 3 ואוטומציית IT",
+      "summary": "אחריות מלאה על מוצרים ללקוחות ולשימוש פנימי, אינטגרציות זהות, תשתיות, אוטומציה ופתרון תקלות ארגוניות מורכבות.",
       "body": [
-        "דרגה 3 — אחריות על אסקלציות בפריסות ZTNA ארגוניות ב-SaaS, on-prem ו-DMZ, כולל ארכיטקטורות multi-tenant ושרשראות proxy.",
-        "דרגה 3 — פתרון תקלות זהות ותעבורה: SSO, SCIM, LDAP/S, תעודות SSL/TLS ו-SAN, RDP, VNC, Telnet ו-HTTP/HTTPS, על Linux, Windows ו-macOS.",
-        "דרגה 3 — תפעול אשכולות Docker Compose מרובי אתרים, וניטור רישיונות, תעודות, טננטים ואתרים באמצעות Grafana, Prometheus ו-BetterStack.",
-        "דרגה 3 — כתיבת דיווחי Jira שמהם עובדים המוצר והפיתוח, תחזוקת מאגרי הידע ב-Confluence וב-Zendesk, והדרכות שמאחדות את התשובות של צוות התמיכה.",
-        "IT — אחריות בלעדית על סביבת הזהות ואבטחת נקודות הקצה: Entra ID, Azure AD, Microsoft 365, Exchange ו-Defender XDR, בעמידה מלאה ב-SOC 2.",
-        "IT — קביעת מדיניות ה-MFA והגישה המותנית, והפעלת התחברות ב-passkey בסביבת ייצור.",
-        "IT — מתן מענה לכמאה עובדים הפרוסים על אזורי הזמן EMEA, AMER ו-APAC, ותפעול של יותר מ-50 פלטפורמות SaaS: אינטגרציות SSO/SCIM, רישיונות, עלויות ואוטומציה של מחזור חיי המשתמש.",
-        "IT — הקשחת גישה בעזרת חומות אש של Fortinet, reverse proxies וגישה מבוססת תעודות, הקמה מאפס של סביבות בדיקה ב-AD, Entra ID, XDR, Intune ו-GPO עבור הפיתוח, ה-QA והמכירות, והובלת תגובה לאירועים.",
-        "Full-Stack — פיתוח ותפעול של Back-Office לעובדים ושל Helpdesk ללקוחות, וכן כלי הבדיקה ל-SAML/OIDC ול-HTTP שבהם עובדים ה-QA והפיתוח."
+        "עיצוב, בנייה ואחריות מלאה על Cyolo Helpdesk מאפס — תוסף פונה-לקוח ב-React, Redux, Node.js, REST, Docker/PWA ו-RBAC, לניהול מחזורי חיי משתמשים, אפליקציות וכספות.",
+        "אספקה עצמאית של הפרונטאנד של Cyolo Back-Office ותרומה לארכיטקטורת הבקאנד, לריכוז ניהול טננטים, רישיונות ותעודות עבור הצוותים הפנימיים והשותפים.",
+        "ניהול אינטגרציות זהות ומחזורי חיי משתמשים ביותר מ-50 פלטפורמות SaaS באמצעות SSO, SAML, OIDC, SCIM, LDAP/LDAPS, Entra ID ו-Okta.",
+        "בניית כלים ל-QA ולפיתוח לבדיקת ספקי זהות ב-SAML/OIDC ולבחינת בקשות HTTP/HTTPS, ארוזים ב-Docker Compose.",
+        "ניהול והקשחה של סביבות IT ארגוניות עם Microsoft 365, Intune, Microsoft XDR, Fortinet ווירטואליזציה; אוטומציה של התפעול ב-PowerShell, ב-Python וב-Shell, ותמיכה במוכנות לתקן SOC 2.",
+        "מתן תמיכה מתקדמת בדרגות 2 ו-3 בפריסות SaaS, on-prem, DMZ ורב-אתריות, ופתרון תקלות זהות, רשת, proxy, תעודות, Docker וגישה מרחוק ב-Linux, Windows ו-macOS."
       ]
     },
     "robotika": {
@@ -138,6 +135,14 @@
         "אוטומציה של קליטת עובדים, מעברים וסיום העסקה על יותר מ-50 פלטפורמות SaaS, כך שיצירת חשבונות וביטולם הפסיקו להיות תלויים בזיכרון של מישהו.",
         "כתיבת סקריפטי האבחון והניטור שצוות התמיכה מפעיל ביום-יום."
       ]
+    },
+    "ai-workflows": {
+      "title": "תהליכי עבודה נתמכי AI",
+      "summary": "אינטגרציות של מודלי שפה, תהליכים לשימוש חוזר ו-MVP ממוקדים.",
+      "body": [
+        "שילוב מודלי שפה באפליקציות ובתהליכי עבודה תפעוליים, ובניית MVP ממוקדים מבוססי AI לצמצום עבודה ידנית.",
+        "עיצוב תהליכים, יכולות, כללים והנחיות מובנות לשימוש חוזר, כדי שתהליכים נתמכי AI יניבו תוצאות עקביות יותר."
+      ]
     }
   },
   "skills": {
@@ -183,7 +188,9 @@
       "presets": {
         "support": "מהנדס תמיכה",
         "it": "מומחה IT",
-        "fullstack": "Full-Stack"
+        "fullstack": "Full-Stack",
+        "fullstack-iam": "Full-Stack IAM",
+        "technical-solutions": "פתרונות טכניים"
       },
       "selectAll": "בחר הכול",
       "clear": "נקה הכול",
@@ -204,40 +211,42 @@
         "full": "IT Specialist, Support Engineer and Full-Stack Developer",
         "support": "Technical Support Engineer",
         "it": "IT Specialist",
-        "fullstack": "Full-Stack Developer"
+        "fullstack": "Full-Stack Developer",
+        "fullstack-iam": "Full-Stack IAM Engineer",
+        "technical-solutions": "Technical Solutions Engineer"
       },
       "summary": {
         "profile": {
-          "lead": "מומחה IT, מהנדס תמיכה טכנית ומפתח Full-Stack רב-תחומי",
-          "text": " עם התמחות באבטחת מידע, ZTNA ותשתיות ארגוניות."
+          "lead": "מהנדס עם ניסיון של יותר מ-3 שנים בהייטק",
+          "text": " בפיתוח Full-Stack, זהות, אבטחת מידע, אוטומציה ו-SaaS ארגוני."
         },
         "track-record": {
-          "lead": "",
-          "text": "ניסיון מוכח במתן תמיכה טכנית, בניהול סביבות SaaS ו-On-Prem מורכבות ובפיתוח כלים Full-Stack שמייעלים תהליכים ומשפרים את חוויית המשתמש."
+          "lead": "בניית מוצרים פונים-לקוח מאפס ואחריות מלאה עליהם",
+          "text": ", בשילוב אינטגרציות IAM, אוטומציה ופתרון תקלות ארגוניות מורכבות."
         },
         "automation": {
-          "lead": "",
-          "text": "שליטה באוטומציה, בכתיבת סקריפטים ובניהול תשתיות בסביבות Windows, macOS ו-Linux."
+          "lead": "מהנדס רב-תחומי עם ניסיון בסביבות ארגוניות מורכבות",
+          "text": " בפריסות SaaS, On-Prem, DMZ ורב-אתריות."
         },
         "communication": {
-          "lead": "",
-          "text": "לומד מהר ובעל כישורי תקשורת גבוהים, אוהב לעזור לאנשים, לשתף ידע ולבנות מערכות יעילות, מאובטחות וברות-הרחבה."
+          "lead": "שילוב של פתרון תקלות מתקדם עם זהות, תשתיות ואוטומציה",
+          "text": ", ואספקת פתרונות אמינים ללקוחות בעבודה מול צוותי המוצר וה-R&D."
         }
       },
       "roles": {
         "cyolo": {
           "lead": "",
-          "period": "2023-היום:  ",
-          "title": "מומחה IT, מהנדס תמיכה טכנית – Tier 3 ומפתח Full-Stack, Cyolo",
+          "period": "2023-2026:  ",
+          "title": "מפתח Full-Stack | מהנדס תמיכה טכנית – Tier 3 | מהנדס תשתיות ואוטומציית IT, Cyolo",
           "suffix": "",
           "bullets": {
             "support": {
-              "lead": "מתן תמיכה טכנית",
-              "text": " לפריסות ארגוניות בסביבות SaaS, On-Prem ו-DMZ."
+              "lead": "מתן תמיכה ארגונית מתקדמת בדרגות 2 ו-3",
+              "text": " בפריסות SaaS, On-Prem, DMZ ורב-אתריות."
             },
             "escalations": {
-              "lead": "פתרון תקלות טכניות מורכבות",
-              "text": " בתחומי SSO, SCIM, LDAP/S, תעודות SSL/TLS, הגדרות רשת ופרוטוקולי גישה מרחוק (RDP, VNC, Telnet) בפלטפורמות Linux, Windows ו-macOS."
+              "lead": "אחריות על פתרון תקלות ארגוניות מורכבות בדרגה 3",
+              "text": " בתחומי זהות, Docker, רשת ו-proxy, SSL/TLS, תעודות וגישה מרחוק ב-Linux, Windows ו-macOS; תיעוד ממצאים והעברת באגים ברי-שחזור לצוותי המוצר וה-R&D."
             },
             "docker": {
               "lead": "ניהול ותחזוקה של אשכולות Docker Compose",
@@ -256,28 +265,32 @@
               "text": " הכוללות תקלות, באגים ובקשות הגדרה, לצד ליווי לקוחות ב-Zoom וב-Microsoft Teams."
             },
             "automation": {
-              "lead": "בניית תהליכי אוטומציה",
-              "text": " ב-PowerShell, ב-Python וב-Shell לקליטת עובדים, לסיום העסקה ולניטור."
+              "lead": "אוטומציה של קליטת עובדים, סיום העסקה, ניטור ואבחון",
+              "text": " ב-PowerShell, ב-Python וב-Shell, ובניית תהליכי עבודה נתמכי AI ו-MVP ממוקדים מבוססי AI."
             },
             "cloud": {
               "lead": "ניהול סביבות ענן היברידיות:",
               "text": " VMware ESXi, Proxmox ו-AWS."
             },
-            "saas": {
-              "lead": "ניהול מעל 50 פלטפורמות SaaS",
-              "text": ", כולל אינטגרציות SSO/SCIM, ניהול רישיונות ואופטימיזציה של עלויות."
+            "identity": {
+              "lead": "ניהול אינטגרציות זהות ומחזורי חיי משתמשים ביותר מ-50 פלטפורמות SaaS",
+              "text": " באמצעות SSO, SAML, OIDC, SCIM, LDAP/LDAPS, Microsoft Entra ID ו-Okta."
             },
             "infrastructure": {
-              "lead": "אחריות מלאה על תשתית ה-IT הארגונית ואבטחתה",
-              "text": " (AzureAD, Entra ID, M365, Exchange) בעמידה מלאה בתקן SOC 2."
+              "lead": "ניהול ואבטחה של תשתית ה-IT הארגונית",
+              "text": ", הכוללת Entra ID, Microsoft 365, Exchange, Intune, Microsoft XDR, Fortinet ווירטואליזציה, לצד תמיכה במוכנות לביקורת SOC 2."
             },
             "back-office": {
-              "lead": "פיתוח Cyolo Back-Office",
-              "text": ", פלטפורמת Full-Stack פנימית ולשותפים לניהול טננטים ורישיונות של לקוחות."
+              "lead": "אספקה עצמאית של הפרונטאנד של Cyolo Back-Office",
+              "text": " לצד תרומה לארכיטקטורת הבקאנד, לריכוז ניהול טננטים, רישיונות ותעודות עבור הצוותים הפנימיים והשותפים."
             },
             "helpdesk": {
-              "lead": "פיתוח ותחזוקה של Cyolo Helpdesk",
-              "text": ", תוסף Full-Stack למוצר המרכזי — React, Redux, Node, Docker, PWA ו-RBAC — לניהול מחזור חיי המשתמשים, אפליקציות וכספות. תיעוד, עדכונים ותמיכה שוטפת."
+              "lead": "עיצוב, בנייה ואחריות מלאה על Cyolo Helpdesk מאפס",
+              "text": ", תוסף Full-Stack פונה-לקוח שנבנה ב-React, Redux, Node.js, REST APIs, Docker/PWA ו-RBAC; אחריות על גרסאות, תיעוד, תחזוקה ותמיכה."
+            },
+            "qa-tools": {
+              "lead": "בניית כלים Full-Stack עבור ה-QA וה-R&D",
+              "text": ", ובהם כלי לבדיקת ספקי זהות SaaS ב-SAML/OIDC ו-Web Forge לבדיקה ולמניפולציה של בקשות HTTP/HTTPS, ארוזים ב-Docker Compose."
             }
           }
         },
